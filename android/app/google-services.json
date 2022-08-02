@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "812164169009",
+    "project_id": "food-2-fit-83c30",
+    "storage_bucket": "food-2-fit-83c30.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:812164169009:android:0c5995a81b5cc85c994410",
+        "android_client_info": {
+          "package_name": "com.flexsolutionsjo.food2fit"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "812164169009-0e9d2slcvt8l4olc6g0hlba5isdarljk.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBBzT_Z6Y6IFizAle-64c4JdAjjYs_DpsA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "812164169009-0e9d2slcvt8l4olc6g0hlba5isdarljk.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
