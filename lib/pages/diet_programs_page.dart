@@ -45,9 +45,8 @@ class DietProgramsPageState extends State<DietProgramsPage> {
                             );
                             break;
                           case Status.COMPLETED_WITH_TRUE:
-                            dietPrograms = snapshot.data!.data!.data;
+                            dietPrograms = List.from(snapshot.data!.data!.data);
                             print('COMPLETED_WITH_TRUE');
-                            print(snapshot.data!.data!.data);
                             return SingleChildScrollView(
                               child: Container(
                                 padding:

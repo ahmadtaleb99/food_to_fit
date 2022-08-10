@@ -15,9 +15,9 @@ class AdviceCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return
-      // Hero(
-      // tag: 'adviceImage'+ index.toString(),
-      // child:
+      Hero(
+      tag: 'adviceImage'+ index.toString(),
+      child:
     GestureDetector(
         onTap: () {
           Navigator.push(
@@ -47,6 +47,7 @@ class AdviceCard extends StatelessWidget {
                 child: ClipRRect(
                   borderRadius: BorderRadius.circular(ConstMeasures.borderRadius),
                   child: CachedNetworkImage(
+
                     imageUrl: advice!.imageUrl != null ? ConstAPIUrls.baseURLFiles +advice!.imageUrl! : '',
                     progressIndicatorBuilder: (context, url, downloadProgress) =>
                         Center( child: Loading()),
@@ -71,6 +72,6 @@ class AdviceCard extends StatelessWidget {
           ),
         ),
       // ),
-    );
+    ));
   }
 }

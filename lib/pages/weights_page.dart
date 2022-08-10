@@ -49,7 +49,7 @@ class WeightsPageState extends State<WeightsPage> {
                     );
                     break;
                   case Status.COMPLETED_WITH_TRUE:
-                    weights = snapshot.data!.data!.data;
+                    weights = List.from(snapshot.data!.data!.data);
                     print('COMPLETED_WITH_TRUE');
                     print(snapshot.data!.data!.data);
                     return SingleChildScrollView(

@@ -75,9 +75,9 @@ class Food2FitRepositories {
   }
 
   Future<CommonResponse> getMedicalTestsResponse() async {
-    final response = await helper.get(ConstAPIUrls.getMedicalTests + await (getPatientID() as FutureOr<String>),
-        headers: {'Authorization': await (getAccessToken() as FutureOr<String>), 'Referer': 'https://www.flexsolution.biz'});
-    print("headers"+await (getAccessToken() as FutureOr<String>));
+    final response = await helper.get(ConstAPIUrls.getMedicalTests + await (getPatientID() ),
+        headers: {'Authorization': await (getAccessToken() ), 'Referer': 'https://www.flexsolution.biz'});
+    print("headers"+await (getAccessToken() ));
     print(response);
     commonResponse.setResponseType("MedicalTests");
     return commonResponse.fromJson(response);
@@ -86,15 +86,15 @@ class Food2FitRepositories {
 
   Future<CommonResponse> getMedicalTestDetailsResponse(String medicalTestID) async {
     final response = await helper.get(ConstAPIUrls.getMedicalTestDetails+medicalTestID,
-        headers: {'Authorization': await (getAccessToken() as FutureOr<String>), 'Referer': 'https://www.flexsolution.biz'});
+        headers: {'Authorization': await (getAccessToken() ), 'Referer': 'https://www.flexsolution.biz'});
     print(response);
     commonResponse.setResponseType("MedicalTestDetails");
     return commonResponse.fromJson(response);
   }
 
   Future<CommonResponse> getPatientVisitsResponse() async {
-    final response = await helper.get(ConstAPIUrls.getPatientVisits + await (getPatientID() as FutureOr<String>),
-        headers: {'Authorization': await (getAccessToken() as FutureOr<String>), 'Referer': 'https://www.flexsolution.biz'});
+    final response = await helper.get(ConstAPIUrls.getPatientVisits + await (getPatientID() ),
+        headers: {'Authorization': await (getAccessToken() ), 'Referer': 'https://www.flexsolution.biz'});
     print(response);
     commonResponse.setResponseType("PatientVisits");
     return commonResponse.fromJson(response);
@@ -102,8 +102,8 @@ class Food2FitRepositories {
   }
 
   Future<CommonResponse> getPatientWeightsResponse() async {
-    final response = await helper.get(ConstAPIUrls.getPatientWeights + await (getPatientID() as FutureOr<String>),
-        headers: {'Authorization': await (getAccessToken() as FutureOr<String>), 'Referer': 'https://www.flexsolution.biz'});
+    final response = await helper.get(ConstAPIUrls.getPatientWeights + await (getPatientID() ),
+        headers: {'Authorization': await (getAccessToken() ), 'Referer': 'https://www.flexsolution.biz'});
     print(response);
     commonResponse.setResponseType("PatientWeights");
     return commonResponse.fromJson(response);
@@ -112,15 +112,15 @@ class Food2FitRepositories {
 
   Future<CommonResponse> getPatientVisitDetailsResponse(String visitID) async {
     final response = await helper.get(ConstAPIUrls.getPatientVisitDetails+visitID,
-        headers: {'Authorization': await (getAccessToken() as FutureOr<String>), 'Referer': 'https://www.flexsolution.biz'});
+        headers: {'Authorization': await (getAccessToken() ), 'Referer': 'https://www.flexsolution.biz'});
     print(response);
     commonResponse.setResponseType("PatientVisitDetails");
     return commonResponse.fromJson(response);
   }
 
   Future<CommonResponse> getDietProgramsResponse() async {
-    final response = await helper.get(ConstAPIUrls.getDietPrograms + await (getPatientID() as FutureOr<String>),
-        headers: {'Authorization': await (getAccessToken() as FutureOr<String>), 'Referer': 'https://www.flexsolution.biz'});
+    final response = await helper.get(ConstAPIUrls.getDietPrograms + await (getPatientID() ),
+        headers: {'Authorization': await (getAccessToken() ), 'Referer': 'https://www.flexsolution.biz'});
     print(response);
     commonResponse.setResponseType("DietPrograms");
     return commonResponse.fromJson(response);
@@ -129,31 +129,31 @@ class Food2FitRepositories {
 
   Future<CommonResponse> getDietProgramDetailsResponse(String dietProgramID) async {
     final response = await helper.get(ConstAPIUrls.getDietProgramDetails+dietProgramID,
-        headers: {'Authorization': await (getAccessToken() as FutureOr<String>), 'Referer': 'https://www.flexsolution.biz'});
+        headers: {'Authorization': await (getAccessToken() ), 'Referer': 'https://www.flexsolution.biz'});
     print(response);
     commonResponse.setResponseType("DietProgramDetails");
     return commonResponse.fromJson(response);
   }
 
   Future<CommonResponse> getLatestDietProgramResponse() async {
-    final response = await helper.get(ConstAPIUrls.getLatestDietProgram + await (getPatientID() as FutureOr<String>),
-        headers: {'Authorization': await (getAccessToken() as FutureOr<String>), 'Referer': 'https://www.flexsolution.biz'});
+    final response = await helper.get(ConstAPIUrls.getLatestDietProgram + await (getPatientID() ),
+        headers: {'Authorization': await (getAccessToken() ), 'Referer': 'https://www.flexsolution.biz'});
     print(response);
     commonResponse.setResponseType("LatestDietProgram");
     return commonResponse.fromJson(response);
   }
 
   Future<CommonResponse> getProfileResponse() async {
-    final response = await helper.get(ConstAPIUrls.getProfileInfo + await (getPatientID() as FutureOr<String>),
-        headers: {'Authorization': await (getAccessToken() as FutureOr<String>), 'Referer': 'https://www.flexsolution.biz'});
+    final response = await helper.get(ConstAPIUrls.getProfileInfo + await (getPatientID() ),
+        headers: {'Authorization': await (getAccessToken() ), 'Referer': 'https://www.flexsolution.biz'});
     print(response);
     commonResponse.setResponseType("ProfileInfo");
     return commonResponse.fromJson(response);
   }
 
   Future<CommonResponse> getBasicProfileInfoResponse() async {
-    final response = await helper.get(ConstAPIUrls.getBasicProfileInfo + await (getPatientID() as FutureOr<String>),
-        headers: {'Authorization': await (getAccessToken() as FutureOr<String>), 'Referer': 'https://www.flexsolution.biz'});
+    final response = await helper.get(ConstAPIUrls.getBasicProfileInfo + await (getPatientID()),
+        headers: {'Authorization': await (getAccessToken() ), 'Referer': 'https://www.flexsolution.biz'});
     print(response);
     commonResponse.setResponseType("BasicProfileInfo");
     return commonResponse.fromJson(response);
@@ -161,7 +161,7 @@ class Food2FitRepositories {
 
   Future<CommonResponse> changePasswordResponse(String newPassword) async {
     final response = await helper.post(ConstAPIUrls.changePassword,
-        headers: {'Authorization': await (getAccessToken() as FutureOr<String>), 'Referer': 'https://www.flexsolution.biz'},
+        headers: {'Authorization': await (getAccessToken() ), 'Referer': 'https://www.flexsolution.biz'},
         body: {'new_password': newPassword});
     print(response);
     commonResponse.setResponseType("ChangePassword");
@@ -171,7 +171,7 @@ class Food2FitRepositories {
   Future<CommonResponse> uploadMedicalTestResponse(medicalTestRequestID, imagesCount, photos) async {
     final response = await helper.multiPartRequest(ConstAPIUrls.uploadMedicalTest,
         medicalTestRequestID, imagesCount, photos,
-        headers: {'Authorization': await (getAccessToken() as FutureOr<String>), 'Referer': 'https://www.flexsolution.biz'});
+        headers: {'Authorization': await (getAccessToken() ), 'Referer': 'https://www.flexsolution.biz'});
     print(response);
     commonResponse.setResponseType("UploadMedicalTest");
     return commonResponse.fromJson(response);
@@ -191,8 +191,8 @@ class Food2FitRepositories {
   }
 
   Future<CommonResponse> getNotificationsResponse() async {
-    final response = await helper.get(ConstAPIUrls.getNotifications + await (getPatientID() as FutureOr<String>),
-        headers: {'Authorization': await (getAccessToken() as FutureOr<String>), 'Referer': 'https://www.flexsolution.biz'});
+    final response = await helper.get(ConstAPIUrls.getNotifications + await (getPatientID() ),
+        headers: {'Authorization': await (getAccessToken() ), 'Referer': 'https://www.flexsolution.biz'});
     print(response);
     commonResponse.setResponseType("Notifications");
     return commonResponse.fromJson(response);

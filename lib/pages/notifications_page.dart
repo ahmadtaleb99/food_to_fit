@@ -44,7 +44,7 @@ class NotificationsPage extends StatelessWidget {
                       Loading();
                     break;
                   case Status.COMPLETED_WITH_TRUE:
-                    notificationList = snapshot.data!.data!.data;
+                    notificationList = List.from(snapshot.data!.data!.data);
                     print('COMPLETED_WITH_TRUE');
                     print(snapshot.data!.data!.data);
                     return SingleChildScrollView(

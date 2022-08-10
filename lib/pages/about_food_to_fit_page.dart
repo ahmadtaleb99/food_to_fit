@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:food_to_fit/app_icons.dart';
 import 'package:food_to_fit/app_constants.dart';
@@ -53,6 +55,9 @@ class AboutFoodToFitState extends State<AboutFoodToFit> {
                     systemConfigurationList = List.from(snapshot.data!.data!.data);
                     List<String> weekendDaysList =
                         systemConfigurationList!.elementAt(0).value!.split(" ");
+                    for(var kza in systemConfigurationList!){
+                      log(kza.value.toString());
+                    }
                     for (int i = 0; i < weekendDaysList.length; i++) {
                       if (i == weekendDaysList.length - 1) {
                         weekendDays =
@@ -64,6 +69,8 @@ class AboutFoodToFitState extends State<AboutFoodToFit> {
                     }
                     String? mobilePhone = systemConfigurationList!.elementAt(7).value;
                     String? phone = systemConfigurationList!.elementAt(6).value;
+                    String? facebookPage = systemConfigurationList!.elementAt(11).value;
+                    String? igAccount = systemConfigurationList!.elementAt(12).value;
                     return SingleChildScrollView(
                       child: Container(
                         margin: EdgeInsets.symmetric(
@@ -283,9 +290,8 @@ class AboutFoodToFitState extends State<AboutFoodToFit> {
                                       child: GestureDetector(
                                         onTap: () async {
                                           _launchURL(
-                                              systemConfigurationList!
-                                                  .elementAt(11)
-                                                  .value!);
+
+                                              'https://'+facebookPage.toString());
                                         },
                                         child: AutoSizeText(
                                           systemConfigurationList!
@@ -372,15 +378,17 @@ class AboutFoodToFitState extends State<AboutFoodToFit> {
 }
 
 _launchURL(String url) async {
-  if (await canLaunch(url)) {
-    await launch(url, forceWebView: true);
+  final uri = Uri.parse(url);
+
+  if (await canLaunchUrl(uri)) {
+    await launchUrl(uri );
   } else {
-    throw 'Could not launch $url';
+    throw 'Could not launch ${uri.toString()}';
   }
 }
 
 Future<void> _makePhoneCall(String url) async {
-  if (await canLaunch(url)) {
+  if (await canLaunchUrl(Uri.parse(url))) {
     await launch(url);
   } else {
     throw 'Could not launch $url';

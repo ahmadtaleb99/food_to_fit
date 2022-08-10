@@ -40,7 +40,7 @@ class ProfilePageState extends State<ProfilePage> {
   List<ProfileActionWidgetObject> profileActions = [
     ProfileActionWidgetObject(icon: AppIcons.icon_user, title: 'Profile Info'),
     ProfileActionWidgetObject(icon: Icons.notifications_none_outlined, title: 'Notifications'),
-    // ProfileActionWidgetObject(icon: AppIcons.settings, title: 'Account Settings'),
+    ProfileActionWidgetObject(icon: AppIcons.settings, title: 'Account Settings'),
     ProfileActionWidgetObject(icon: Icons.lock_outline, title: 'Change Password'),
   ];
 
@@ -120,7 +120,6 @@ class ProfilePageState extends State<ProfilePage> {
                                                 //               margin: EdgeInsets.all(20),
                                                 //               child: Icon(AppIcons.user,
                                                 //                   color: CustomColors.GreyColor, size: 40))),
-                                                // ),
                                                 // GestureDetector(
                                                 //   onTap: () {
                                                 //     getFromGallery();

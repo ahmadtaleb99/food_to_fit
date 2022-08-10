@@ -46,7 +46,7 @@ class VisitsPageState extends State<VisitsPage> {
                             );
                             break;
                           case Status.COMPLETED_WITH_TRUE:
-                            visits = snapshot.data!.data!.data;
+                            visits =List.from(snapshot.data!.data!.data);
                             print('COMPLETED_WITH_TRUE');
                             print(snapshot.data!.data!.data);
                             return SingleChildScrollView(

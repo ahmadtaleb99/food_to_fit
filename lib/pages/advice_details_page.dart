@@ -44,7 +44,7 @@ class AdviceDetails extends StatelessWidget {
                 progressIndicatorBuilder: (context, url, downloadProgress) =>
                     Center( child: Loading()),
                 errorWidget: (context, url, error) => Image(image: AssetImage('assets/images/started_logo@2x.png'), fit: BoxFit.cover,),
-                fit: BoxFit.cover,
+                fit: BoxFit.fill,
               ),
               ),
             ),

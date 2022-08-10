@@ -45,7 +45,7 @@ class MedTestPageState extends State<MedTestPage> {
                             );
                             break;
                           case Status.COMPLETED_WITH_TRUE:
-                            medTests = snapshot.data!.data!.data;
+                            medTests =List.from(snapshot.data!.data!.data);
                             print('COMPLETED_WITH_TRUE');
                             print(snapshot.data!.data!.data);
                             return SingleChildScrollView(

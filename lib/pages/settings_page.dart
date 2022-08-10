@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:food_to_fit/AppPreferences.dart';
 import 'package:food_to_fit/app_constants.dart';
+import 'package:food_to_fit/language_manager.dart';
 import 'package:food_to_fit/pages/drawables/rounded_button.dart';
 import 'package:food_to_fit/widgets/appBarWidget.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:auto_size_text/auto_size_text.dart';
+import 'package:food_to_fit/widgets/di.dart';
 
 enum SingingCharacter { English, Arabic }
 
@@ -14,6 +17,8 @@ class SettingsPage extends StatefulWidget {
 
 class SettingsPageState extends State<SettingsPage> {
   SingingCharacter? character = SingingCharacter.English;
+  String _selectedLanguage = LanguageType.ENGLISH.getValue();
+
   bool switchNotificationValue = false;
   bool switchReminderValue = true;
 
@@ -67,11 +72,11 @@ class SettingsPageState extends State<SettingsPage> {
                         // color: Colors.red,
                         child: Radio(
                           activeColor: CustomColors.LightLeavesGreen,
-                          value: SingingCharacter.English,
-                          groupValue: character,
-                          onChanged: (SingingCharacter? value) {
+                          value: LanguageType.ENGLISH.getValue(),
+                          groupValue: _selectedLanguage,
+                          onChanged: (String? value) {
                             setState(() {
-                              character = value;
+                              _selectedLanguage = value!;
                             });
                           },
                         ),
@@ -91,11 +96,11 @@ class SettingsPageState extends State<SettingsPage> {
                         // color: Colors.red,
                         child: Radio(
                           activeColor: CustomColors.LightLeavesGreen,
-                          value: SingingCharacter.Arabic,
-                          groupValue: character,
-                          onChanged: (SingingCharacter? value) {
+                          value: LanguageType.ARABIC.getValue(),
+                          groupValue: _selectedLanguage,
+                          onChanged: (String? value) {
                             setState(() {
-                              character = value;
+                              _selectedLanguage = value!;
                             });
                           },
                         ),
@@ -171,7 +176,9 @@ class SettingsPageState extends State<SettingsPage> {
                         color: CustomColors.PrimaryColor,
                         textColor: Colors.white,
                         title: 'Update',
-                        onClick: (){},
+                        onClick: (){
+                          getIT<AppPreferences>().changeAppLanguage(context, );
+                        },
                       ),
                     ),
                     SizedBox(height: 10),

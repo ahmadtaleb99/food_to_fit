@@ -15,9 +15,9 @@ class ProfileActionWidget{
       onTap: () {
         if (actionWidgetObject.title!.compareTo('Profile Info') == 0)
           Navigator.of(context).push(MaterialPageRoute(builder: (context) => ProfileInfoPage()));
-        // else
-        // if (actionWidgetObject.title.compareTo('Account Settings') == 0)
-        //   Navigator.of(context).push(MaterialPageRoute(builder: (context) => SettingsPage()));
+        else
+        if (actionWidgetObject.title?.compareTo('Account Settings') == 0)
+          Navigator.of(context).push(MaterialPageRoute(builder: (context) => SettingsPage()));
         else
         if (actionWidgetObject.title!.compareTo('Notifications') == 0)
           Navigator.of(context).push(MaterialPageRoute(builder: (context) => NotificationsPage()));

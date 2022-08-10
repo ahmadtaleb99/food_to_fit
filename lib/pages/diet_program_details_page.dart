@@ -64,7 +64,7 @@ class DietProgramDetailsPageState extends State<DietProgramDetailsPage> {
                   return Loading();
                   break;
                 case Status.COMPLETED_WITH_TRUE:
-                  daysList = snapshot.data!.data!.data;
+                  daysList = List.from(snapshot.data!.data!.data);
                   print('COMPLETED_WITH_TRUE');
                   print(snapshot.data!.data!.data);
                   return SingleChildScrollView(

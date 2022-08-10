@@ -1,5 +1,11 @@
+import 'dart:developer';
+import 'dart:io';
+
+import 'package:easy_localization/easy_localization.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:food_to_fit/app_constants.dart';
+import 'package:food_to_fit/language_manager.dart';
 import './pages/log_in.dart';
 import 'pages/started_page.dart';
 import 'package:food_to_fit/pages/main_page.dart';
@@ -9,26 +15,52 @@ import 'package:flutter/services.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'models/pushNotificationModel.dart';
+Future backgroundMessageHandler(RemoteMessage message) async {
+  print("onBackgroundMessage: $message");
+  PushNotification notification = PushNotification.fromJson(message.data);
+  AppWidgetState().showNotification(
+      notification.title, notification.body);
+}
+
+
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
+  await FirebaseMessaging.instance.getToken();
+
   SystemChrome.setPreferredOrientations([
     DeviceOrientation.portraitUp,
   ]);
 
-  runApp(MaterialApp(
-    title: 'Food to Fit',
-    theme: ThemeData(
-        primarySwatch: Colors.blue,
-        visualDensity: VisualDensity.adaptivePlatformDensity,
-        fontFamily: 'Montserrat'),
-    home: AppWidget(),
-    routes: <String, WidgetBuilder>{
-      '/LogIn': (BuildContext context) => LogInPage()
-    },
+
+  FirebaseMessaging.onBackgroundMessage(backgroundMessageHandler);
+
+  runApp(EasyLocalization(
+    supportedLocales: const [AppLanguages.englishLocale,AppLanguages.arabicLocale],
+    path:'assets/languages',
+
+    child: Builder(
+      builder: (context) {
+        return MaterialApp(
+          localizationsDelegates: context.localizationDelegates,
+          supportedLocales: context.supportedLocales,
+          locale: context.locale,
+          title: 'Food to Fit',
+          theme: ThemeData(
+              primarySwatch: Colors.blue,
+              visualDensity: VisualDensity.adaptivePlatformDensity,
+              fontFamily: 'Montserrat'),
+          home: AppWidget(),
+          routes: <String, WidgetBuilder>{
+            '/LogIn': (BuildContext context) => LogInPage()
+          },
+        );
+      }
+    ),
   ));
 }
+
 
 Future<String> checkStartedPage() async {
   var startedPageWasSeen = await SharedPreferencesSingleton()
@@ -92,37 +124,38 @@ class AppWidgetState extends State<AppWidget> {
 
     var android =  AndroidInitializationSettings('@mipmap/ic_launcher');
     var iOS =  IOSInitializationSettings();
-    // var initSetttings =  InitializationSettings(android: android, iOS: iOS);
-    // flutterLocalNotificationsPlugin.initialize(initSetttings,
-    //     onSelectNotification: onSelectNotification);
-    //
-    // messaging.configure(
-    //   onMessage: (Map<String, dynamic> message) async {
-    //     print("onMessage: $message");
-    //     PushNotification notification = PushNotification.fromJson(message);
-    //     showNotification(notification.title, notification.body);
-    //   },
-    //   onResume: (Map<String, dynamic> message) async {
-    //     print("onResume: $message");
-    //     Navigator.push(context,
-    //         MaterialPageRoute(builder: (context) => NotificationsPage()));
-    //   },
-    //   // onBackgroundMessage: myBackgroundMessageHandler,
-    //   onLaunch: (Map<String, dynamic> message) async {
-    //     print("onLaunch: $message");
-    //     Navigator.push(context,
-    //         MaterialPageRoute(builder: (context) => NotificationsPage()));
-    //   },
-    // );
-    //
-    // messaging.requestNotificationPermissions(
-    //   IosNotificationSettings(
-    //     alert: true,
-    //     badge: true,
-    //     provisional: false,
-    //     sound: true,
-    //   ),
-    // );
+    var initSetttings =  InitializationSettings(android: android, iOS: iOS);
+    flutterLocalNotificationsPlugin.initialize(initSetttings,
+        onSelectNotification: onSelectNotification);
+    if(Platform.isIOS) _initNotificationsConfigsIOS();
+
+
+
+    FirebaseMessaging.onMessage.listen((RemoteMessage message) {
+      log("onMessage: $message");
+
+      // PushNotification notification = PushNotification.fromJson(message.notification.t);
+      showNotification(
+          message.notification?.title, message.notification?.body);
+
+      Navigator.push(context,
+          MaterialPageRoute(builder: (context) => NotificationsPage()));
+    });
+
+
+
+    FirebaseMessaging.onMessageOpenedApp.listen((RemoteMessage message) {
+      log("onResume: $message");
+      // PushNotification notification = PushNotification.fromJson(message.data);
+      showNotification(
+          message.notification?.title, message.notification?.body);
+
+      Navigator.push(context,
+          MaterialPageRoute(builder: (context) => NotificationsPage()));
+    });
+
+
+
   }
 
   @override
@@ -130,19 +163,38 @@ class AppWidgetState extends State<AppWidget> {
     return chooseFirstPage();
   }
 
-  // showNotification(String? title, String? content) async {
-  //   var android =  AndroidNotificationDetails(
-  //       'channel id', 'channel NAME', 'CHANNEL DESCRIPTION' as int?,
-  //       priority: Priority.high, importance: Importance.max);
-  //   var iOS =  IOSNotificationDetails();
-  //   var platform =  NotificationDetails(android: android, iOS: iOS);
-  //   await flutterLocalNotificationsPlugin.show(0, title, content, platform,
-  //       payload: 'AndroidCoding.in');
-  // }
+  showNotification(String? title, String? content) async {
+    var android =  AndroidNotificationDetails(
+        'channel id', 'channel NAME', channelDescription: 'CHANNEL DESCRIPTION',
+        priority: Priority.high, importance: Importance.max,styleInformation: BigTextStyleInformation(''));
+    var iOS =  IOSNotificationDetails();
+    var platform =  NotificationDetails(android: android, iOS: iOS);
+    await flutterLocalNotificationsPlugin.show(0, title, content, platform,
+        payload: 'AndroidCoding.in');
+  }
 
-  //  Future onSelectNotification(String? payload) {
-  //   print("payload : $payload");
-  //   Navigator.push(context,
-  //       MaterialPageRoute(builder: (context) => NotificationsPage()));
-  // }
+   void onSelectNotification(String? payload) {
+    print("payload : $payload");
+    Navigator.push(context,
+        MaterialPageRoute(builder: (context) => NotificationsPage()));
+  }
+
+  Future _initNotificationsConfigsIOS() async{
+      final fcm = FirebaseMessaging.instance;
+    await fcm.setForegroundNotificationPresentationOptions(
+      alert: true, // Required to display a heads up notification
+      badge: true,
+      sound: true,
+    );
+
+      fcm.requestPermission(
+        alert: true,
+        announcement: false,
+        badge: true,
+        carPlay: false,
+        criticalAlert: false,
+        provisional: false,
+        sound: true );
+  }
+
 }
