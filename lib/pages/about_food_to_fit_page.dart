@@ -1,5 +1,6 @@
 import 'dart:developer';
 
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:food_to_fit/app_icons.dart';
 import 'package:food_to_fit/app_constants.dart';
@@ -32,7 +33,7 @@ class AboutFoodToFitState extends State<AboutFoodToFit> {
     return Scaffold(
         backgroundColor: Colors.white,
         appBar: AppBarWidget().appBarWidget(AutoSizeText(
-          'About Food To Fit',
+          'About Food To Fit'.tr(),
           style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold),
           maxFontSize: 16,
         )) as PreferredSizeWidget?,
@@ -187,11 +188,11 @@ class AboutFoodToFitState extends State<AboutFoodToFit> {
                                     padding: const EdgeInsets.all(15.0),
                                     alignment: Alignment.center,
                                     child: AutoSizeText(
-                                      "Work Hours: " +
+                                      "Work Hours: ".tr() +
                                           systemConfigurationList!
                                               .elementAt(1)
                                               .value! +
-                                          " to " +
+                                          " to ".tr() +
                                           systemConfigurationList!
                                               .elementAt(2)
                                               .value!,
@@ -220,7 +221,7 @@ class AboutFoodToFitState extends State<AboutFoodToFit> {
                                     padding: const EdgeInsets.all(15.0),
                                     alignment: Alignment.center,
                                     child: AutoSizeText(
-                                      "Weekend Days: " + weekendDays,
+                                      "Weekend Days: ".tr() + weekendDays,
                                       maxFontSize: 13.0,
                                       style: TextStyle(
                                           color: CustomColors.YellowColor),

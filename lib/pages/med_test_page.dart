@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:food_to_fit/models/medTestModel.dart';
 import 'package:food_to_fit/app_constants.dart';
@@ -86,7 +87,7 @@ class MedTestPageState extends State<MedTestPage> {
                                           .map((medTest) => TimeLineWidget()
                                                   .getTimeLineWidget(
                                                       context,
-                                                      'Status: ' +
+                                                      'Status: '.tr() +
                                                           medTest.fillStatus!,
                                                       medTest.date!,
                                                       medTest == medTests!.last,

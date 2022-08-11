@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:food_to_fit/models/visitModel.dart';
 import 'package:food_to_fit/app_constants.dart';
@@ -69,7 +70,7 @@ class VisitsPageState extends State<VisitsPage> {
                                           .map((visit) => TimeLineWidget()
                                                   .getTimeLineWidget(
                                                       context,
-                                                      'Visit: ' +
+                                                      'Visit: '.tr() +
                                                           (visits!.indexOf(
                                                                       visit) +
                                                                   1)
@@ -85,7 +86,7 @@ class VisitsPageState extends State<VisitsPage> {
                                                             VisitDetailsPage(
                                                               previousVisit:
                                                                   visit,
-                                                              visitTitle: 'Visit: ' +
+                                                              visitTitle: 'Visit: '.tr() +
                                                                   (visits!.indexOf(
                                                                               visit) +
                                                                           1)
@@ -129,7 +130,7 @@ class VisitsPageState extends State<VisitsPage> {
                 backgroundColor: CustomColors.ErrorMessageColor,
                 message:
                     ConstMeasures.unAuthenticatedMessage,
-                actionTitle: 'Go to login',
+                actionTitle: 'Go to login'.tr(),
                 onPressed: () {
                   Navigator.of(context).pushNamedAndRemoveUntil(
                       '/LogIn', (Route<dynamic> route) => false);

@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:food_to_fit/models/profileActionWidgetModel.dart';
 import 'package:food_to_fit/app_constants.dart';
@@ -13,16 +14,16 @@ class ProfileActionWidget{
   Widget profileActionWidget(BuildContext context, ProfileActionWidgetObject actionWidgetObject) {
     return GestureDetector(
       onTap: () {
-        if (actionWidgetObject.title!.compareTo('Profile Info') == 0)
+        if (actionWidgetObject.title!.compareTo('Profile Info'.tr()) == 0)
           Navigator.of(context).push(MaterialPageRoute(builder: (context) => ProfileInfoPage()));
         else
-        if (actionWidgetObject.title?.compareTo('Account Settings') == 0)
+        if (actionWidgetObject.title?.compareTo('Account Settings'.tr()) == 0)
           Navigator.of(context).push(MaterialPageRoute(builder: (context) => SettingsPage()));
         else
-        if (actionWidgetObject.title!.compareTo('Notifications') == 0)
+        if (actionWidgetObject.title!.compareTo('Notifications'.tr()) == 0)
           Navigator.of(context).push(MaterialPageRoute(builder: (context) => NotificationsPage()));
         else
-        if (actionWidgetObject.title!.compareTo('Change Password') == 0)
+        if (actionWidgetObject.title!.compareTo('Change Password'.tr()) == 0)
           Navigator.of(context).push(MaterialPageRoute(builder: (context) => ChangePasswordPage()));
       },
       child: Container(
@@ -55,7 +56,7 @@ class ProfileActionWidget{
               child: Container(
                 padding: const EdgeInsets.all(8.0),
                 child: AutoSizeText(
-                  actionWidgetObject.title!,
+                  actionWidgetObject.title!.tr(),
                   style: TextStyle(fontSize: 13.0),
                   maxFontSize: 13,
                 ),

@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import './drawables/rounded_button.dart';
 import '../app_constants.dart';
@@ -73,12 +74,11 @@ class ChangePasswordPageState extends State<ChangePasswordPage> {
                               topRight: const Radius.circular(25.0),
                             )),
                         child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
                           children: <Widget>[
                             SizedBox(height: 10),
-                            Align(
-                                alignment: Alignment.topLeft,
-                                child: Text('Change your password:',
-                                    style: TextStyle(fontSize: 16.0, color: Colors.grey, fontWeight: FontWeight.bold))),
+                            Text('Change your password'.tr(),
+                                style: TextStyle(fontSize: 16.0, color: Colors.grey, fontWeight: FontWeight.bold)),
                             SizedBox(
                                 height:
                                     MediaQuery.of(context).size.height / 30),
@@ -88,7 +88,7 @@ class ChangePasswordPageState extends State<ChangePasswordPage> {
                               textInputAction: TextInputAction.next,
                               validator: (val) {
                                 if (val!.isEmpty)
-                                  return 'This field cannot be empty';
+                                  return 'Field is required'.tr();
                                 // if (newPasswordController.text.length < 8)
                                 //   return 'Password must be more than or equal to 8';
                                 return null;
@@ -108,7 +108,7 @@ class ChangePasswordPageState extends State<ChangePasswordPage> {
                                 ),
                                 hintStyle: TextStyle(
                                     color: Colors.grey[400], fontSize: 14.0),
-                                hintText: "New Password",
+                                hintText: "New Password".tr(),
                               ),
                             ),
                             SizedBox(height: 20),
@@ -129,9 +129,9 @@ class ChangePasswordPageState extends State<ChangePasswordPage> {
                               },
                               validator: (val) {
                                 if (val!.isEmpty)
-                                  return 'This field cannot be empty';
+                                  return 'Field is required'.tr();
                                 if (val != newPasswordController.text)
-                                  return 'Confirm does not match with password!';
+                                  return 'Confirm does not match with password!'.tr();
                                 return null;
                               },
                               decoration: InputDecoration(
@@ -149,14 +149,14 @@ class ChangePasswordPageState extends State<ChangePasswordPage> {
                                 ),
                                 hintStyle: TextStyle(
                                     color: Colors.grey[400], fontSize: 14.0),
-                                hintText: "Confirm Password",
+                                hintText: "Confirm Password".tr() ,
                               ),
                             ),
                             SizedBox(height: 20),
                             RoundedButton(
                               color: CustomColors.PrimaryColor,
                               textColor: Colors.white,
-                              title: 'Change Password',
+                              title: 'Change Password'.tr(),
                               onClick: () {
                                 if (formKey.currentState!.validate()) {
                                   FocusScope.of(context)
@@ -202,7 +202,7 @@ class ChangePasswordPageState extends State<ChangePasswordPage> {
                                       message: snapshot.data!.data!.message,
                                       backgroundColor:
                                           CustomColors.SuccessMessageColor,
-                                      actionTitle: 'Ok',
+                                      actionTitle: 'Ok'.tr(),
                                       onPressed: () {
                                         Navigator.pop(context);
                                         Navigator.pop(context);
@@ -231,7 +231,7 @@ class ChangePasswordPageState extends State<ChangePasswordPage> {
                                     message: snapshot.data!.data!.message,
                                     backgroundColor:
                                         CustomColors.ErrorMessageColor,
-                                    actionTitle: 'Ok',
+                                    actionTitle: 'Ok'.tr(),
                                     onPressed: () => Navigator.pop(context),
                                     onCanceled: null,
                                   );

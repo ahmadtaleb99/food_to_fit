@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:food_to_fit/models/responseModel.dart';
 import './drawables/rounded_text_field.dart';
@@ -100,7 +101,7 @@ class LogInPageState extends State<LogInPage> {
                                 height:
                                     MediaQuery.of(context).size.height / 28),
                             RoundedTextField(
-                              hint: "Email or Phone",
+                              hint: "Email or Phone".tr(),
                               obscure: false,
                               controller: usernameController,
                               action: TextInputAction.next,
@@ -108,7 +109,7 @@ class LogInPageState extends State<LogInPage> {
                             ),
                             SizedBox(height: 20),
                             RoundedTextField(
-                              hint: "Password",
+                              hint: "password_hint".tr(),
                               obscure: true,
                               controller: passwordController,
                               action: TextInputAction.done,
@@ -128,7 +129,7 @@ class LogInPageState extends State<LogInPage> {
                             RoundedButton(
                               color: CustomColors.PrimaryColor,
                               textColor: Colors.white,
-                              title: 'Log in',
+                              title: 'Log in'.tr(),
                               onClick: () async {
                                 // logIn('accessToken', context);
                                 if (formKey.currentState!.validate()) {
@@ -146,7 +147,7 @@ class LogInPageState extends State<LogInPage> {
                             RoundedButton(
                               color: CustomColors.PrimaryAssentColor,
                               textColor: Colors.white,
-                              title: 'Skip',
+                              title: 'Skip'.tr(),
                               onClick: () {
                                 Navigator.push(
                                     context,

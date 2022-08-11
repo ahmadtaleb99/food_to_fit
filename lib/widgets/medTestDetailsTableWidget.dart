@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:food_to_fit/models/medTestModel.dart';
 import 'package:food_to_fit/app_constants.dart';
@@ -50,7 +51,7 @@ class MedTestDetailsTableWidget {
             padding: EdgeInsets.all(10.0),
             child: Center(
               child: AutoSizeText(
-                'Test',
+                'Test'.tr(),
                 maxLines: 1,
                 style: TextStyle(
                     color: Colors.black,
@@ -70,7 +71,7 @@ class MedTestDetailsTableWidget {
             ),
             child: Center(
               child: AutoSizeText(
-                'Result',
+                'Result'.tr(),
                 maxLines: 1,
                 style: TextStyle(
                     color: Colors.black,
@@ -85,7 +86,7 @@ class MedTestDetailsTableWidget {
             padding: EdgeInsets.all(10.0),
             child: Center(
               child: AutoSizeText(
-                'Normal Range',
+                'Normal Range'.tr(),
                 style:
                     TextStyle(color: Colors.black, fontSize: 12, fontWeight: FontWeight.bold),
                 minFontSize: 11,
@@ -96,6 +97,7 @@ class MedTestDetailsTableWidget {
         ]));
 
     for (int i = 0; i < properties!.length; i++) {
+     var propertiy  =  properties!.elementAt(i);
       rows.add(TableRow(
         children: [
           Container(
@@ -133,7 +135,8 @@ class MedTestDetailsTableWidget {
             padding: EdgeInsets.all(10.0),
             child: Center(
               child: AutoSizeText(
-                properties!.elementAt(i).range!,
+                propertiy.from == null ? '-' :
+                'from '.tr()+propertiy.from.toString()+' '+'to'.tr()+' '+propertiy.to.toString(),
                 style: TextStyle(color: Colors.black, fontSize: 14),
                 minFontSize: 12,
                 maxLines: 1,

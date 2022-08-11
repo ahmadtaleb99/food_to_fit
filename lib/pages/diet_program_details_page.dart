@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:food_to_fit/app_constants.dart';
 import 'package:food_to_fit/pages/drawables/rounded_diet_program_button.dart';
@@ -49,7 +50,7 @@ class DietProgramDetailsPageState extends State<DietProgramDetailsPage> {
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBarWidget().appBarWidget(AutoSizeText(
-        'Diet Program at: ' + dietProgramCreatedAt!.split(' ').first,
+        'Diet Program at: '.tr() + dietProgramCreatedAt!.split(' ').first,
         style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold),
         maxFontSize: 16,
       )) as PreferredSizeWidget?,
@@ -81,7 +82,7 @@ class DietProgramDetailsPageState extends State<DietProgramDetailsPage> {
                                           selectedIndex == daysList!.indexOf(day)
                                               ? CustomColors.PrimaryColor
                                               : CustomColors.GreyDividerColor,
-                                      title: "Day " +
+                                      title: "Day ".tr() +
                                           (daysList!.indexOf(day) + 1)
                                               .toString(),
                                       onClick: () {
@@ -200,7 +201,7 @@ class DietProgramDetailsPageState extends State<DietProgramDetailsPage> {
                                                     2 -
                                                 200),
                                         child: Text(
-                                            'This day hasn\'t been filled with meals, please contact your nutrition specialist to fill it for you',
+                                            'no-diet-for-day'.tr(),
                                             style:
                                                 TextStyle(color: Colors.red),
                                         textAlign: TextAlign.center,),

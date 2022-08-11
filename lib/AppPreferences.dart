@@ -28,7 +28,7 @@ class AppPreferences {
 
   void changeAppLanguage(BuildContext context,String languageType){
 
-      _prefs.setString(keyLanguage, languageType.getValue());
+      _prefs.setString(keyLanguage, languageType);
 
     var locale = getLocale();
     context.setLocale(locale);

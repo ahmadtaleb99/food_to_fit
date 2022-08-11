@@ -6,6 +6,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:food_to_fit/app_constants.dart';
 import 'package:food_to_fit/language_manager.dart';
+import 'package:food_to_fit/widgets/di.dart';
 import './pages/log_in.dart';
 import 'pages/started_page.dart';
 import 'package:food_to_fit/pages/main_page.dart';
@@ -26,6 +27,7 @@ Future backgroundMessageHandler(RemoteMessage message) async {
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  await EasyLocalization.ensureInitialized();
   await Firebase.initializeApp();
   await FirebaseMessaging.instance.getToken();
 
@@ -35,7 +37,7 @@ Future<void> main() async {
 
 
   FirebaseMessaging.onBackgroundMessage(backgroundMessageHandler);
-
+    await initAppModule();
   runApp(EasyLocalization(
     supportedLocales: const [AppLanguages.englishLocale,AppLanguages.arabicLocale],
     path:'assets/languages',
@@ -122,7 +124,7 @@ class AppWidgetState extends State<AppWidget> {
     // TODO: implement initState
     super.initState();
 
-    var android =  AndroidInitializationSettings('@mipmap/ic_launcher');
+    var android =  AndroidInitializationSettings('@mipmap/launcher_icon');
     var iOS =  IOSInitializationSettings();
     var initSetttings =  InitializationSettings(android: android, iOS: iOS);
     flutterLocalNotificationsPlugin.initialize(initSetttings,

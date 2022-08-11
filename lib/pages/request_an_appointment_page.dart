@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:food_to_fit/app_constants.dart';
 import 'package:food_to_fit/pages/drawables/rounded_button.dart';
@@ -32,7 +33,7 @@ class RequestAnAppointmentForm extends StatefulWidget {
 class RequestAnAppointmentFormState extends State<RequestAnAppointmentForm> {
   final formKey = GlobalKey<FormState>();
   final scaffoldKey = GlobalKey<ScaffoldState>();
-  final List<String> meetingTypesList = ['Face to face', 'Online'];
+  final List<String> meetingTypesList = ['Face to face'.tr(), 'Online'.tr()];
   final Pattern pattern = r'^(0|\+){1}[0-9]{6,15}$';
   String isAuthenticated = " ";
   late RequestAnAppointmentBloc bloc;
@@ -45,10 +46,9 @@ class RequestAnAppointmentFormState extends State<RequestAnAppointmentForm> {
 
   @override
   Widget build(BuildContext context) {
-    // TODO: implement build
     return Scaffold(
       key: scaffoldKey,
-      appBar: AppBarWidget().appBarWidget(AutoSizeText("Request an Appointment",
+      appBar: AppBarWidget().appBarWidget(AutoSizeText("Request an appointment".tr(),
           style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold),
           maxFontSize: 16)) as PreferredSizeWidget?,
       body: formSetup(context),
@@ -164,7 +164,7 @@ class RequestAnAppointmentFormState extends State<RequestAnAppointmentForm> {
                           FormBuilderDropdown(
                             decoration: InputDecoration(
                               hintText: "",
-                              labelText: "Meeting Type",
+                              labelText: "Meeting Type".tr(),
                               labelStyle: TextStyle(
                                   color: Colors.grey[600], fontSize: 16),
                               border: OutlineInputBorder(
@@ -185,7 +185,7 @@ class RequestAnAppointmentFormState extends State<RequestAnAppointmentForm> {
                           RoundedButton(
                             color: CustomColors.PrimaryColor,
                             textColor: Colors.white,
-                            title: 'Send',
+                            title: 'Send'.tr(),
                             onClick: () async {
                               if (formKey.currentState!.validate()) {
                                 if (await checkLastAppointmentRequestDate()) {
@@ -227,7 +227,7 @@ class RequestAnAppointmentFormState extends State<RequestAnAppointmentForm> {
                           FormBuilderDropdown(
                             decoration: InputDecoration(
                               hintText: "",
-                              labelText: "Meeting Type",
+                              labelText: "Meeting Type".tr(),
                               labelStyle: TextStyle(
                                   color: Colors.grey[600], fontSize: 16),
                               border: OutlineInputBorder(
@@ -248,7 +248,7 @@ class RequestAnAppointmentFormState extends State<RequestAnAppointmentForm> {
                           RoundedButton(
                             color: CustomColors.PrimaryColor,
                             textColor: Colors.white,
-                            title: 'Send',
+                            title: 'Send'.tr(),
                             onClick: () {
                               if (formKey.currentState!.validate()) {
                                 formKey.currentState!.save();
@@ -292,7 +292,7 @@ class RequestAnAppointmentFormState extends State<RequestAnAppointmentForm> {
                                     message: snapshot.data!.data!.message,
                                     backgroundColor:
                                         CustomColors.SuccessMessageColor,
-                                    actionTitle: 'Ok',
+                                    actionTitle: 'Ok'.tr(),
                                     onPressed: () {
                                       Navigator.pop(context);
                                       Navigator.pop(context);

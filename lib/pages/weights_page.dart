@@ -1,4 +1,5 @@
 import 'package:auto_size_text/auto_size_text.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:food_to_fit/models/weightBodyMeasureModel.dart';
 import 'package:food_to_fit/app_constants.dart';
@@ -28,7 +29,7 @@ class WeightsPageState extends State<WeightsPage> {
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBarWidget().appBarWidget(AutoSizeText(
-        'Weights Details',
+        'Weights Details'.tr(),
         style: TextStyle(
             color: Colors.black, fontWeight: FontWeight.bold, fontSize: 16),
         maxFontSize: 16,
@@ -58,7 +59,7 @@ class WeightsPageState extends State<WeightsPage> {
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            AutoSizeText('Your Weights History is:',
+                            AutoSizeText('Your Weights History is:'.tr(),
                                 style: TextStyle(
                                     fontSize: 16.0,
                                     fontWeight: FontWeight.bold)),
@@ -71,7 +72,7 @@ class WeightsPageState extends State<WeightsPage> {
                                       ? TimeLineWidget()
                                           .getWeightTimeLineWidget(
                                           context,
-                                          weight.measure.toString() + ' KG',
+                                          weight.measure.toString() + ' KG'.tr(),
                                           weight.date!,
                                           weight == weights!.last,
                                           weight == weights!.first,

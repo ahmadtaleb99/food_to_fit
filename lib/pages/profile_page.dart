@@ -1,3 +1,6 @@
+import 'dart:developer';
+
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:food_to_fit/models/profileActionWidgetModel.dart';
 import 'package:food_to_fit/app_constants.dart';
@@ -38,10 +41,10 @@ class ProfilePageState extends State<ProfilePage> {
   ProfileInfo? profile;
 
   List<ProfileActionWidgetObject> profileActions = [
-    ProfileActionWidgetObject(icon: AppIcons.icon_user, title: 'Profile Info'),
-    ProfileActionWidgetObject(icon: Icons.notifications_none_outlined, title: 'Notifications'),
-    ProfileActionWidgetObject(icon: AppIcons.settings, title: 'Account Settings'),
-    ProfileActionWidgetObject(icon: Icons.lock_outline, title: 'Change Password'),
+    ProfileActionWidgetObject(icon: AppIcons.icon_user, title: 'Profile Info'.tr()),
+    ProfileActionWidgetObject(icon: Icons.notifications_none_outlined, title: 'Notifications'.tr()),
+    ProfileActionWidgetObject(icon: AppIcons.settings, title: 'Account Settings'.tr()),
+    ProfileActionWidgetObject(icon: Icons.lock_outline, title: 'Change Password'.tr()),
   ];
 
   @override
@@ -193,20 +196,22 @@ class ProfilePageState extends State<ProfilePage> {
                                           RoundedButton(
                                             color: CustomColors.PrimaryColor,
                                             textColor: Colors.white,
-                                            title: 'LOGOUT',
+                                            title: 'LOGOUT'.tr(),
                                             onClick: () {
                                               Future.delayed(Duration.zero, () {
                                                 showDialog(
                                                     context: context,
                                                     builder: (context) {
+
+                                                      log('opend');
                                                       return CustomDialog(
                                                         title: ' ',
                                                         backgroundColor:
                                                             CustomColors
                                                                 .ErrorMessageColor,
                                                         message:
-                                                            'Are you sure you want to logout?',
-                                                        actionTitle: 'Ok',
+                                                            'logout-confirm'.tr(),
+                                                        actionTitle: 'Ok'.tr(),
                                                         onPressed: () {
                                                           loggingOut = true;
                                                           setState(() {});
@@ -256,7 +261,7 @@ class ProfilePageState extends State<ProfilePage> {
                 backgroundColor: CustomColors.ErrorMessageColor,
                 message:
                 ConstMeasures.unAuthenticatedMessage,
-                actionTitle: 'Go to login',
+                actionTitle: 'Go to login'.tr(),
                 onPressed: () {
                   Navigator.of(context).pushNamedAndRemoveUntil(
                       '/LogIn', (Route<dynamic> route) => false);

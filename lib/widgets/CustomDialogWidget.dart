@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:food_to_fit/app_constants.dart';
 
@@ -22,23 +23,23 @@ class CustomDialog extends StatelessWidget {
           )),
           // side: BorderSide(color: CustomColors.ErrorMessageBorderColor)),
       title: Text(
-        title!,
+        title!.tr(),
         style: TextStyle(
             color: CustomColors.GreyColor, fontWeight: FontWeight.bold),
       ),
       content: Text(
-        message!,
+        message!.tr(),
         style: TextStyle(
             color: CustomColors.GreyColor, fontWeight: FontWeight.bold),
       ),
       actions: [
         FlatButton(
-          child: Text(actionTitle!),
+          child: Text(actionTitle!.tr()),
           onPressed: onPressed as void Function()?,
         ),
         onCanceled != null ? FlatButton(
             onPressed: onCanceled as void Function()?,
-            child: Text('Cancel'),
+            child: Text('Cancel'.tr()),
         ) : Container()
       ],
     );

@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:food_to_fit/app_constants.dart';
 import 'package:food_to_fit/handler/carousel_cards_slider.dart';
@@ -36,12 +37,12 @@ class UserHomeViewWidgetState extends State<UserHomeViewWidget> {
         backgroundColor: CustomColors.PrimaryColor,
         iconBackgroundColor: CustomColors.DarkGrassGreen,
         icon: AppIcons.appointment,
-        title: 'Request an appointment'),
+        title: 'Request an appointment'.tr()),
     HomeActionCardObject(
         backgroundColor: CustomColors.PrimaryAssentColor,
         iconBackgroundColor: CustomColors.DarkPink,
         icon: AppIcons.lightbulb,
-        title: 'Nutritional Advice'),
+        title: 'Nutritional Advice'.tr()),
     // HomeActionCardObject(
     //     backgroundColor: CustomColors.YellowColor,
     //     iconBackgroundColor: CustomColors.DarkYellowColor,
@@ -51,7 +52,7 @@ class UserHomeViewWidgetState extends State<UserHomeViewWidget> {
         backgroundColor: CustomColors.PrimaryDarkColor,
         iconBackgroundColor: CustomColors.DarkLeavesGreen,
         icon: AppIcons.pear,
-        title: 'About Food To Fit'),
+        title: 'About Food To Fit'.tr()),
   ];
 
   bool loading = false;
@@ -203,14 +204,14 @@ class UserHomeViewWidgetState extends State<UserHomeViewWidget> {
           iconBackgroundColor: CustomColors.GreyColor,
           icon: AppIcons.goal,
           title: profile.staticBodyMeasures!.weightGoal != null
-              ? profile.staticBodyMeasures!.weightGoal.toString() + ' KG'
+              ? profile.staticBodyMeasures!.weightGoal.toString() + ' KG'.tr()
               : '-'),
       HomeActionCardObject(
           backgroundColor: Colors.white,
           iconBackgroundColor: CustomColors.GreyColor,
           icon: AppIcons.weight_scale,
           title: profile.staticBodyMeasures!.wT != null
-              ? profile.staticBodyMeasures!.wT.toString() + ' KG'
+              ? profile.staticBodyMeasures!.wT.toString() + ' KG'.tr()
               : '-'),
     ];
   }

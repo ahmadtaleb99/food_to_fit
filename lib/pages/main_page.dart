@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'dart:collection';
 import 'package:food_to_fit/pages/guest_home_page.dart';
@@ -50,13 +51,13 @@ class MainPageState extends State<MainPage> {
 
   static List<String> widgetOptionsTitles = <String>[
     'Home',
-    'Diet programs',
-    'Medical Tests',
+    'Diet',
+    'Med Test',
     'My visits and payments',
     'Profile'
   ];
 
-  Widget appBarContent() {
+   appBarContent() {
     if (selectedIndex == 0)
       return Container(
           width: 144,
@@ -64,7 +65,7 @@ class MainPageState extends State<MainPage> {
           child: Image.asset('assets/images/text_logo.png'));
     else
       return AutoSizeText(
-        widgetOptionsTitles[selectedIndex],
+        widgetOptionsTitles[selectedIndex].tr(),
         style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold),
         maxFontSize: 16,
       );
@@ -113,27 +114,27 @@ class MainPageState extends State<MainPage> {
                 BottomNavigationBarItem(
                   icon: showBottomNavigationBarIndicator(
                       selectedIndex == 0, AppIcons.ic_home_1),
-                  label: 'Home',
+                  label: 'Home'.tr(),
                 ),
                 BottomNavigationBarItem(
                   icon: showBottomNavigationBarIndicator(
                       selectedIndex == 1, AppIcons.watermelon),
-                  label: 'Diet',
+                  label: 'Diet'.tr(),
                 ),
                 BottomNavigationBarItem(
                   icon: showBottomNavigationBarIndicator(
                       selectedIndex == 2, AppIcons.group_358),
-                  label: 'Med Test',
+                  label: 'Med Test'.tr(),
                 ),
                 BottomNavigationBarItem(
                   icon: showBottomNavigationBarIndicator(
                       selectedIndex == 3, AppIcons.icon_orders),
-                  label: 'Visits',
+                  label: 'Visits'.tr(),
                 ),
                 BottomNavigationBarItem(
                   icon: showBottomNavigationBarIndicator(
                       selectedIndex == 4, AppIcons.ic_profile),
-                  label: 'Profile',
+                  label: 'Profile'.tr(),
                 ),
               ],
               currentIndex: selectedIndex,

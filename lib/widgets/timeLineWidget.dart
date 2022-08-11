@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:timeline_tile/timeline_tile.dart';
 import 'package:flutter/material.dart';
 import 'package:food_to_fit/pages/drawables/rounded_wrap_content_button.dart';
@@ -43,7 +44,7 @@ class TimeLineWidget {
             Text(title, style: TextStyle(fontSize: 14)),
             RoundedButton(
                 color: CustomColors.PrimaryColor,
-                title: 'View',
+                title: 'View'.tr(),
                 onClick: onClick,
                 verticalPadding: 0.0,
                 horizontalPadding: 0.0)

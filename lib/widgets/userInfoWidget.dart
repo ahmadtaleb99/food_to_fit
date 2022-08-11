@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:food_to_fit/app_constants.dart';
 import 'package:food_to_fit/app_icons.dart';
@@ -25,7 +26,7 @@ class UserInfoWidget {
                 padding: const EdgeInsets.all(20.0),
                 margin: const EdgeInsets.only(left: 100.0),
                 child: AutoSizeText(
-                  "Welcome: "+ patientName,
+                  "Welcome: ".tr()+ patientName,
                   minFontSize: 14,
                   maxFontSize: 16,
                   maxLines: 1,

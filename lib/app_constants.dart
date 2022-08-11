@@ -1,5 +1,6 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-
+import 'dart:math' as math;
 class CustomColors {
   static const PrimaryColor = Color(0xFF8FC743);
   static const PrimaryDarkColor = Color(0xFF0F6F3A);
@@ -28,13 +29,14 @@ class ConstMeasures {
   static const double borderRadius = 15.0;
   static const double borderCircular = 50.0;
 
-  static const String unAuthenticatedMessage = 'You have to login to get the features of this page.\n\nIf you do not have an account, please contact your nutrition specialist in order to have an account';
+  static  String unAuthenticatedMessage = 'not-authed-msg'.tr();
   // static const int patient_id = 3;
   // static const String access_token = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiIsImp0aSI6Im15aG9zdEBob3N0LmNvbSJ9.eyJpc3MiOiJteWhvc3RAaG9zdC5jb20iLCJhdWQiOiJteWhvc3RAaG9zdC5jb20iLCJqdGkiOiJteWhvc3RAaG9zdC5jb20iLCJpYXQiOjE2MTM5OTA3MzcsImV4cCI6MTY0NDc0OTEzNywiYWNjb3VudF9pZCI6MTN9.XxbHVMAUxOa7_L3ZfhWshkBCjprcUyCyfcKKHT-KKbw";
 }
 
 class ConstAPIUrls {
-  static const String baseURL = 'http://flexsolutions.technology/food2fit/web/api/';
+  // static const String baseURL = 'http://flexsolutions.technology/food2fit/web/api/';
+  static const String baseURL = 'http://192.168.1.104/food2fit/web/api/';
   static const String baseURLFiles = 'http://flexsolutions.technology/food2fit/web/';
   static const String logIn = 'login';
   static const String getGeneralAdvices = 'get-general-advices';
@@ -57,4 +59,9 @@ class ConstAPIUrls {
   static const String getNotifications = 'get-notifications?patient_id=';
 
 
+}
+extension xDouble on double{
+  bool canBeInt () {
+    return  this.floor() == this;
+  }
 }

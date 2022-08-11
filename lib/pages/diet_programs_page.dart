@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:food_to_fit/models/dietProgramModel.dart';
 import 'package:food_to_fit/widgets/CustomDialogWidget.dart';
@@ -58,8 +59,8 @@ class DietProgramsPageState extends State<DietProgramsPage> {
                                       .map((dietProgram) =>
                                           TimeLineWidget().getTimeLineWidget(
                                               context,
-                                              dietProgram.daysNumber == '1'? dietProgram.daysNumber! + " day" :
-                                              dietProgram.daysNumber! + " days",
+                                              dietProgram.daysNumber == '1'? dietProgram.daysNumber! + " day".tr() :
+                                              dietProgram.daysNumber! + " days".tr(),
                                               dietProgram.createdAt!,
                                               dietProgram == dietPrograms!.last,
                                               dietProgram == dietPrograms!.first,

@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:food_to_fit/AppPreferences.dart';
 import 'package:food_to_fit/app_constants.dart';
@@ -26,7 +27,7 @@ class SettingsPageState extends State<SettingsPage> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBarWidget().appBarWidget(AutoSizeText(
-          "Settings",
+          "Settings".tr(),
           style: TextStyle(
               color: Colors.black, fontWeight: FontWeight.bold, fontSize: 16),
           maxFontSize: 16,
@@ -45,7 +46,7 @@ class SettingsPageState extends State<SettingsPage> {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             AutoSizeText(
-                              'Choose Languages',
+                              'Choose Languages'.tr(),
                               style: TextStyle(
                                   color: Colors.black,
                                   fontWeight: FontWeight.bold,
@@ -54,7 +55,7 @@ class SettingsPageState extends State<SettingsPage> {
                             ),
                             SizedBox(height: 10.0),
                             AutoSizeText(
-                              'Please select your preferred language to facilitate communication',
+                              'select-lang'.tr(),
                               style:
                                   TextStyle(color: Colors.black, fontSize: 14),
                               maxFontSize: 14,
@@ -63,8 +64,8 @@ class SettingsPageState extends State<SettingsPage> {
                     ),
                     ListTile(
                       contentPadding: EdgeInsets.only(left: 5.0, right: 5.0),
-                      title: const AutoSizeText(
-                        'English',
+                      title:  AutoSizeText(
+                        'English'.tr(),
                         style: TextStyle(fontSize: 14.0),
                         maxFontSize: 14,
                       ),
@@ -110,7 +111,7 @@ class SettingsPageState extends State<SettingsPage> {
                     Container(
                       padding: EdgeInsets.all(ConstMeasures.borderWidth),
                       child: AutoSizeText(
-                        'Settings',
+                        'Settings'.tr(),
                         style: TextStyle(color: Colors.black, fontSize: 14),
                         maxFontSize: 14,
                       ),
@@ -119,8 +120,8 @@ class SettingsPageState extends State<SettingsPage> {
                       contentPadding: EdgeInsets.only(
                           left: ConstMeasures.borderWidth,
                           right: ConstMeasures.borderWidth),
-                      title: const AutoSizeText(
-                        'Allow Notifications',
+                      title:  AutoSizeText(
+                        'Allow Notifications'.tr(),
                         style: TextStyle(fontSize: 14.0),
                         maxFontSize: 14,
                       ),
@@ -146,8 +147,8 @@ class SettingsPageState extends State<SettingsPage> {
                       contentPadding: EdgeInsets.only(
                           left: ConstMeasures.borderWidth,
                           right: ConstMeasures.borderWidth),
-                      title: const AutoSizeText(
-                        'Allow Reminders',
+                      title:  AutoSizeText(
+                        'Allow Reminders'.tr(),
                         style: TextStyle(fontSize: 14.0),
                         maxFontSize: 14,
                       ),
@@ -175,9 +176,9 @@ class SettingsPageState extends State<SettingsPage> {
                       child: RoundedButton(
                         color: CustomColors.PrimaryColor,
                         textColor: Colors.white,
-                        title: 'Update',
+                        title: 'Update'.tr(),
                         onClick: (){
-                          getIT<AppPreferences>().changeAppLanguage(context, );
+                          setState(() => getIT<AppPreferences>().changeAppLanguage(context, _selectedLanguage));
                         },
                       ),
                     ),

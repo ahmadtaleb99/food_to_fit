@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:food_to_fit/widgets/appBarWidget.dart';
 import 'package:food_to_fit/app_constants.dart';
@@ -66,7 +67,7 @@ class VisitDetailsPage extends StatelessWidget {
                           // SizedBox(height: 10.0),
                           Padding(
                               padding: EdgeInsets.symmetric(horizontal: 10.0),
-                              child: Text('Visit Details',
+                              child: Text('Visit Details'.tr(),
                                   style: TextStyle(
                                       color: Colors.black,
                                       fontSize: 16.0,
@@ -82,7 +83,7 @@ class VisitDetailsPage extends StatelessWidget {
                                       Padding(
                                           padding: EdgeInsets.symmetric(
                                               horizontal: 10.0),
-                                          child: Text('Payment',
+                                          child: Text('Payment'.tr(),
                                               style: TextStyle(
                                                   color: Colors.black,
                                                   fontSize: 16.0,

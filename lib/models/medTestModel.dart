@@ -98,19 +98,21 @@ class MedicalTestProperties {
 class Properties {
   int? id;
   int? typeId;
+  double? from;
+  double? to;
   String? name;
   String? type;
-  String? range;
   String? value;
 
-  Properties({this.id, this.typeId, this.name, this.type, this.range, this.value});
+  Properties({this.id, this.typeId, this.name, this.type,  this.value});
 
   Properties.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     typeId = json['type_id'];
     name = json['name'];
+    if(json['range'] != null ) from = double.parse(json['range']['from'].toString());
     type = json['type'];
-    range = json['range'];
+    if(json['range'] != null ) to = double.parse(json['range']['to'].toString());
     value = json['value'];
   }
 
@@ -120,7 +122,6 @@ class Properties {
     data['type_id'] = this.typeId;
     data['name'] = this.name;
     data['type'] = this.type;
-    data['range'] = this.range;
     data['value'] = this.value;
     return data;
   }

@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:food_to_fit/app_constants.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
@@ -21,7 +22,7 @@ class RoundedTextField extends StatelessWidget {
       textInputAction: action,
       keyboardType: textInputType,
       onFieldSubmitted: (_) => onSubmitted!(),
-      validator: FormBuilderValidators.required(),
+      validator: FormBuilderValidators.required(errorText: 'Field is required'.tr() ),
       decoration: InputDecoration(
           border: OutlineInputBorder(
             borderRadius: BorderRadius.all(Radius.circular(25.0)),

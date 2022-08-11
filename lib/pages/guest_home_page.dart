@@ -1,5 +1,6 @@
 import 'dart:developer';
 
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:food_to_fit/app_constants.dart';
 import 'package:food_to_fit/handler/carousel_with_indicator_slider.dart';
@@ -26,12 +27,12 @@ class GuestHomeViewWidgetState extends State<GuestHomeViewWidget> {
         backgroundColor: CustomColors.PrimaryColor,
         iconBackgroundColor: CustomColors.DarkGrassGreen,
         icon: AppIcons.appointment,
-        title: 'Request an appointment'),
+        title: 'Request an appointment'.tr()),
     HomeActionCardObject(
         backgroundColor: CustomColors.PrimaryAssentColor,
         iconBackgroundColor: CustomColors.DarkPink,
         icon: AppIcons.lightbulb,
-        title: 'Nutritional Advice'),
+        title: 'Nutritional Advice'.tr()),
     // HomeActionCardObject(
     //     backgroundColor: CustomColors.YellowColor,
     //     iconBackgroundColor: CustomColors.DarkYellowColor,
@@ -41,7 +42,7 @@ class GuestHomeViewWidgetState extends State<GuestHomeViewWidget> {
         backgroundColor: CustomColors.PrimaryDarkColor,
         iconBackgroundColor: CustomColors.DarkLeavesGreen,
         icon: AppIcons.pear,
-        title: 'About Food To Fit'),
+        title: 'About Food To Fit'.tr()),
   ];
 
   @override

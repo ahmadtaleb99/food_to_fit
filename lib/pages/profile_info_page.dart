@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:food_to_fit/widgets/homeUserInfoCardWidget.dart';
 import 'package:food_to_fit/models/homeActionCardModel.dart';
@@ -39,10 +40,7 @@ class ProfileInfoPageState extends State<ProfileInfoPage> {
   @override
   void initState() {
     super.initState();
-    image.image.resolve(ImageConfiguration()).addListener(
-        ImageStreamListener((ImageInfo info, bool syncCall) => setState(() {
-              loading = true;
-            })));
+
   }
 
   @override
@@ -55,7 +53,7 @@ class ProfileInfoPageState extends State<ProfileInfoPage> {
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBarWidget().appBarWidget(AutoSizeText(
-        'Profile Info',
+        'Profile Info'.tr(),
         style: TextStyle(
             color: Colors.black, fontWeight: FontWeight.bold, fontSize: 16),
         maxFontSize: 16,
@@ -122,6 +120,7 @@ class ProfileInfoPageState extends State<ProfileInfoPage> {
 
   Widget userInfoView(BuildContext context, ProfileInfo data) {
     return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         UserInfoWidget().getUserInfoWidget(context, loading, imageURL,
             profile!.profile!.firstName! + " " + profile!.profile!.lastName!),
@@ -253,26 +252,23 @@ class ProfileInfoPageState extends State<ProfileInfoPage> {
             ],
           ),
         ),
-        Align(
-            alignment: Alignment.centerLeft,
-            child: AutoSizeText(
-              'More Information:',
-              style: TextStyle(
-                  color: CustomColors.PrimaryColor,
-                  fontWeight: FontWeight.bold,
-                  fontSize: 16.0),
-              maxFontSize: 16,
-            )),
-        Align(
-            alignment: Alignment.centerLeft,
-            child: AutoSizeText(
-              'Body Measure',
-              style: TextStyle(
-                  color: CustomColors.PrimaryColor,
-                  fontWeight: FontWeight.bold,
-                  fontSize: 16.0),
-              maxFontSize: 16,
-            )),
+        AutoSizeText(
+          'More Information:'.tr(),
+          style: TextStyle(
+              color: CustomColors.PrimaryColor,
+              fontWeight: FontWeight.bold,
+              fontSize: 24.0),
+          maxFontSize: 24,
+        ),
+        SizedBox(height: 10.0),
+        AutoSizeText(
+          'Body Measure'.tr(),
+          style: TextStyle(
+              color: CustomColors.PrimaryColor,
+              fontWeight: FontWeight.bold,
+              fontSize: 16.0),
+          maxFontSize: 16,
+        ),
         SizedBox(height: 10.0),
         Column(
           children: List.generate(profile!.nonStaticBodyMeasures!.length, (index) {
@@ -285,22 +281,20 @@ class ProfileInfoPageState extends State<ProfileInfoPage> {
                 : Container();
           }),
         ),
-        Align(
-            alignment: Alignment.centerLeft,
-            child: AutoSizeText(
-              'Diseases',
-              style: TextStyle(
-                  color: CustomColors.PrimaryColor,
-                  fontWeight: FontWeight.bold,
-                  fontSize: 16.0),
-              maxFontSize: 16,
-            )),
+        AutoSizeText(
+          'Diseases'.tr(),
+          style: TextStyle(
+              color: CustomColors.PrimaryColor,
+              fontWeight: FontWeight.bold,
+              fontSize: 16.0),
+          maxFontSize: 16,
+        ),
         SizedBox(height: 15.0),
         diseasesList!.length == 0
             ? Align(
-          alignment: Alignment.centerLeft,
+          alignment: Alignment.center,
           child: AutoSizeText(
-            'There are no diseases',
+            'There are no diseases'.tr(),
             style: TextStyle(fontWeight: FontWeight.bold, fontSize: 14.0),
             maxFontSize: 14,
           ),
@@ -347,14 +341,14 @@ class ProfileInfoPageState extends State<ProfileInfoPage> {
           iconBackgroundColor: CustomColors.GreyColor,
           icon: AppIcons.goal,
           title: profile!.staticBodyMeasures!.weightGoal != null
-              ? profile!.staticBodyMeasures!.weightGoal.toString() + ' KG'
+              ? profile!.staticBodyMeasures!.weightGoal.toString() + ' KG'.tr()
               : '-'),
       HomeActionCardObject(
           backgroundColor: Colors.white,
           iconBackgroundColor: CustomColors.GreyColor,
           icon: AppIcons.weight_scale,
           title: profile!.staticBodyMeasures!.wT != null
-              ? profile!.staticBodyMeasures!.wT.toString() + ' KG'
+              ? profile!.staticBodyMeasures!.wT.toString() + ' KG'.tr()
               : '-'),
     ];
   }
@@ -373,7 +367,7 @@ class ProfileInfoPageState extends State<ProfileInfoPage> {
           iconBackgroundColor: CustomColors.GreyColor,
           icon: AppIcons.measurement,
           title: profile!.staticBodyMeasures!.hT != null
-              ? profile!.staticBodyMeasures!.hT.toString() + ' cm'
+              ? profile!.staticBodyMeasures!.hT.toString() + 'cm'.tr()
               : '-'),
       HomeActionCardObject(
           backgroundColor: Colors.white,

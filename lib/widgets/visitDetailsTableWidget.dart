@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:food_to_fit/app_constants.dart';
 import 'package:food_to_fit/models/visitModel.dart';
@@ -21,7 +22,7 @@ class VisitDetailsTableWidget {
                 SizedBox(height: 10.0),
                 Padding(
                   padding: EdgeInsets.symmetric(horizontal: 10.0),
-                  child: AutoSizeText('Date and Time',
+                  child: AutoSizeText('Date and Time'.tr(),
                       style: TextStyle(
                           color: Colors.black,
                           fontWeight: FontWeight.bold,
@@ -51,7 +52,7 @@ class VisitDetailsTableWidget {
                 Padding(
                   padding: EdgeInsets.symmetric(horizontal: 10.0),
                   child: AutoSizeText(
-                    'Diagnosis',
+                    'Diagnosis'.tr(),
                     style: TextStyle(
                         color: Colors.black,
                         fontWeight: FontWeight.bold,
@@ -86,7 +87,7 @@ class VisitDetailsTableWidget {
                             Padding(
                               padding: EdgeInsets.symmetric(horizontal: 10.0),
                               child: AutoSizeText(
-                                'Payment',
+                                'Payment'.tr(),
                                 style: TextStyle(
                                     color: Colors.black,
                                     fontWeight: FontWeight.bold,
@@ -152,7 +153,7 @@ class VisitDetailsTableWidget {
                 Padding(
                   padding: EdgeInsets.symmetric(horizontal: 10.0),
                   child: AutoSizeText(
-                    'Amount',
+                    'Amount'.tr(),
                     style: TextStyle(
                         color: Colors.black,
                         fontWeight: FontWeight.bold,

@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:food_to_fit/widgets/appBarWidget.dart';
 import 'package:food_to_fit/models/medTestModel.dart';
@@ -30,7 +31,7 @@ class MedTestDetailsPageState extends State<MedTestDetailsPage> {
   Widget build(BuildContext context) {
     bloc = GetMedicalTestDetailsBloc(widget.previousMedicalTest.id!);
     return Scaffold(
-      appBar: AppBarWidget().appBarWidget(Text('Medical Test Details',
+      appBar: AppBarWidget().appBarWidget(Text('Medical Test Details'.tr(),
           style: TextStyle(
               color: Colors.black, fontWeight: FontWeight.bold, fontSize: 16))) as PreferredSizeWidget?,
       body: Container(
@@ -64,7 +65,7 @@ class MedTestDetailsPageState extends State<MedTestDetailsPage> {
                                   padding:
                                       EdgeInsets.symmetric(horizontal: 10.0),
                                   child: AutoSizeText(
-                                    'Status: ' +
+                                    'Status: '.tr() +
                                         medTest!.medicalTestDetails!.fillStatus!,
                                     style: TextStyle(color: Colors.black),
                                     maxFontSize: 14,
@@ -74,7 +75,7 @@ class MedTestDetailsPageState extends State<MedTestDetailsPage> {
                                   padding:
                                       EdgeInsets.symmetric(horizontal: 10.0),
                                   child: AutoSizeText(
-                                    'Time: ' + medTest!.medicalTestDetails!.date!,
+                                    'Time: '.tr() + medTest!.medicalTestDetails!.date!,
                                     style: TextStyle(color: Colors.black),
                                     maxFontSize: 14,
                                   )),
@@ -102,13 +103,13 @@ class MedTestDetailsPageState extends State<MedTestDetailsPage> {
                                                       .fillStatus !=
                                                   'Uploaded'
                                               ? Text(
-                                                  'You have to upload images of the following medical tests and its properties:',
+                                                  'upload-test'.tr(),
                                                   style: TextStyle(
                                                       fontSize: 16.0,
                                                       color: Colors.blueAccent),
                                                 )
                                               : Text(
-                                                  'Your medical tests and its properties:',
+                                                  'Your medical tests and its properties:'.tr(),
                                                   style: TextStyle(
                                                       fontSize: 16.0,
                                                       fontWeight:

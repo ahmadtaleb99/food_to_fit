@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:food_to_fit/models/notificationModel.dart';
 import 'package:food_to_fit/widgets/notificationWidget.dart';
@@ -25,7 +26,7 @@ class NotificationsPage extends StatelessWidget {
             color: Colors.black, //change your color here
           ),
           title: AutoSizeText(
-            'Notifications',
+            'Notifications'.tr(),
             style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold),
             maxFontSize: 16.0,
           ),

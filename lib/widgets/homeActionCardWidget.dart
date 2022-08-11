@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:food_to_fit/models/homeActionCardModel.dart';
 import 'package:food_to_fit/pages/request_an_appointment_page.dart';
@@ -15,16 +16,16 @@ class HomeActionCardWidget {
       BuildContext context, HomeActionCardObject actionCardObject) {
     return GestureDetector(
       onTap: () {
-        if (actionCardObject.title!.compareTo('Request an appointment') == 0)
+        if (actionCardObject.title!.compareTo('Request an appointment'.tr()) == 0)
           Navigator.of(context).push(
               MaterialPageRoute(builder: (context) => RequestAnAppointment()));
-        else if (actionCardObject.title!.compareTo('Nutritional Advice') == 0)
+        else if (actionCardObject.title!.compareTo('Nutritional Advice'.tr()) == 0)
           Navigator.of(context)
               .push(MaterialPageRoute(builder: (context) => AdvicesPage()));
-        else if (actionCardObject.title!.compareTo('Ask a question') == 0)
+        else if (actionCardObject.title!.compareTo('Ask a question'.tr()) == 0)
           Navigator.of(context)
               .push(MaterialPageRoute(builder: (context) => AskAQuestion()));
-        else if (actionCardObject.title!.compareTo('About Food To Fit') == 0)
+        else if (actionCardObject.title!.compareTo('About Food To Fit'.tr()) == 0)
           Navigator.of(context)
               .push(MaterialPageRoute(builder: (context) => AboutFoodToFit()));
       },
