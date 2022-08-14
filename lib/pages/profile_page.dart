@@ -5,6 +5,10 @@ import 'package:flutter/material.dart';
 import 'package:food_to_fit/models/profileActionWidgetModel.dart';
 import 'package:food_to_fit/app_constants.dart';
 import 'package:food_to_fit/app_icons.dart';
+import 'package:food_to_fit/pages/change_password_page.dart';
+import 'package:food_to_fit/pages/notifications_page.dart';
+import 'package:food_to_fit/pages/profile_info_page.dart';
+import 'package:food_to_fit/pages/settings_page.dart';
 import 'package:food_to_fit/widgets/profileActionWidget.dart';
 import 'package:food_to_fit/pages/drawables/rounded_button.dart';
 import 'package:image_picker/image_picker.dart';
@@ -40,12 +44,6 @@ class ProfilePageState extends State<ProfilePage> {
   bool loggingOut = false;
   ProfileInfo? profile;
 
-  List<ProfileActionWidgetObject> profileActions = [
-    ProfileActionWidgetObject(icon: AppIcons.icon_user, title: 'Profile Info'.tr()),
-    ProfileActionWidgetObject(icon: Icons.notifications_none_outlined, title: 'Notifications'.tr()),
-    ProfileActionWidgetObject(icon: AppIcons.settings, title: 'Account Settings'.tr()),
-    ProfileActionWidgetObject(icon: Icons.lock_outline, title: 'Change Password'.tr()),
-  ];
 
   @override
   void initState() {
@@ -58,6 +56,7 @@ class ProfilePageState extends State<ProfilePage> {
 
   @override
   Widget build(BuildContext context) {
+    log('build');
     GetBasicProfileBloc bloc = GetBasicProfileBloc();
     return FutureBuilder(
         future: checkAuthentication(),
@@ -184,13 +183,26 @@ class ProfilePageState extends State<ProfilePage> {
                                           ),
                                           SizedBox(height: 10),
                                           Column(
-                                            children: profileActions
-                                                .map((profileAction) =>
-                                                    ProfileActionWidget()
-                                                        .profileActionWidget(
-                                                            context,
-                                                            profileAction))
-                                                .toList(),
+                                            children:[
+                                              ProfileActionWidget(title: 'Profile Info', icon: AppIcons.icon_user, onTap: () {
+                                                Navigator.of(context).push(MaterialPageRoute(builder: (context) => ProfileInfoPage()));
+                                              },),
+                                              ProfileActionWidget(title: 'Notifications', icon: Icons.notifications_none_outlined, onTap: () {
+                                                Navigator.of(context).push(MaterialPageRoute(builder: (context) => NotificationsPage()));
+                                              },),
+                                              ProfileActionWidget(title: 'Account Settings', icon: AppIcons.settings, onTap: () {
+                                                Navigator.of(context).push(MaterialPageRoute(builder: (context) => SettingsPage())).then((value) => setState((){}));
+                                              },),
+                                              ProfileActionWidget(title: 'Change Password', icon: Icons.lock_outline, onTap: () {
+                                                Navigator.of(context).push(MaterialPageRoute(builder: (context) => ChangePasswordPage()));
+                                              },),
+
+                                            ]
+                                            // children: profileActions
+                                            //     .map((profileAction) =>
+                                            //         ProfileActionWidget(actionWidgetObject: profileAction,)
+                                            // )
+                                            //     .toList(),
                                           ),
                                           SizedBox(height: 30),
                                           RoundedButton(

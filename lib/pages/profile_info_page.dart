@@ -219,7 +219,7 @@ class ProfileInfoPageState extends State<ProfileInfoPage> {
                     flex: 1,
                     child: ProfileInfoField().profileInfoFieldWidget(
                         AutoSizeText(
-                          data.profile!.socialStatus!,
+                          data.profile!.socialStatus!.tr(),
                           style: TextStyle(fontSize: 14),
                           maxFontSize: 14,
                         ),
@@ -231,7 +231,7 @@ class ProfileInfoPageState extends State<ProfileInfoPage> {
                     flex: 1,
                     child: ProfileInfoField().profileInfoFieldWidget(
                         AutoSizeText(
-                          data.profile!.gender!,
+                          data.profile!.gender!.tr(),
                           style: TextStyle(fontSize: 14),
                           maxFontSize: 14,
                         ),
@@ -242,7 +242,7 @@ class ProfileInfoPageState extends State<ProfileInfoPage> {
               ),
               ProfileInfoField().profileInfoFieldWidget(
                   AutoSizeText(
-                    data.profile!.qualifications!,
+                    data.profile!.qualifications!.tr(),
                     style: TextStyle(fontSize: 14),
                     maxFontSize: 14,
                     overflow: TextOverflow.ellipsis,

@@ -88,7 +88,7 @@ class MedTestPageState extends State<MedTestPage> {
                                                   .getTimeLineWidget(
                                                       context,
                                                       'Status: '.tr() +
-                                                          medTest.fillStatus!,
+                                                          medTest.fillStatus!.tr(),
                                                       medTest.date!,
                                                       medTest == medTests!.last,
                                                       medTest == medTests!.first,

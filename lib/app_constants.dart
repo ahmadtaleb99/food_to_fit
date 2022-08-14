@@ -36,7 +36,8 @@ class ConstMeasures {
 
 class ConstAPIUrls {
   // static const String baseURL = 'http://flexsolutions.technology/food2fit/web/api/';
-  static const String baseURL = 'http://192.168.1.104/food2fit/web/api/';
+  // static const String baseURL = 'http://192.168.1.104/food2fit/web/api/';
+  static const String baseURL = 'http://192.168.0.145/food2fit/web/api/';
   static const String baseURLFiles = 'http://flexsolutions.technology/food2fit/web/';
   static const String logIn = 'login';
   static const String getGeneralAdvices = 'get-general-advices';
@@ -50,7 +51,7 @@ class ConstAPIUrls {
   static const String getDietProgramDetails = 'get-diet-program-details?diet_program_id=';
   static const String getLatestDietProgram = 'get-latest-diet-program?patient_id=';
   static const String getProfileInfo = 'get-profile?patient_id=';
-  static const String getBasicProfileInfo = 'get-basic-profile-info?patient_id=';
+    static const String getBasicProfileInfo = 'get-basic-profile-info?patient_id=';
   static const String getPatientWeights = 'get-patient-weights?patient_id=';
   static const String changePassword = 'change-password';
   static const String uploadMedicalTest = 'upload-medical-test';

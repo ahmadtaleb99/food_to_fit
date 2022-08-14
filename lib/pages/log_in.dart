@@ -1,6 +1,8 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:food_to_fit/AppPreferences.dart';
 import 'package:food_to_fit/models/responseModel.dart';
+import 'package:food_to_fit/widgets/di.dart';
 import './drawables/rounded_text_field.dart';
 import './drawables/rounded_button.dart';
 import '../app_constants.dart';
@@ -279,6 +281,8 @@ class LogInPageState extends State<LogInPage> {
   }
 
   logIn(CommonResponse response, BuildContext context) async {
+
+      getIT<AppPreferences>().saveAccessToken(response.accessToken!);
     await SharedPreferencesSingleton().addStringToSF(
         SharedPreferencesSingleton.accessToken, response.accessToken!);
     print("access_token: " +

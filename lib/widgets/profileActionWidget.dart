@@ -9,34 +9,27 @@ import 'package:food_to_fit/pages/notifications_page.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 
 
-class ProfileActionWidget{
+class ProfileActionWidget extends StatelessWidget {
 
-  Widget profileActionWidget(BuildContext context, ProfileActionWidgetObject actionWidgetObject) {
+  final void Function()? onTap;
+final IconData icon;
+final String title;
+  @override
+  Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () {
-        if (actionWidgetObject.title!.compareTo('Profile Info'.tr()) == 0)
-          Navigator.of(context).push(MaterialPageRoute(builder: (context) => ProfileInfoPage()));
-        else
-        if (actionWidgetObject.title?.compareTo('Account Settings'.tr()) == 0)
-          Navigator.of(context).push(MaterialPageRoute(builder: (context) => SettingsPage()));
-        else
-        if (actionWidgetObject.title!.compareTo('Notifications'.tr()) == 0)
-          Navigator.of(context).push(MaterialPageRoute(builder: (context) => NotificationsPage()));
-        else
-        if (actionWidgetObject.title!.compareTo('Change Password'.tr()) == 0)
-          Navigator.of(context).push(MaterialPageRoute(builder: (context) => ChangePasswordPage()));
-      },
+
+      onTap: onTap,
       child: Container(
         margin: EdgeInsets.symmetric(vertical: 10),
         padding: EdgeInsets.symmetric(horizontal: 0, vertical: 10),
         decoration: BoxDecoration(
             color: Colors.white,
             borderRadius: BorderRadius.all(
-                Radius.circular(ConstMeasures.borderCircular),
+              Radius.circular(ConstMeasures.borderCircular),
             ),
             border: Border.all(
                 color: CustomColors.GreyBorderColor)
-          ),
+        ),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           mainAxisSize: MainAxisSize.max,
@@ -47,16 +40,16 @@ class ProfileActionWidget{
                 padding: const EdgeInsets.all(8.0),
                 // margin: EdgeInsets.all(10.0),
                 child: Icon(
-                  actionWidgetObject.icon,
-                  color: CustomColors.PrimaryColor),
-                ),
+                   icon,
+                    color: CustomColors.PrimaryColor),
               ),
+            ),
             Expanded(
               flex: 3,
               child: Container(
                 padding: const EdgeInsets.all(8.0),
                 child: AutoSizeText(
-                  actionWidgetObject.title!.tr(),
+                  title.tr(),
                   style: TextStyle(fontSize: 13.0),
                   maxFontSize: 13,
                 ),
@@ -82,4 +75,12 @@ class ProfileActionWidget{
       ),
     );
   }
+
+  const ProfileActionWidget({
+    required this.onTap,
+    required this.icon,
+    required this.title,
+  });
 }
+
+

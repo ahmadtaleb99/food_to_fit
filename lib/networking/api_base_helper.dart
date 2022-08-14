@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'package:food_to_fit/networking/api_exceptions.dart';
@@ -24,12 +25,12 @@ class ApiBaseHelper {
           .timeout(const Duration(seconds: 60));
       responseJson = returnResponse(response);
     } on TimeoutException catch (_) {
-      throw FetchDataException('No response');
+      throw FetchDataException('No Internet connection'.tr());
     } on SocketException catch (_) {
-      throw FetchDataException('No Internet connection');
+      throw FetchDataException('No Internet connection'.tr());
     } catch (e) {
       print(e);
-      throw FetchDataException('Something went wrong!');
+      throw FetchDataException('Something went wrong!'.tr());
     }
 
     print('api get received!');
@@ -49,12 +50,12 @@ class ApiBaseHelper {
 
       responseJson = returnResponse(response);
     } on TimeoutException catch (_) {
-      throw FetchDataException('Server Timed out waiting for the response');
+      throw FetchDataException('Server Timed out waiting for the response'.tr());
     } on SocketException catch (_) {
-      throw FetchDataException('No Internet connection');
+      throw FetchDataException('No Internet connection'.tr());
     } catch (e) {
       print(e);
-      throw FetchDataException('Something went wrong!');
+      throw FetchDataException('Something went wrong!'.tr());
     }
     print('api get received!');
     return responseJson;
@@ -80,13 +81,13 @@ class ApiBaseHelper {
           await http.Response.fromStream(await request.send());
       responseJson = returnResponse(response);
     } on TimeoutException catch (_) {
-      throw FetchDataException('Server Timed out waiting for the response');
+      throw FetchDataException('Server Timed out waiting for the response'.tr());
     } on SocketException catch (_) {
-      throw FetchDataException('No Internet connection');
+      throw FetchDataException('No Internet connection'.tr());
     } catch (e) {
       print(e);
       print('error catched');
-      throw FetchDataException('Something went wrong!');
+      throw FetchDataException('Something went wrong!'.tr());
     }
     print('api get received!');
     return responseJson;

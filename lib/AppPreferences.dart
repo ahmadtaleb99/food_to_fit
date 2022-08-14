@@ -5,7 +5,8 @@ import 'package:flutter/material.dart';
 import 'package:food_to_fit/app_constants.dart';
 import 'package:food_to_fit/language_manager.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-const String keyLanguage = 'keyLanguage';
+const String keyLanguageKey = 'keyLanguage';
+const String accessTokenKey = 'accessToken';
 
 class AppPreferences {
 
@@ -14,9 +15,15 @@ class AppPreferences {
   AppPreferences(this._prefs);
 
   bool isRtl() => getLocale() == AppLanguages.arabicLocale;
+    Future<void> saveAccessToken(String accessToken) async{
+    await _prefs.setString(accessTokenKey, accessToken);
+    }
+
+    bool isAuthenticated() => _prefs.getString(accessTokenKey) != null;
+
 
   String getAppLanguage() {
-    String? language = _prefs.getString(keyLanguage);
+    String? language = _prefs.getString(keyLanguageKey);
 
     if (language == null || language.isEmpty) {
 
@@ -26,12 +33,12 @@ class AppPreferences {
     return language;
   }
 
-  void changeAppLanguage(BuildContext context,String languageType){
+  Future<void> changeAppLanguage(BuildContext context,String languageType) async {
 
-      _prefs.setString(keyLanguage, languageType);
+  await     _prefs.setString(keyLanguageKey, languageType);
 
     var locale = getLocale();
-    context.setLocale(locale);
+    context.locale = locale;
   }
 
 

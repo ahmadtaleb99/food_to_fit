@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 
 class Error extends StatelessWidget {
@@ -25,7 +26,7 @@ class Error extends StatelessWidget {
           RaisedButton(
             color: Colors.redAccent,
             child: Text(
-              'Retry',
+              'Retry'.tr(),
               style: TextStyle(color: Colors.white),
             ),
             onPressed: onRetryPressed as void Function()?,

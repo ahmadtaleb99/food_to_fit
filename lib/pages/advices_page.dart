@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:food_to_fit/models/adviceModel.dart';
 import 'package:food_to_fit/widgets/adviceCardWidget.dart';
@@ -23,7 +24,7 @@ class AdvicesPage extends StatelessWidget {
             color: Colors.black, //change your color here
           ),
           title: AutoSizeText(
-            'Advices',
+            'Advice'.tr(),
             style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold),
             maxFontSize: 16.0,
           ),

@@ -4,6 +4,9 @@ import 'package:food_to_fit/AppPreferences.dart';
 import 'package:food_to_fit/app_constants.dart';
 import 'package:food_to_fit/language_manager.dart';
 import 'package:food_to_fit/pages/drawables/rounded_button.dart';
+import 'package:food_to_fit/pages/main_page.dart';
+import 'package:food_to_fit/pages/profile_info_page.dart';
+import 'package:food_to_fit/pages/profile_page.dart';
 import 'package:food_to_fit/widgets/appBarWidget.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:auto_size_text/auto_size_text.dart';
@@ -17,8 +20,16 @@ class SettingsPage extends StatefulWidget {
 }
 
 class SettingsPageState extends State<SettingsPage> {
+
+  @override
+  initState(){
+        _selectedLanguage = getIT<AppPreferences>().getAppLanguage();
+
+
+    super.initState();
+  }
   SingingCharacter? character = SingingCharacter.English;
-  String _selectedLanguage = LanguageType.ENGLISH.getValue();
+  String _selectedLanguage =' ';
 
   bool switchNotificationValue = false;
   bool switchReminderValue = true;
@@ -27,7 +38,7 @@ class SettingsPageState extends State<SettingsPage> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBarWidget().appBarWidget(AutoSizeText(
-          "Settings".tr(),
+          'Settings'.tr(),
           style: TextStyle(
               color: Colors.black, fontWeight: FontWeight.bold, fontSize: 16),
           maxFontSize: 16,
@@ -62,50 +73,41 @@ class SettingsPageState extends State<SettingsPage> {
                             ),
                           ]),
                     ),
-                    ListTile(
+                    RadioListTile(
                       contentPadding: EdgeInsets.only(left: 5.0, right: 5.0),
+                      activeColor: CustomColors.LightLeavesGreen,
+
                       title:  AutoSizeText(
                         'English'.tr(),
+
                         style: TextStyle(fontSize: 14.0),
                         maxFontSize: 14,
                       ),
-                      leading: Container(
-                        // color: Colors.red,
-                        child: Radio(
-                          activeColor: CustomColors.LightLeavesGreen,
-                          value: LanguageType.ENGLISH.getValue(),
-                          groupValue: _selectedLanguage,
-                          onChanged: (String? value) {
-                            setState(() {
-                              _selectedLanguage = value!;
-                            });
-                          },
-                        ),
-                      ),
+                      groupValue: _selectedLanguage,
+                      onChanged: (String? value) {
+                        setState(() {
+                          _selectedLanguage = value!;
+                        });
+                      }, value: LanguageType.ENGLISH.getValue(),
+
                     ),
-                    ListTile(
+                    RadioListTile(
                       contentPadding: EdgeInsets.only(left: 5.0, right: 5.0),
-                      title: Container(
-                        // color: Colors.blue,
-                        child: const AutoSizeText(
-                          'العربية',
-                          style: TextStyle(fontSize: 14.0),
-                          maxFontSize: 14,
-                        ),
+                      activeColor: CustomColors.LightLeavesGreen,
+
+                      title:  AutoSizeText(
+                        'Arabic'.tr(),
+
+                        style: TextStyle(fontSize: 14.0),
+                        maxFontSize: 14,
                       ),
-                      leading: Container(
-                        // color: Colors.red,
-                        child: Radio(
-                          activeColor: CustomColors.LightLeavesGreen,
-                          value: LanguageType.ARABIC.getValue(),
-                          groupValue: _selectedLanguage,
-                          onChanged: (String? value) {
-                            setState(() {
-                              _selectedLanguage = value!;
-                            });
-                          },
-                        ),
-                      ),
+                      groupValue: _selectedLanguage,
+                      onChanged: (String? value) {
+                        setState(() {
+                          _selectedLanguage = value!;
+                        });
+                      }, value: LanguageType.ARABIC.getValue(),
+
                     ),
                     SizedBox(height: 30),
                     Container(
@@ -178,7 +180,12 @@ class SettingsPageState extends State<SettingsPage> {
                         textColor: Colors.white,
                         title: 'Update'.tr(),
                         onClick: (){
-                          setState(() => getIT<AppPreferences>().changeAppLanguage(context, _selectedLanguage));
+                          setState(() =>
+                              getIT<AppPreferences>().changeAppLanguage(context, _selectedLanguage)
+                              .then((value) {
+                                Navigator.pop(context,true);
+                              }
+                          ));
                         },
                       ),
                     ),

@@ -66,7 +66,7 @@ class MedTestDetailsPageState extends State<MedTestDetailsPage> {
                                       EdgeInsets.symmetric(horizontal: 10.0),
                                   child: AutoSizeText(
                                     'Status: '.tr() +
-                                        medTest!.medicalTestDetails!.fillStatus!,
+                                        medTest!.medicalTestDetails!.fillStatus!.tr(),
                                     style: TextStyle(color: Colors.black),
                                     maxFontSize: 14,
                                   )),
@@ -178,7 +178,7 @@ class MedTestDetailsPageState extends State<MedTestDetailsPage> {
                                                             .PrimaryColor,
                                                         textColor: Colors.white,
                                                         title:
-                                                            'Upload New Medical Test',
+                                                            'Upload New Medical Test'.tr(),
                                                         onClick: () {
                                                           Navigator.push(
                                                               context,

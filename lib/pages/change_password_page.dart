@@ -25,6 +25,10 @@ class ChangePasswordPageState extends State<ChangePasswordPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        elevation: 0,
+        backgroundColor: CustomColors.PrimaryColor,
+      ),
       body: Stack(children: [
         Container(
           height: MediaQuery.of(context).size.height,

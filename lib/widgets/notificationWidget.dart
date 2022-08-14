@@ -41,7 +41,7 @@ class NotificationWidget {
                 padding: EdgeInsets.all(5.0),
                 alignment: Alignment.centerLeft,
                 child: AutoSizeText(
-                  notification.date!,
+                  notification.date !,
                   maxFontSize: 12,
                   minFontSize: 10,
                   style: TextStyle(color: CustomColors.GreyColor),

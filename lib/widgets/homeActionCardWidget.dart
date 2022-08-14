@@ -47,9 +47,10 @@ class HomeActionCardWidget {
                 child: AutoSizeText(
                   actionCardObject.title!,
                   style: TextStyle(
-                      // fontSize: 16.0,
+                      fontSize: 16.0,
                       color: Colors.white),
                   minFontSize: 16.0,
+                  maxFontSize: 22,
                   maxLines: 2,
                 ),
               ),

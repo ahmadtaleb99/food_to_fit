@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'drawables/rounded_button.dart';
@@ -66,7 +67,7 @@ class UploadMedicalTestImagesPageState
             color: Colors.black, //change your color here
           ),
           title: AutoSizeText(
-            'Upload medical Test Images',
+            'Upload medical Test Images'.tr(),
             style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold),
             maxFontSize: 16,
           ),
@@ -79,7 +80,7 @@ class UploadMedicalTestImagesPageState
                   ? Container(
                       padding: EdgeInsets.all(10),
                       child: Text(
-                        '"Note: If you click on any image to edit it, you have to reselect other images.',
+                        'Note: If you click on any image to edit it, you have to reselect other images.'.tr(),
                         style: TextStyle(
                             color: Colors.red,
                             fontSize: 16.0,
@@ -93,7 +94,7 @@ class UploadMedicalTestImagesPageState
                   child: RoundedButton(
                     color: CustomColors.PrimaryColor,
                     textColor: Colors.white,
-                    title: 'Upload',
+                    title: 'Upload'.tr(),
                     onClick: !_btnEnabled
                         ? null
                         : () {
@@ -137,7 +138,7 @@ class UploadMedicalTestImagesPageState
                                         message: snapshot.data!.data!.message,
                                         backgroundColor:
                                             CustomColors.SuccessMessageColor,
-                                        actionTitle: 'Ok',
+                                        actionTitle: 'Ok'.tr(),
                                         onPressed: () {
                                           Navigator.pop(context);
                                           Navigator.pop(context);
@@ -167,7 +168,7 @@ class UploadMedicalTestImagesPageState
                                       message: snapshot.data!.data!.message,
                                       backgroundColor:
                                           CustomColors.ErrorMessageColor,
-                                      actionTitle: 'Ok',
+                                      actionTitle: 'Ok'.tr(),
                                       onPressed: () {
                                         Navigator.pop(context);
                                       },
@@ -189,7 +190,7 @@ class UploadMedicalTestImagesPageState
                                         message: snapshot.data!.message,
                                         backgroundColor:
                                             CustomColors.ErrorMessageColor,
-                                        actionTitle: 'Retry',
+                                        actionTitle: 'Retry'.tr(),
                                         onPressed: () {
                                           if (files.length != 0) {
                                             bloc = UploadMedicalTestBloc(

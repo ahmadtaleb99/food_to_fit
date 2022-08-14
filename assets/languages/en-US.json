@@ -52,7 +52,7 @@
   "Time: ": "Time: ",
   "There are no diseases": "There are no diseases",
   "Diet Program at: ": "Diet Program at: ",
-  "no-diet-for-day": "This day hasn\\'t been filled with meals, please contact your nutrition specialist to fill it for you",
+  "no-diet-for-day": "This day has not been filled with meals, please contact your nutrition specialist to fill it for you",
   "Day ": "Day ",
   "to": "to",
 
@@ -80,8 +80,13 @@
 
 
   "invalid_password": "password is wrong",
+  "No Internet connection": "No Internet connection",
   "username_hint": "UserName",
+  "Upload": "Upload",
+  "Advice": "Advice",
+  "Something went wrong!": "Something went wrong!",
   "password_hint": "Password",
+  "Server Timed out waiting for the response": "Server Timed out waiting for the response",
   "login_button": "Login",
   "forgot_password_text": "Forgot Password",
   "register_text": "Not a member ? Sign up",
@@ -89,8 +94,10 @@
   "retry_again": "Retry again",
   "error_occurred": "An Error Occurred",
   "Ok": "Ok",
+  "Upload medical Test Images": "Upload medical Test Images",
+  "Note: If you click on any image to edit it, you have to reselect other images.": "Note: If you click on any image to edit it, you have to reselect other images.",
   "Skip": "Skip ",
-    "not-authed-msg": "You have to login to get the features of this page.\\n\\nIf you do not have an account, please contact your nutrition specialist in order to have an account ",
+    "not-authed-msg": "You have to login to get the features of this page. If you do not have an account, please contact your nutrition specialist in order to have an account ",
   "Meeting Type": "Meeting Type",
   "invalid_user_name": "Invalid User Name",
   "invalid_mobile_number": "Invalid Mobile Number",
@@ -128,5 +135,35 @@
   "contact_us": "Contact Us",
   "invite_your_friends": "Invite Your Friends",
   "Logout": "Logout",
-  "reset_password": "Reset Password"
+  "Logout": "Logout",
+  "reset_password": "Reset Password",
+
+  "Elementary School": "Elementary School",
+  "Junior High School": "Junior High School",
+  "Senior High School": "Senior High School",
+  "Undergraduate": "Undergraduate",
+  "Post Graduate": "Post Graduate",
+  "Master": "Master",
+  "Doctorate": "Doctorate",
+  "Bachelor": "Bachelor",
+
+  "Male": "Male",
+  "Female": "Female",
+
+  "Breakfast": "Breakfast",
+  "Lunch": "Lunch",
+  "Dinner": "Dinner",
+  "Snack": "Snack",
+
+
+  "Single": "Single",
+  "Married": "Married",
+  "Separated": "Separated",
+  "Widow": "Widow",
+
+  "Unfilled": "Unfilled",
+  "Uploaded": "Uploaded",
+  "Filled": "Filled"
+
+
 }

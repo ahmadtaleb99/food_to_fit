@@ -4,6 +4,7 @@ import 'package:food_to_fit/app_constants.dart';
 import 'package:food_to_fit/pages/drawables/rounded_diet_program_button.dart';
 import 'package:food_to_fit/widgets/appBarWidget.dart';
 import 'package:food_to_fit/models/mealCardModel.dart';
+import 'package:food_to_fit/widgets/di.dart';
 import 'package:food_to_fit/widgets/ingredientWidget.dart';
 import 'package:food_to_fit/app_icons.dart';
 import 'package:auto_size_text/auto_size_text.dart';
@@ -14,6 +15,9 @@ import 'package:food_to_fit/widgets/errorWidget.dart';
 import 'package:food_to_fit/models/dayModel.dart';
 import 'package:food_to_fit/blocs/getDietProgramDetailsBloc.dart';
 import 'package:food_to_fit/main.dart';
+
+import '../AppPreferences.dart';
+import '../language_manager.dart';
 
 class DietProgramDetailsPage extends StatefulWidget {
   final String? dietProgramID;
@@ -141,6 +145,7 @@ class DietProgramDetailsPageState extends State<DietProgramDetailsPage> {
                                                               horizontal: 15,
                                                               vertical: 5),
                                                       child: Row(
+                                                        mainAxisAlignment: MainAxisAlignment.spaceAround,
                                                           mainAxisSize:
                                                               MainAxisSize.min,
                                                           children: [
@@ -149,6 +154,7 @@ class DietProgramDetailsPageState extends State<DietProgramDetailsPage> {
                                                               color:
                                                                   Colors.white,
                                                             ),
+                                                            SizedBox(width: 5,),
                                                             Container(
                                                                 margin: EdgeInsets
                                                                     .only(
@@ -242,8 +248,12 @@ class DietProgramDetailsPageState extends State<DietProgramDetailsPage> {
               : (day.meals![i].name == "Snack"
               ? CustomColors.PrimaryAssentColor
               : CustomColors.DarkLeavesGreen),
-          title: day.meals![i].name,
-          ingredientList: day.meals![i].englishTextualExplanation!.split("\r\n")));
+          title: day.meals![i].name!.tr(),
+          ingredientList: getIT<AppPreferences>().getAppLanguage() == LanguageType.ENGLISH.getValue() ?
+
+          day.meals![i].englishTextualExplanation!.split("\r\n"):
+          day.meals![i].arabicTextualExplanation!.split("\r\n")
+      ));
     }
     print("currCardList: " + cardList.toString());
     currCardList = cardList;
