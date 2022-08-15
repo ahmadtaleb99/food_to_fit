@@ -102,7 +102,7 @@ class VisitsPageState extends State<VisitsPage> {
                             break;
                           case Status.ERROR:
                             print('error');
-                            return Error(
+                            return CustomErrorWidget(
                               errorMessage: snapshot.data!.message,
                               onRetryPressed: () => bloc.fetchResponse(),
                             );

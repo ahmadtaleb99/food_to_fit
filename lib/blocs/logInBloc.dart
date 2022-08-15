@@ -1,4 +1,6 @@
 import 'dart:async';
+import 'package:firebase_messaging/firebase_messaging.dart';
+import 'package:food_to_fit/main.dart';
 import 'package:food_to_fit/networking/api_response.dart';
 import 'package:food_to_fit/repository/food2FitRepositories.dart';
 import 'package:food_to_fit/models/responseModel.dart';
@@ -10,25 +12,35 @@ class LogInBloc {
       logInController!.sink as StreamSink<ApiResponse<CommonResponse>>;
   Stream<ApiResponse<CommonResponse>> get logInResponseStream =>
       logInController!.stream as Stream<ApiResponse<CommonResponse>>;
-  LogInBloc(username, password, firebaseToken) {
+  LogInBloc(username, password) {
     logInController = StreamController<ApiResponse<CommonResponse>>();
     logInRepository = Food2FitRepositories();
-    fetchResponse(username, password, firebaseToken);
+    fetchResponse(username, password);
   }
-  fetchResponse(String username, String password, String? firebaseToken) async {
+  fetchResponse(String username, String password) async {
     logInResponseSink.add(ApiResponse.loading('Fetching response'));
-    try {
-      CommonResponse response = await logInRepository.getLogInResponse(username, password, firebaseToken);
-      if (response.status!)
-        logInResponseSink.add(ApiResponse.completed_with_true(response));
-      else
-        logInResponseSink.add(ApiResponse.completed_with_false(response));
-      print("completed");
-    } catch (e) {
-      logInResponseSink.add(ApiResponse.error(e.toString()));
-      print("error");
-      print(e);
-    }
+
+      var firebaseToken =  await FirebaseMessaging.instance.getToken().then((token) async  {
+
+        try {
+
+        CommonResponse response = await logInRepository.getLogInResponse(username, password, token);
+          if (response.status!)
+    logInResponseSink.add(ApiResponse.completed_with_true(response));
+    else
+    logInResponseSink.add(ApiResponse.completed_with_false(response));
+    print("completed");
+        } catch (e) {
+          logInResponseSink.add(ApiResponse.error(e.toString()));
+          print("error");
+          print(e);
+        }
+      }).catchError((e){
+        logInResponseSink.add(ApiResponse.error('Firebase-Error'));
+
+      });
+
+
   }
   dispose() {
     logInController?.close();

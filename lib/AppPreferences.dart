@@ -8,6 +8,7 @@ import 'package:food_to_fit/language_manager.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 const String keyLanguageKey = 'keyLanguage';
 const String accessTokenKey = 'accessToken';
+const String patientIdKey = 'patientIdKey';
 
 class AppPreferences {
 
@@ -20,6 +21,15 @@ class AppPreferences {
     await _prefs.setString(accessTokenKey, accessToken);
     log('new access token :  : $accessToken');
     }
+
+
+  Future<void> savePatientId(String id) async{
+    await _prefs.setString(patientIdKey, id);
+  }
+
+  String? getPatientID () => _prefs.getString(patientIdKey);
+
+
 
     bool isAuthenticated() => _prefs.getString(accessTokenKey) != null;
   String getAppLanguage() {

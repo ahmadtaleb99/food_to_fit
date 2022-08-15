@@ -1,7 +1,10 @@
+import 'dart:developer';
+
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:food_to_fit/AppPreferences.dart';
 import 'package:food_to_fit/models/responseModel.dart';
+import 'package:food_to_fit/pages/multi_patient_page.dart';
 import 'package:food_to_fit/widgets/di.dart';
 import './drawables/rounded_text_field.dart';
 import './drawables/rounded_button.dart';
@@ -31,6 +34,7 @@ class LogInPageState extends State<LogInPage> {
   TextEditingController passwordController =  TextEditingController();
   bool loading = false;
 
+   var  _appPrefs =  getIT<AppPreferences>();
   @override
   void initState() {
     // TODO: implement initState
@@ -121,7 +125,7 @@ class LogInPageState extends State<LogInPage> {
                                   bloc = LogInBloc(
                                       usernameController.text,
                                       passwordController.text,
-                                      await messaging.getToken());
+                                  );
                                   loading = true;
                                   setState(() {});
                                 }
@@ -140,7 +144,7 @@ class LogInPageState extends State<LogInPage> {
                                   bloc = LogInBloc(
                                       usernameController.text,
                                       passwordController.text,
-                                      await messaging.getToken());
+                                   );
                                   loading = true;
                                   setState(() {});
                                 }
@@ -201,9 +205,13 @@ class LogInPageState extends State<LogInPage> {
                           print('COMPLETED_WITH_TRUE');
                           if (snapshot.data!.data!.status!) {
                             CommonResponse response = snapshot.data!.data!;
-                            if (response.patientsAccounts!.length > 0)
+                            if (response.patientsAccounts!.length == 1 )
                               logIn(response, context);
                             else
+                            if (response.patientsAccounts!.length > 1 )
+                                  _goToMultiPatientPage(response, context);
+
+                                else
                               Future.delayed(Duration.zero, () {
                                 showDialog(
                                     context: context,
@@ -212,7 +220,7 @@ class LogInPageState extends State<LogInPage> {
                                         title: 'NO patient'.tr(),
                                         backgroundColor:
                                         CustomColors.ErrorMessageColor,
-                                        message: 'There is no patient to login',
+                                        message: 'There is no patient to login'.tr(),
                                         actionTitle: 'Ok'.tr(),
                                         onPressed: () => Navigator.pop(context),
                                         onCanceled: null,
@@ -231,10 +239,10 @@ class LogInPageState extends State<LogInPage> {
                                 context: context,
                                 builder: (context) {
                                   return CustomDialog(
-                                    title: snapshot.data!.data!.message,
+                                    title: 'Wrong:'.tr(),
                                     backgroundColor:
                                         CustomColors.ErrorMessageColor,
-                                    message: 'wrong username or password'.tr(),
+                                    message: snapshot.data!.data?.message?.tr(),
                                     actionTitle: 'Ok'.tr(),
                                     onPressed: () => Navigator.pop(context),
                                     onCanceled: null,
@@ -260,7 +268,7 @@ class LogInPageState extends State<LogInPage> {
                                         bloc = LogInBloc(
                                             usernameController.text,
                                             passwordController.text,
-                                            await messaging.getToken());
+                                            );
                                         loading = true;
                                         setState(() {});
                                       },
@@ -282,20 +290,37 @@ class LogInPageState extends State<LogInPage> {
 
   logIn(CommonResponse response, BuildContext context) async {
 
-      getIT<AppPreferences>().saveAccessToken(response.accessToken!);
+      await _appPrefs.saveAccessToken(response.accessToken!);
     await SharedPreferencesSingleton().addStringToSF(
         SharedPreferencesSingleton.accessToken, response.accessToken!);
-    print("access_token: " +
-        SharedPreferencesSingleton()
-            .getStringValuesSF(SharedPreferencesSingleton.accessToken)
-            .toString());
-    await SharedPreferencesSingleton().addStringToSF(
-        SharedPreferencesSingleton.patientID,
-        response.patientsAccounts![0].id.toString());
+
+    await _appPrefs.savePatientId(response.patientsAccounts![0].id.toString());
     Navigator.pushAndRemoveUntil(
         context,
         MaterialPageRoute(
             builder: (context) => MainPage(isAuthenticated: true)),
         (route) => false);
+
+
+  }
+
+
+
+
+  _goToMultiPatientPage(CommonResponse response, BuildContext context) async {
+
+    _appPrefs.saveAccessToken(response.accessToken!);
+
+    await SharedPreferencesSingleton().addStringToSF(
+        SharedPreferencesSingleton.accessToken, response.accessToken!);
+
+   await _appPrefs.savePatientId(response.patientsAccounts![0].id.toString());
+
+
+    Navigator.pushAndRemoveUntil(
+        context,
+        MaterialPageRoute(
+            builder: (context) => MultiPatientPage(patients: response.patientsAccounts ?? [ ],email : usernameController.text)),
+            (route) => false);
   }
 }

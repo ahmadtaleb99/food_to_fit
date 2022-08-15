@@ -1,16 +1,17 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:food_to_fit/models/profileInfoModel.dart';
+import 'package:food_to_fit/pages/main_page.dart';
 import 'package:food_to_fit/widgets/appBarWidget.dart';
+import 'package:food_to_fit/widgets/di.dart';
 import 'package:food_to_fit/widgets/userInfoWidget.dart';
 import 'package:food_to_fit/app_constants.dart';
 import 'package:food_to_fit/pages/drawables/rounded_patient_button.dart';
 import 'package:food_to_fit/pages/log_in.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 
-List<String> patientsNamesList = [
-  'Seham Aljabban',
-  'Seham Aljabban',
-  'Seham Aljabban'
-];
+import '../AppPreferences.dart';
+
 
 bool loading = false;
 String imageURL =
@@ -21,18 +22,26 @@ Image image = Image.network(
 );
 
 class MultiPatientPage extends StatefulWidget {
+
+  List<Profile> patients;
+  String email;
   @override
   MultiPatientPageState createState() => MultiPatientPageState();
+
+  MultiPatientPage({
+    required this.patients,
+    required this.email,
+  });
 }
 
 class MultiPatientPageState extends State<MultiPatientPage> {
   @override
   void initState() {
     super.initState();
-    image.image.resolve(ImageConfiguration()).addListener(
-        ImageStreamListener((ImageInfo info, bool syncCall) => setState(() {
-              loading = true;
-            })));
+    // image.image.resolve(ImageConfiguration()).addListener(
+    //     ImageStreamListener((ImageInfo info, bool syncCall) => setState(() {
+    //           loading = true;
+    //         })));
   }
 
   @override
@@ -40,7 +49,7 @@ class MultiPatientPageState extends State<MultiPatientPage> {
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBarWidget().appBarWidget(AutoSizeText(
-        'Choose patient',
+        'Choose patient'.tr(),
         style: TextStyle(
             color: Colors.black, fontWeight: FontWeight.bold, fontSize: 16),
         maxFontSize: 16,
@@ -58,7 +67,7 @@ class MultiPatientPageState extends State<MultiPatientPage> {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: <Widget>[
                   UserInfoWidget()
-                      .getUserInfoWidget(context, loading, imageURL, "Sara AlGhamian"),
+                      .getUserInfoWidget(context, loading, imageURL, widget.email),
                   SizedBox(height: 20),
                   Column(
                     children: createButtons(context),
@@ -71,17 +80,21 @@ class MultiPatientPageState extends State<MultiPatientPage> {
       ),
     );
   }
+
+
+  createButtons(BuildContext context) {
+    var roundedButtons = <Widget>[];
+    widget.patients.forEach((patient) {
+      return roundedButtons.add(RoundedButton()
+          .roundedButton(context, CustomColors.PrimaryColor, patient.firstName!+' '+patient.lastName!, () {
+        Navigator.push(
+            context, MaterialPageRoute(builder: (context) => MainPage(isAuthenticated: true)));
+        getIT<AppPreferences>().savePatientId(patient.id!.toString());
+      }));
+    });
+
+    return roundedButtons;
+  }
 }
 
-createButtons(BuildContext context) {
-  var roundedButtons = <Widget>[];
 
-  patientsNamesList.forEach((i) {
-    return roundedButtons.add(RoundedButton()
-        .roundedButton(context, CustomColors.PrimaryColor, i, () {
-      Navigator.push(
-          context, MaterialPageRoute(builder: (context) => LogInPage()));
-    }));
-  });
-  return roundedButtons;
-}

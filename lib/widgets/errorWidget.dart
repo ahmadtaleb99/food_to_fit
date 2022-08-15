@@ -1,11 +1,11 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 
-class Error extends StatelessWidget {
+class CustomErrorWidget extends StatelessWidget {
   final String? errorMessage;
   final Function? onRetryPressed;
 
-  const Error({Key? key, this.errorMessage, this.onRetryPressed})
+  const CustomErrorWidget({Key? key, this.errorMessage, this.onRetryPressed})
       : super(key: key);
 
   @override

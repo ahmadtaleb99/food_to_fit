@@ -58,7 +58,7 @@ class AdvicesPage extends StatelessWidget {
                     break;
                   case Status.ERROR:
                     print('error');
-                    return Error(
+                    return CustomErrorWidget(
                       errorMessage: snapshot.data!.message,
                       onRetryPressed: () => bloc.fetchResponse(),
                     );

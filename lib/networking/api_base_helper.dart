@@ -46,7 +46,7 @@ class ApiBaseHelper {
     var responseJson;
     try {
       final response =
-          await http.post(uri, body: body, headers: headers);
+          await http.post(uri, body: body, headers: headers).timeout(const Duration(seconds: 60));
 
       responseJson = returnResponse(response);
     } on TimeoutException catch (_) {

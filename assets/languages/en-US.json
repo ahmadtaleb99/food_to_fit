@@ -70,6 +70,7 @@
   "Diagnosis": "Diagnosis",
   "from ": "from ",
   "Retry": "Retry",
+  "Choose patient": "Choose patient",
   "Date and Time": "Date and Time",
   "Confirm does not match with password!": "Confirm does not match with password!",
 
@@ -108,6 +109,8 @@
   "NO patient": "NO patient",
   "There is no patient to login": "There is no patient to login",
   "wrong username or password": "wrong username or password",
+  "invalid_credentials": "wrong username or password",
+  "inactive_account": "Inactive Account",
 
   "Upload medical Test Images": "Upload medical Test Images",
   "Note: If you click on any image to edit it, you have to reselect other images.": "Note: If you click on any image to edit it, you have to reselect other images.",

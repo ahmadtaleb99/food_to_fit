@@ -17,6 +17,7 @@ import 'package:flutter/services.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'models/pushNotificationModel.dart';
+import 'widgets/errorWidget.dart';
 Future backgroundMessageHandler(RemoteMessage message) async {
   print("onBackgroundMessage: $message");
   PushNotification notification = PushNotification.fromJson(message.data);
@@ -24,21 +25,27 @@ Future backgroundMessageHandler(RemoteMessage message) async {
       notification.title, notification.body);
 }
 
-
+  bool firebaseError= false;
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await EasyLocalization.ensureInitialized();
   await Firebase.initializeApp();
-  await FirebaseMessaging.instance.getToken();
-
   SystemChrome.setPreferredOrientations([
     DeviceOrientation.portraitUp,
   ]);
 
 
   FirebaseMessaging.onBackgroundMessage(backgroundMessageHandler);
-    await initAppModule();
+  await initAppModule();
+  try{
+    // await FirebaseMessaging.instance.getToken();
+
+  } catch (e){
+    firebaseError = true;
+  }
+
+
   runApp(EasyLocalization(
     supportedLocales: const [AppLanguages.englishLocale,AppLanguages.arabicLocale],
     path:'assets/languages',
@@ -55,7 +62,7 @@ Future<void> main() async {
               primarySwatch: Colors.blue,
               visualDensity: VisualDensity.adaptivePlatformDensity,
               fontFamily: 'Montserrat'),
-          home: AppWidget(),
+          home:  AppWidget(),
           routes: <String, WidgetBuilder>{
             '/LogIn': (BuildContext context) => LogInPage()
           },

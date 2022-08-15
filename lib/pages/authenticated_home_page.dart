@@ -134,7 +134,7 @@ class UserHomeViewWidgetState extends State<UserHomeViewWidget> {
                 break;
               case Status.ERROR:
                 print('error');
-                return Error(
+                return CustomErrorWidget(
                   errorMessage: snapshot.data!.message,
                   onRetryPressed: () => basicBloc.fetchResponse(),
                 );

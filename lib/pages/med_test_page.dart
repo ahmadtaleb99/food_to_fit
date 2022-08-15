@@ -117,7 +117,7 @@ class MedTestPageState extends State<MedTestPage> {
                             break;
                           case Status.ERROR:
                             print('error');
-                            return Error(
+                            return CustomErrorWidget(
                               errorMessage: snapshot.data!.message,
                               onRetryPressed: () => bloc.fetchResponse(),
                             );

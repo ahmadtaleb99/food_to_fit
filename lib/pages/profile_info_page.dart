@@ -98,7 +98,7 @@ class ProfileInfoPageState extends State<ProfileInfoPage> {
                   break;
                 case Status.ERROR:
                   print('error');
-                  return Error(
+                  return CustomErrorWidget(
                     errorMessage: snapshot.data!.message,
                     onRetryPressed: () => bloc.fetchResponse(),
                   );

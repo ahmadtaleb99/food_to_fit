@@ -36,8 +36,8 @@ class ConstMeasures {
 
 class ConstAPIUrls {
   // static const String baseURL = 'http://flexsolutions.technology/food2fit/web/api/';
-  // static const String baseURL = 'http://192.168.1.104/food2fit/web/api/';
-  static const String baseURL = 'http://192.168.0.145/food2fit/web/api/';
+  static const String baseURL = 'http://192.168.1.105/food2fit/web/api/';
+  // static const String baseURL = 'http://192.168.0.145/food2fit/web/api/';
   static const String baseURLFiles = 'http://flexsolutions.technology/food2fit/web/';
   static const String logIn = 'login';
   static const String getGeneralAdvices = 'get-general-advices';
