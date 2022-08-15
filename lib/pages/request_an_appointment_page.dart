@@ -33,7 +33,7 @@ class RequestAnAppointmentForm extends StatefulWidget {
 class RequestAnAppointmentFormState extends State<RequestAnAppointmentForm> {
   final formKey = GlobalKey<FormState>();
   final scaffoldKey = GlobalKey<ScaffoldState>();
-  final List<String> meetingTypesList = ['Face to face'.tr(), 'Online'.tr()];
+  final List<String> meetingTypesList = ['Face to face', 'Online'];
   final Pattern pattern = r'^(0|\+){1}[0-9]{6,15}$';
   String isAuthenticated = " ";
   late RequestAnAppointmentBloc bloc;
@@ -89,19 +89,19 @@ class RequestAnAppointmentFormState extends State<RequestAnAppointmentForm> {
                                       color: CustomColors.PrimaryColor),
                                 ),
                                 hintText: "",
-                                labelText: "First Name",
+                                labelText: "First Name".tr(),
                                 labelStyle: TextStyle(
                                     color: Colors.grey[600], fontSize: 16)),
                             keyboardType: TextInputType.name,
                             textInputAction: TextInputAction.next,
-                            validator: FormBuilderValidators.required(),
+                            validator: FormBuilderValidators.required(errorText: 'Field is required'.tr()),
                             onSaved: (value) => firstName = value,
                           ),
                           SizedBox(height: 20.0),
                           TextFormField(
                             decoration: InputDecoration(
                               hintText: "",
-                              labelText: "Last Name",
+                              labelText: "Last Name".tr(),
                               labelStyle: TextStyle(
                                   color: Colors.grey[600], fontSize: 16),
                               border: OutlineInputBorder(
@@ -118,14 +118,14 @@ class RequestAnAppointmentFormState extends State<RequestAnAppointmentForm> {
                             ),
                             keyboardType: TextInputType.name,
                             textInputAction: TextInputAction.next,
-                            validator: FormBuilderValidators.required(),
+                            validator: FormBuilderValidators.required(errorText: 'Field is required'.tr()),
                             onSaved: (value) => lastName = value,
                           ),
                           SizedBox(height: 20.0),
                           FormBuilderTextField(
                             decoration: InputDecoration(
                               hintText: "",
-                              labelText: "Phone Number",
+                              labelText: "Phone Number".tr(),
                               labelStyle: TextStyle(
                                   color: Colors.grey[600], fontSize: 16.0),
                               border: OutlineInputBorder(
@@ -146,16 +146,17 @@ class RequestAnAppointmentFormState extends State<RequestAnAppointmentForm> {
                             validator:
                   FormBuilderValidators.compose( [
                     // FormBuilderValidators.numeric(),
-                    FormBuilderValidators.required(),
+                    FormBuilderValidators.required(errorText: 'Field is required'.tr()),
                     FormBuilderValidators.minLength(6,
                         errorText:
-                        "Phone number must be more than or equal to 6"),
+                        "Phone number must be more than or equal to".tr()+' 6 '+'digits'.tr()),
                     FormBuilderValidators.maxLength(15,
                         errorText:
-                        "Phone number must be less than or equal to 15"),
+                        "Phone number must be less than or equal to".tr()+' 15 '+'digit'.tr()),
+
                     FormBuilderValidators.match(pattern.toString(),
                         errorText:
-                        "Invalid phone number"),
+                        "Invalid phone number".tr()),
                   ])
                            ,
                             onSaved: ((value) => phoneNumber = value) as void Function(String?)?, name: '',
@@ -173,11 +174,11 @@ class RequestAnAppointmentFormState extends State<RequestAnAppointmentForm> {
                                 borderSide: BorderSide(color: Colors.grey[400]!),
                               ),
                             ),
-                            validator: FormBuilderValidators.compose([FormBuilderValidators.required()]),
+                            validator: FormBuilderValidators.compose([FormBuilderValidators.required(errorText: 'Field is required'.tr())]),
                             items: meetingTypesList
                                 .map((meetingType) => DropdownMenuItem(
                                     value: meetingType,
-                                    child: Text("$meetingType")))
+                                    child: Text(meetingType.tr())))
                                 .toList(),
                             onSaved: (dynamic value) => selectedMeetingType = value, name: '',
                           ),
@@ -201,10 +202,10 @@ class RequestAnAppointmentFormState extends State<RequestAnAppointmentForm> {
                                             return CustomDialog(
                                               title: ' ',
                                               message:
-                                                  'You have sent an appointment for today, please try again later',
+                                                  'You have sent an appointment for today, please try again later'.tr(),
                                               backgroundColor: CustomColors
                                                   .ErrorMessageColor,
-                                              actionTitle: 'Ok',
+                                              actionTitle: 'Ok'.tr(),
                                               onPressed: () {
                                                 // formKey.currentState.reset();
                                                 Navigator.pop(context);
@@ -236,11 +237,11 @@ class RequestAnAppointmentFormState extends State<RequestAnAppointmentForm> {
                                 borderSide: BorderSide(color: Colors.grey[400]!),
                               ),
                             ),
-                            validator: FormBuilderValidators.compose([FormBuilderValidators.required()]),
+                            validator: FormBuilderValidators.compose([FormBuilderValidators.required(errorText: 'Field is required'.tr())]),
                             items: meetingTypesList
                                 .map((meetingType) => DropdownMenuItem(
                                     value: meetingType,
-                                    child: Text("$meetingType")))
+                                    child: Text(meetingType.tr())))
                                 .toList(),
                             onSaved: (dynamic value) => selectedMeetingType = value, name: '',
                           ),
@@ -288,7 +289,7 @@ class RequestAnAppointmentFormState extends State<RequestAnAppointmentForm> {
                                 context: context,
                                 builder: (context) {
                                   return CustomDialog(
-                                    title: 'Success:',
+                                    title: 'Success:'.tr(),
                                     message: snapshot.data!.data!.message,
                                     backgroundColor:
                                         CustomColors.SuccessMessageColor,
@@ -321,7 +322,7 @@ class RequestAnAppointmentFormState extends State<RequestAnAppointmentForm> {
                                   message: snapshot.data!.data!.message,
                                   backgroundColor:
                                       CustomColors.ErrorMessageColor,
-                                  actionTitle: 'Ok',
+                                  actionTitle: 'Ok'.tr(),
                                   onPressed: () {
                                     Navigator.pop(context);
                                     Navigator.pop(context);
@@ -339,11 +340,11 @@ class RequestAnAppointmentFormState extends State<RequestAnAppointmentForm> {
                               context: context,
                               builder: (context) {
                                 return CustomDialog(
-                                  title: 'Wrong:',
+                                  title: 'Wrong:'.tr(),
                                   message: snapshot.data!.message,
                                   backgroundColor:
                                       CustomColors.ErrorMessageColor,
-                                  actionTitle: 'Ok',
+                                  actionTitle: 'Ok'.tr(),
                                   onPressed: () => Navigator.pop(context),
                                   onCanceled: null,
                                 );
@@ -384,6 +385,8 @@ class RequestAnAppointmentFormState extends State<RequestAnAppointmentForm> {
   }
 
   Future<bool> checkLastAppointmentRequestDate() async {
+
+    // return true;
     String lastAppointmentDateRequest = await SharedPreferencesSingleton().getStringValuesSF(
         SharedPreferencesSingleton.lastAppointmentRequestDate);
     // print("lastAppointmentDateRequest " + lastAppointmentDateRequest);

@@ -1,3 +1,4 @@
+import 'dart:developer';
 import 'dart:ui';
 
 import 'package:easy_localization/easy_localization.dart';
@@ -17,11 +18,10 @@ class AppPreferences {
   bool isRtl() => getLocale() == AppLanguages.arabicLocale;
     Future<void> saveAccessToken(String accessToken) async{
     await _prefs.setString(accessTokenKey, accessToken);
+    log('new access token :  : $accessToken');
     }
 
     bool isAuthenticated() => _prefs.getString(accessTokenKey) != null;
-
-
   String getAppLanguage() {
     String? language = _prefs.getString(keyLanguageKey);
 

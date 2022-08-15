@@ -1,7 +1,11 @@
 import 'dart:developer';
 
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+
+import 'package:food_to_fit/AppPreferences.dart';
+import 'package:food_to_fit/language_manager.dart';
 import 'package:food_to_fit/models/profileActionWidgetModel.dart';
 import 'package:food_to_fit/app_constants.dart';
 import 'package:food_to_fit/app_icons.dart';
@@ -9,6 +13,7 @@ import 'package:food_to_fit/pages/change_password_page.dart';
 import 'package:food_to_fit/pages/notifications_page.dart';
 import 'package:food_to_fit/pages/profile_info_page.dart';
 import 'package:food_to_fit/pages/settings_page.dart';
+import 'package:food_to_fit/widgets/di.dart';
 import 'package:food_to_fit/widgets/profileActionWidget.dart';
 import 'package:food_to_fit/pages/drawables/rounded_button.dart';
 import 'package:image_picker/image_picker.dart';
@@ -43,10 +48,11 @@ class ProfilePage extends StatefulWidget {
 class ProfilePageState extends State<ProfilePage> {
   bool loggingOut = false;
   ProfileInfo? profile;
-
-
+  String _selectedLanguage='';
+    bool _loading= false;
   @override
   void initState() {
+    _selectedLanguage = getIT<AppPreferences>().getAppLanguage();
     super.initState();
     image.image.resolve(ImageConfiguration()).addListener(
         ImageStreamListener((ImageInfo info, bool syncCall) => setState(() {
@@ -76,7 +82,7 @@ class ProfilePageState extends State<ProfilePage> {
                         builder: (context, snapshot) {
                           if (snapshot.hasData) {
                             switch (snapshot.data!.status) {
-                              case Status.LOADING:
+                              case Status.LOADING :
                                 return Center(
                                   child: Loading(),
                                 );
@@ -268,16 +274,86 @@ class ProfilePageState extends State<ProfilePage> {
                 ]),
               );
             } else {
-              return CustomDialog(
-                title: ' ',
-                backgroundColor: CustomColors.ErrorMessageColor,
-                message:
-                ConstMeasures.unAuthenticatedMessage,
-                actionTitle: 'Go to login'.tr(),
-                onPressed: () {
-                  Navigator.of(context).pushNamedAndRemoveUntil(
-                      '/LogIn', (Route<dynamic> route) => false);
-                },
+              return Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  SizedBox(height: 15,),
+                  Container(
+                          padding: EdgeInsets.symmetric(horizontal: 30),
+                    child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          AutoSizeText(
+                            'Choose Languages'.tr(),
+                            style: TextStyle(
+                                color: Colors.black,
+                                fontWeight: FontWeight.bold,
+                                fontSize: 14),
+                            maxFontSize: 14,
+                          ),
+                          SizedBox(height: 10.0),
+                          AutoSizeText(
+                            'select-lang'.tr(),
+                            style:
+                            TextStyle(color: Colors.black, fontSize: 14),
+                            maxFontSize: 14,
+                          ),
+                          RadioListTile(
+                            contentPadding: EdgeInsets.zero,
+                            activeColor: CustomColors.LightLeavesGreen,
+
+                            title:  AutoSizeText(
+                              'English'.tr(),
+
+                              style: TextStyle(fontSize: 14.0),
+                              maxFontSize: 14,
+                            ),
+                            groupValue: _selectedLanguage,
+                            onChanged: (String? value) {
+                              setState(() async {
+
+                                _selectedLanguage = value!;
+                                await      getIT<AppPreferences>().changeAppLanguage(context, _selectedLanguage);
+                              });
+                            }, value: LanguageType.ENGLISH.getValue(),
+
+                          ),
+                          RadioListTile(
+                            contentPadding: EdgeInsets.zero,
+
+                            activeColor: CustomColors.LightLeavesGreen,
+
+                            title:  AutoSizeText(
+                              'Arabic'.tr(),
+
+                              style: TextStyle(fontSize: 14.0),
+                              maxFontSize: 14,
+                            ),
+                            groupValue: _selectedLanguage,
+                            onChanged: (String? value) {
+                              setState(() async {
+                                _selectedLanguage = value!;
+                           await      getIT<AppPreferences>().changeAppLanguage(context, _selectedLanguage);
+
+                              });
+                            }, value: LanguageType.ARABIC.getValue(),
+
+                          ),
+                        ]),
+                  ),
+                  CustomDialog(
+                    title: ' ',
+                    backgroundColor: CustomColors.ErrorMessageColor,
+                    message:
+                    ConstMeasures.unAuthenticatedMessage.tr(),
+                    actionTitle: 'Go to login'.tr(),
+                    onPressed: () {
+                      Navigator.of(context).pushNamedAndRemoveUntil(
+                          '/LogIn', (Route<dynamic> route) => false);
+                    },
+                  ),
+                ],
               );
             }
           } else {

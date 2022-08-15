@@ -27,7 +27,7 @@ class ApiBaseHelper {
     } on TimeoutException catch (_) {
       throw FetchDataException('No Internet connection'.tr());
     } on SocketException catch (_) {
-      throw FetchDataException('No Internet connection'.tr());
+      throw FetchDataException('timeout-error'.tr());
     } catch (e) {
       print(e);
       throw FetchDataException('Something went wrong!'.tr());

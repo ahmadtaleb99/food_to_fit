@@ -78,7 +78,7 @@ class LogInPageState extends State<LogInPage> {
                         )),
                     SizedBox(height: 10),
                     AutoSizeText(
-                      'Welcome to Food to Fit App',
+                      'Welcome to Food to Fit App'.tr(),
                       style: TextStyle(
                         color: Colors.white,
                         fontSize: 16.0,
@@ -209,11 +209,11 @@ class LogInPageState extends State<LogInPage> {
                                     context: context,
                                     builder: (context) {
                                       return CustomDialog(
-                                        title: 'NO patient',
+                                        title: 'NO patient'.tr(),
                                         backgroundColor:
                                         CustomColors.ErrorMessageColor,
                                         message: 'There is no patient to login',
-                                        actionTitle: 'Ok',
+                                        actionTitle: 'Ok'.tr(),
                                         onPressed: () => Navigator.pop(context),
                                         onCanceled: null,
                                       );
@@ -234,8 +234,8 @@ class LogInPageState extends State<LogInPage> {
                                     title: snapshot.data!.data!.message,
                                     backgroundColor:
                                         CustomColors.ErrorMessageColor,
-                                    message: 'wrong username or password',
-                                    actionTitle: 'Ok',
+                                    message: 'wrong username or password'.tr(),
+                                    actionTitle: 'Ok'.tr(),
                                     onPressed: () => Navigator.pop(context),
                                     onCanceled: null,
                                   );
@@ -254,7 +254,7 @@ class LogInPageState extends State<LogInPage> {
                                       message: snapshot.data!.message,
                                       backgroundColor:
                                           CustomColors.ErrorMessageColor,
-                                      actionTitle: 'Retry',
+                                      actionTitle: 'Retry'.tr(),
                                       onPressed: () async {
                                         Navigator.pop(context);
                                         bloc = LogInBloc(

@@ -1,3 +1,5 @@
+import 'package:easy_localization/easy_localization.dart';
+
 class AppException implements Exception {
   final _message;
   final _prefix;
@@ -8,7 +10,7 @@ class AppException implements Exception {
 }
 class FetchDataException extends AppException {
   FetchDataException([String? message])
-      : super(message, "Error During Communication: " );
+      : super(message, 'Error During Communication'.tr()+':  ' );
 }
 class BadRequestException extends AppException {
   BadRequestException([message]) : super(message, "Invalid Request: ");

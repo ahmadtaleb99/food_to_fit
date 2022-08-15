@@ -14,7 +14,10 @@
   "logout-confirm": "هل انت متأكد انك تريد تسجيل الخروج؟",
   "View": "عرض",
   "Cancel": "إلغاء",
+  "NO patient": "لا يوجد مريض",
+  "There is no patient to login": "لا يوجد مريض لتسجيل الدخول",
   "LOGOUT": "تسجيل الخروج",
+  "wrong username or password": "اسم المستخدم أو كلمة المرور غير صحيحة ",
   "Welcome: ": "مرحباً: ",
   "Weights Details": "تفاصيل الوزن",
   "Your Weights History is:": "تاريخ الوزن الخاص بك: ",
@@ -50,7 +53,9 @@
   "More Information:": "معلومات إضافية: ",
   "Diet Program at: ": "البرنامج الغذائي في: ",
   "Day ": "اليوم ",
-
+  "First Name": "الاسم الأول",
+  "Last Name": "الاسم الأخير",
+  "Phone Number": "رقم الموبايل",
 
   "no_route_found": "لا توجد شاشه",
   "on_boarding_title1": "شاهد افضل كورس #١",
@@ -71,9 +76,10 @@
   "loading": "جاري التحميل...",
   "retry_again": "حاول مره اخرق",
   "error_occurred": "حصل خطآ",
-  "OK": "حسناً",
+  "Welcome to Food to Fit App": "أهلاً بك في تطبيق Foot To Fit",
   "Retry": "إعادة المحاولة",
-  "not-authed-msg": "يجب عليك تسجيل الدخول للحصول على ميزات هذه الصفحة. \\n\\n يرجى التواصل مع اخصائية التغذية الخاصة بك للحصول على حساب ",
+  "Success:": "نجاح:",
+  "not-authed-msg": "يجب عليك تسجيل الدخول للحصول على ميزات هذه الصفحة.  يرجى التواصل مع اخصائية التغذية الخاصة بك للحصول على حساب ",
   "Confirm does not match with password!": "كلمتي المرور غير متطابقتان!",
   "Change your password": "تغيير كلمة المرور",
 
@@ -84,6 +90,14 @@
   "Amount": "الكمية",
   "Visit: ": "الزيارة: ",
   " KG" : " كغ",
+  "digit": "رقم",
+  "Invalid phone number": "الرقم غير صالح",
+
+  "Phone number must be more than or equal to": "يجب ان يكون الرقم أكبر أو مساوياً ل",
+  "digits": "خانات",
+  "Phone number must be less than or equal to": "يجب ان يكون الرقم أصغر أو مساوياً ل",
+  "Ok": "حسناً",
+
   "Status: ": "الحالة: ",
   " day": " يوم",
   " days": " أيام",
@@ -118,8 +132,12 @@
   "services": "الخدمات",
   "stores": "المتاجر",
   "about": "عن المتجر",
+  "Wrong:": "خطأ:",
+  "You have sent an appointment for today, please try again later": "يوجد حجز سابق اليوم، يرجى المحاولة لاحقاً",
+
+  "timeout-error": "استغرق الاتصال وقتا أكثر من اللازم",
   "Something went wrong!": "حدث خطأ أثناء محاولة الاتصال!",
-  "'Server Timed out waiting for the response'": "حدث خطأ أثناء محاولة الاتصال!",
+  "Server Timed out waiting for the response": "انتهت مدة الاتصال",
 
 
   "Elementary School": "المدرسة الابتدائية",
@@ -144,6 +162,7 @@
   "Married": "متزوج",
   "Separated": "منفصل",
   "Widow": "أرمل-ة",
+  "Error During Communication": "حدث خطأ أثناء محاولة الاتصال",
 
 
   "Unfilled": "غير مملوء",

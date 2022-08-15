@@ -7,6 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:food_to_fit/app_constants.dart';
 import 'package:food_to_fit/language_manager.dart';
 import 'package:food_to_fit/widgets/di.dart';
+import 'package:form_builder_validators/form_builder_validators.dart';
 import './pages/log_in.dart';
 import 'pages/started_page.dart';
 import 'package:food_to_fit/pages/main_page.dart';
@@ -45,6 +46,7 @@ Future<void> main() async {
     child: Builder(
       builder: (context) {
         return MaterialApp(
+
           localizationsDelegates: context.localizationDelegates,
           supportedLocales: context.supportedLocales,
           locale: context.locale,

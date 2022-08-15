@@ -29,7 +29,7 @@ class ConstMeasures {
   static const double borderRadius = 15.0;
   static const double borderCircular = 50.0;
 
-  static  String unAuthenticatedMessage = 'not-authed-msg'.tr();
+  static  String unAuthenticatedMessage = 'not-authed-msg';
   // static const int patient_id = 3;
   // static const String access_token = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiIsImp0aSI6Im15aG9zdEBob3N0LmNvbSJ9.eyJpc3MiOiJteWhvc3RAaG9zdC5jb20iLCJhdWQiOiJteWhvc3RAaG9zdC5jb20iLCJqdGkiOiJteWhvc3RAaG9zdC5jb20iLCJpYXQiOjE2MTM5OTA3MzcsImV4cCI6MTY0NDc0OTEzNywiYWNjb3VudF9pZCI6MTN9.XxbHVMAUxOa7_L3ZfhWshkBCjprcUyCyfcKKHT-KKbw";
 }
