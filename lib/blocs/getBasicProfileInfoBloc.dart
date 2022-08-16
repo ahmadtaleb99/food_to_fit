@@ -27,6 +27,7 @@ class GetBasicProfileBloc {
         getBasicProfileResponseSink.add(ApiResponse.completed_with_false(response));
       print("completed");
     } catch (e) {
+
       getBasicProfileResponseSink.add(ApiResponse.error(e.toString()));
       print("error");
       print(e);

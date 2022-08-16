@@ -39,10 +39,10 @@ Future<void> main() async {
   FirebaseMessaging.onBackgroundMessage(backgroundMessageHandler);
   await initAppModule();
   try{
-    // await FirebaseMessaging.instance.getToken();
+    await FirebaseMessaging.instance.getToken();
 
   } catch (e){
-    firebaseError = true;
+    log('firebase error');
   }
 
 

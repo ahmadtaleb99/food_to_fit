@@ -36,11 +36,12 @@ class ConstMeasures {
 
 class ConstAPIUrls {
   // static const String baseURL = 'http://flexsolutions.technology/food2fit/web/api/';
-  static const String baseURL = 'http://192.168.1.105/food2fit/web/api/';
-  // static const String baseURL = 'http://192.168.0.145/food2fit/web/api/';
-  static const String baseURLFiles = 'http://flexsolutions.technology/food2fit/web/';
+  // static const String baseURL = 'http://192.168.1.105/food2fit/web/api/';
+  static const String baseURL = 'http://192.168.0.145/food2fit/web/api/';
+  // static const String baseURLFiles = 'http://flexsolutions.technology/food2fit/web/';
+  static const String baseURLFiles = 'http://192.168.0.145/food2fit/web/';
   static const String logIn = 'login';
-  static const String getGeneralAdvices = 'get-general-advices';
+  static const String getGeneralAdvices = 'get-general-advices?lang=';
   static const String getCarouselGeneralAdvices = 'get-carousel-general-advices';
   static const String requestAnAppointment = 'request-an-appointment';
   static const String getMedicalTests = 'get-medical-tests?patient_id=';
@@ -58,6 +59,7 @@ class ConstAPIUrls {
   static const String getSystemConfigurations = 'get-system-configurations';
   static const String forgetPassword = 'forget-password';
   static const String getNotifications = 'get-notifications?patient_id=';
+  static const String getPatients = 'get-patients';
 
 
 }

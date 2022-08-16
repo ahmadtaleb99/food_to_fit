@@ -13,8 +13,8 @@ class ProfileInfoField {
         ),
         child: widgetsNumber == 2
             ? Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [textWidget, textWidget2],
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [textWidget,Spacer() ,textWidget2],
               )
             : Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,

@@ -135,7 +135,7 @@ class UploadMedicalTestImagesPageState
                                     builder: (context) {
                                       return CustomDialog(
                                         title: ' ',
-                                        message: snapshot.data!.data!.message,
+                                        message: snapshot.data!.data!.message!.tr(),
                                         backgroundColor:
                                             CustomColors.SuccessMessageColor,
                                         actionTitle: 'Ok'.tr(),

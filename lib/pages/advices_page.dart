@@ -1,20 +1,22 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:food_to_fit/AppPreferences.dart';
 import 'package:food_to_fit/models/adviceModel.dart';
 import 'package:food_to_fit/widgets/adviceCardWidget.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:food_to_fit/blocs/getGeneralAdvicesBloc.dart';
 import 'package:food_to_fit/networking/api_response.dart';
 import 'package:food_to_fit/models/responseModel.dart';
+import 'package:food_to_fit/widgets/di.dart';
 import 'package:food_to_fit/widgets/loadingCircularProgress.dart';
 import 'package:food_to_fit/widgets/errorWidget.dart';
 
 List<Advice>? adviceList;
 
 class AdvicesPage extends StatelessWidget {
-  final GetGeneralAdvicesBloc bloc = GetGeneralAdvicesBloc();
+    final GetGeneralAdvicesBloc bloc = GetGeneralAdvicesBloc(getIT<AppPreferences>().getAppLanguage());
 
-  @override
+    @override
   Widget build(BuildContext context) {
     return Scaffold(
         backgroundColor: Colors.white,
@@ -31,7 +33,7 @@ class AdvicesPage extends StatelessWidget {
           centerTitle: true,
         ),
         body: RefreshIndicator(
-          onRefresh: () => bloc.fetchResponse(),
+          onRefresh: () => bloc.fetchResponse(getIT<AppPreferences>().getAppLanguage()),
           child: StreamBuilder<ApiResponse<CommonResponse>>(
             stream: bloc.getGeneralAdvicesResponseStream,
             builder: (context, snapshot) {
@@ -60,7 +62,7 @@ class AdvicesPage extends StatelessWidget {
                     print('error');
                     return CustomErrorWidget(
                       errorMessage: snapshot.data!.message,
-                      onRetryPressed: () => bloc.fetchResponse(),
+                      onRetryPressed: () => bloc.fetchResponse(getIT<AppPreferences>().getAppLanguage()),
                     );
                     break;
                   case Status.COMPLETED_WITH_FALSE:

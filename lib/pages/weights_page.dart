@@ -97,7 +97,7 @@ class WeightsPageState extends State<WeightsPage> {
                     if (snapshot.data!.data!.message ==
                         "You don't have any weight body measure value yet") {
                       return DataNotFound(
-                          errorMessage: snapshot.data!.data!.message);
+                          errorMessage: snapshot.data!.data!.message?.tr());
                     } else {
                       if (snapshot.data!.data!.message ==
                           "Your account is unauthorized") {

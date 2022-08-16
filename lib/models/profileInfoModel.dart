@@ -1,16 +1,51 @@
+import 'package:food_to_fit/AppPreferences.dart';
+import 'package:food_to_fit/language_manager.dart';
 import 'package:food_to_fit/models/dayModel.dart';
 import 'package:food_to_fit/models/dietProgramModel.dart';
 
+import '../widgets/di.dart';
+class NonStaticBodyMeasure{
+  final String nameAr;
+  final String nameEn;
+  final String namePt;
+  final int value;
+
+
+  String getLocalizedName (){
+    var lang =  getIT<AppPreferences>().getAppLanguage();
+      switch(lang) {
+        case LanguageType.ENGLISH.getValue():
+          return nameEn;
+      }
+  }
+  const NonStaticBodyMeasure({
+    required this.nameAr,
+    required this.nameEn,
+    required this.namePt,
+    required this.value,
+  });
+  factory NonStaticBodyMeasure.fromJson(Map<String, dynamic> json) {
+    return NonStaticBodyMeasure(nameAr: json['name_ar'],
+        nameEn: json['name_en'],
+        namePt: json['name_pt'],
+        value: json['value']);
+
+  }
+
+
+  }
 class ProfileInfo {
   Profile? profile;
   Account? account;
   int? patientsProfilesCount;
   StaticBodyMeasures? staticBodyMeasures;
   String? lastPatientWeightMeasureDate;
-  Map<String, dynamic>? nonStaticBodyMeasures;
+  List<NonStaticBodyMeasure>? nonStaticBodyMeasures;
   List<PatientDiseases>? patientDiseases;
   DietProgram? latestDietProgram;
   List<Day>? dietProgramDays;
+  int? patientsCount;
+
 
   ProfileInfo(
       {this.profile,
@@ -21,6 +56,7 @@ class ProfileInfo {
         this.nonStaticBodyMeasures,
         this.patientDiseases,
         this.latestDietProgram,
+        this.patientsCount,
         this.dietProgramDays});
 
   ProfileInfo.fromJson(Map<String, dynamic> json) {
@@ -33,8 +69,10 @@ class ProfileInfo {
         ?  StaticBodyMeasures.fromJson(json['static_body_measures'])
         : null;
     lastPatientWeightMeasureDate = json['last_patient_weight_measure_date'];
+
     nonStaticBodyMeasures = json['non_static_body_measures'] != null
-        ? json['non_static_body_measures']
+        ? List<NonStaticBodyMeasure>.from(json['non_static_body_measures'])
+        .map((dynamic e) => NonStaticBodyMeasure.fromJson(e)).toList()
         : null;
     if (json['patient_diseases'] != null) {
       patientDiseases =  [];
@@ -51,6 +89,7 @@ class ProfileInfo {
         dietProgramDays!.add( Day.fromJson(v));
       });
     }
+    patientsCount = json['patients_count'] != null ? int.parse(json['patients_count'].toString()) : 0;
   }
 
   Map<String, dynamic> toJson() {
@@ -126,7 +165,7 @@ class Profile {
         this.status});
 
   Profile.fromJson(Map<String, dynamic> json) {
-    id = json['id'];
+    id = int.parse(json['id'].toString());
     firstName = json['first_name'];
     lastName = json['last_name'];
     birthDate = json['birth_date'];
@@ -135,7 +174,7 @@ class Profile {
     socialStatus = json['social_status'];
     childrenNumber = json['children_number'];
     work = json['work'];
-    workHours = json['work_hours'];
+    workHours = json['work_hours'] != null ? int.parse(json['work_hours'].toString()) : null ;
     partnerWork = json['partner_work'];
     getToKnow = json['get_to_know'];
     livingLocation = json['living_location'];

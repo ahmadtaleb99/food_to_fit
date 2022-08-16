@@ -13,7 +13,7 @@ import 'package:food_to_fit/sharedPreferences.dart';
 import 'package:food_to_fit/widgets/CustomDialogWidget.dart';
 import 'package:food_to_fit/widgets/dataNotFoundWidget.dart';
 import 'package:food_to_fit/main.dart';
-
+import 'package:shimmer/shimmer.dart';
 class MedTestPage extends StatefulWidget {
   @override
   MedTestPageState createState() => MedTestPageState();
@@ -127,7 +127,7 @@ class MedTestPageState extends State<MedTestPage> {
                             if (snapshot.data!.data!.message ==
                                 "You don't have any submitted medical test yet.") {
                               return DataNotFound(
-                                  errorMessage: snapshot.data!.data!.message);
+                                  errorMessage: snapshot.data!.data!.message?.tr());
                             } else {
                               if (snapshot.data!.data!.message ==
                                   "Your account is unauthorized") {

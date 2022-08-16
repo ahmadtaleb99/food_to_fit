@@ -2,6 +2,8 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:food_to_fit/widgets/appBarWidget.dart';
 import 'package:food_to_fit/models/medTestModel.dart';
+import 'package:cached_network_image/cached_network_image.dart';
+
 import 'package:food_to_fit/app_constants.dart';
 import 'package:food_to_fit/widgets/medTestDetailsTableWidget.dart';
 import 'package:auto_size_text/auto_size_text.dart';
@@ -238,12 +240,18 @@ class MedTestDetailsPageState extends State<MedTestDetailsPage> {
                                           child: ClipRRect(
                                             borderRadius: BorderRadius.circular(
                                                 ConstMeasures.borderRadius),
-                                            child: Image.network(
-                                              ConstAPIUrls.baseURLFiles +
-                                                  medTest!
-                                                      .medicalTestImages![index]
-                                                      .imagePath!,
-                                              fit: BoxFit.cover,
+                                            child: CachedNetworkImage(
+
+                                                imageUrl:        ConstAPIUrls.baseURLFiles +
+                                                      medTest!
+                                                          .medicalTestImages![index]
+                                                          .imagePath!,
+                                              progressIndicatorBuilder:
+                                                  (context, url, downloadProgress) {
+                                                return Center(
+                                                    child: Loading());
+                                              },
+                                                  fit: BoxFit.cover,
                                             ),
                                           ),
                                         ));

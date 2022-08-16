@@ -11,6 +11,9 @@ import 'package:food_to_fit/widgets/appBarWidget.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:food_to_fit/widgets/di.dart';
+import 'package:food_to_fit/widgets/profileActionWidget.dart';
+
+import 'change_password_page.dart';
 
 enum SingingCharacter { English, Arabic }
 
@@ -172,7 +175,9 @@ class SettingsPageState extends State<SettingsPage> {
                         thickness: 3.0,
                       ),
                     ),
-                    SizedBox(height: 50),
+                    SizedBox(height: 50,),
+
+
                     Container(
                       padding: EdgeInsets.all(ConstMeasures.borderWidth),
                       child: RoundedButton(

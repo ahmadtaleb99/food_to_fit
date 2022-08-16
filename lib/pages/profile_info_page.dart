@@ -157,7 +157,7 @@ class ProfileInfoPageState extends State<ProfileInfoPage> {
         Container(
           margin: EdgeInsets.symmetric(vertical: 10.0),
           child: Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
+            crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               ProfileInfoField().profileInfoFieldWidget(
                   AutoSizeText(
@@ -186,17 +186,21 @@ class ProfileInfoPageState extends State<ProfileInfoPage> {
                   Container(),
                   1),
               ProfileInfoField().profileInfoFieldWidget(
-                  AutoSizeText(
-                    data.profile!.work!,
-                    style: TextStyle(fontSize: 14),
-                    maxFontSize: 14,
+                  Expanded(
+                    child: AutoSizeText(
+                     data.profile!.work!,
+                      style: TextStyle(fontSize: 14,overflow: TextOverflow.visible),
+                      maxFontSize: 14,
+                    ),
                   ),
-                  AutoSizeText(
-                    data.profile!.workHours.toString() + " hours",
-                    style: TextStyle(fontSize: 14),
-                    maxFontSize: 14,
+                  Expanded(
+                    child: AutoSizeText(
+                      data.profile!.workHours.toString() + " hours",
+                      style: TextStyle(fontSize: 14,overflow: TextOverflow.ellipsis ),
+                      maxFontSize: 14,
+                    ),
                   ),
-                  1),
+                  2),
               ProfileInfoField().profileInfoFieldWidget(
                   AutoSizeText(
                     data.account!.phone!,
@@ -208,7 +212,7 @@ class ProfileInfoPageState extends State<ProfileInfoPage> {
               ProfileInfoField().profileInfoFieldWidget(
                   AutoSizeText(
                     data.profile!.livingLocation!,
-                    style: TextStyle(fontSize: 14),
+                    style: TextStyle(fontSize: 14,),
                     maxFontSize: 14,
                   ),
                   Container(),
@@ -272,12 +276,10 @@ class ProfileInfoPageState extends State<ProfileInfoPage> {
         SizedBox(height: 10.0),
         Column(
           children: List.generate(profile!.nonStaticBodyMeasures!.length, (index) {
-            return profile!.nonStaticBodyMeasures!.values.elementAt(index) != null
+            return profile!.nonStaticBodyMeasures![index] != null
                 ? BodyMeasureWidget().bodyMeasureWidget(
-                profile!.nonStaticBodyMeasures!.keys.elementAt(index) + ' : ',
-                profile!.nonStaticBodyMeasures!.values
-                    .elementAt(index)
-                    .toString())
+                profile!.nonStaticBodyMeasures![index].nameAr+ ' : ',
+                profile!.nonStaticBodyMeasures![index].value.toString())
                 : Container();
           }),
         ),

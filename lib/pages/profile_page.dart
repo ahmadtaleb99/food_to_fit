@@ -13,6 +13,7 @@ import 'package:food_to_fit/pages/change_password_page.dart';
 import 'package:food_to_fit/pages/notifications_page.dart';
 import 'package:food_to_fit/pages/profile_info_page.dart';
 import 'package:food_to_fit/pages/settings_page.dart';
+import 'package:food_to_fit/pages/switch_patient_page.dart';
 import 'package:food_to_fit/widgets/di.dart';
 import 'package:food_to_fit/widgets/profileActionWidget.dart';
 import 'package:food_to_fit/pages/drawables/rounded_button.dart';
@@ -202,6 +203,9 @@ class ProfilePageState extends State<ProfilePage> {
                                               ProfileActionWidget(title: 'Change Password', icon: Icons.lock_outline, onTap: () {
                                                 Navigator.of(context).push(MaterialPageRoute(builder: (context) => ChangePasswordPage()));
                                               },),
+                                         profile!.patientsCount! > 1 ?    ProfileActionWidget(title: 'Switch Patient', icon: Icons.swap_horiz_rounded, onTap: () {
+                                                Navigator.of(context).push(MaterialPageRoute(builder: (context) => SwitchPatientsPage()));
+                                              },) : Container(),
 
                                             ]
                                             // children: profileActions

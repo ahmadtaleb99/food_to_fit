@@ -9,6 +9,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 const String keyLanguageKey = 'keyLanguage';
 const String accessTokenKey = 'accessToken';
 const String patientIdKey = 'patientIdKey';
+const String patientsNumberKey = 'patientsNumberKey';
 
 class AppPreferences {
 
@@ -27,6 +28,11 @@ class AppPreferences {
     await _prefs.setString(patientIdKey, id);
   }
 
+  Future<void> savePatientsNumber(String id) async{
+    await _prefs.setString(patientsNumberKey, id);
+  }
+
+  String? getPatientsNumber () => _prefs.getString(patientsNumberKey);
   String? getPatientID () => _prefs.getString(patientIdKey);
 
 

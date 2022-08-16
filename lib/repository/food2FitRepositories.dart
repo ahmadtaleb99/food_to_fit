@@ -1,9 +1,12 @@
 import 'dart:async';
+import 'dart:developer';
 
+import 'package:food_to_fit/AppPreferences.dart';
 import 'package:food_to_fit/models/responseModel.dart';
 import 'package:food_to_fit/app_constants.dart';
 import 'package:food_to_fit/networking/api_base_helper.dart';
 import 'package:food_to_fit/sharedPreferences.dart';
+import 'package:food_to_fit/widgets/di.dart';
 
 class Food2FitRepositories {
   ApiBaseHelper helper = ApiBaseHelper();
@@ -15,7 +18,7 @@ class Food2FitRepositories {
   }
 
   Future getPatientID() async {
-    return await SharedPreferencesSingleton().getStringValuesSF(SharedPreferencesSingleton.patientID);
+    return await getIT<AppPreferences>().getPatientID();
   }
 
   Future<CommonResponse> getLogInResponse(
@@ -29,11 +32,13 @@ class Food2FitRepositories {
     //   return Response.fromJson(jsonDecode(response.body));
   }
 
-  Future<CommonResponse> getGeneralAdvicesResponse() async {
-    final response = await helper.get(ConstAPIUrls.getGeneralAdvices);
+  Future<CommonResponse> getGeneralAdvicesResponse(String language) async {
+    final response = await helper.get(ConstAPIUrls.getGeneralAdvices+language);
     commonResponse.setResponseType("GeneralAdvices");
     return commonResponse.fromJson(response);
   }
+
+
 
   Future<CommonResponse>  getCarouselGeneralAdvicesResponse() async {
     final response = await helper.get(ConstAPIUrls.getCarouselGeneralAdvices);
@@ -152,7 +157,10 @@ class Food2FitRepositories {
   }
 
   Future<CommonResponse> getBasicProfileInfoResponse() async {
-    final response = await helper.get(ConstAPIUrls.getBasicProfileInfo + await (getPatientID()),
+
+    var id = await (getPatientID());
+    log('patient id to be sent : $id');
+    final response =  await helper.get(ConstAPIUrls.getBasicProfileInfo + id,
         headers: {'Authorization': await (getAccessToken() ), 'Referer': 'https://www.flexsolution.biz'});
     print(response);
     commonResponse.setResponseType("BasicProfileInfo");
@@ -183,6 +191,9 @@ class Food2FitRepositories {
     return commonResponse.fromJson(response);
   }
 
+
+
+
   Future<CommonResponse> forgetPasswordResponse(String email) async {
     final response = await helper.post(ConstAPIUrls.forgetPassword, body: {'email': email});
     print(response);
@@ -195,6 +206,17 @@ class Food2FitRepositories {
         headers: {'Authorization': await (getAccessToken() ), 'Referer': 'https://www.flexsolution.biz'});
     print(response);
     commonResponse.setResponseType("Notifications");
+    return commonResponse.fromJson(response);
+
+  }
+
+
+
+  Future<CommonResponse> getPatientsResponse() async {
+    final response = await helper.get(ConstAPIUrls.getPatients ,
+        headers: {'Authorization': await (getAccessToken() ), 'Referer': 'https://www.flexsolution.biz'});
+    print(response);
+    commonResponse.setResponseType("Patients");
     return commonResponse.fromJson(response);
 
   }

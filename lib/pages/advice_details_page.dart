@@ -40,11 +40,11 @@ class AdviceDetails extends StatelessWidget {
                 width: MediaQuery.of(context).size.width,
                 height: MediaQuery.of(context).size.width * 3 / 4,
                 child: CachedNetworkImage(
-              imageUrl: advice!.imageUrl != null ? ConstAPIUrls.baseURLFiles +advice!.imageUrl! : '',
+              imageUrl: advice!.imageUrl != null ? ConstAPIUrls.baseURLFiles +advice!.imageUrl! : 'assets/images/started_logo@2x.png',
                 progressIndicatorBuilder: (context, url, downloadProgress) =>
                     Center( child: Loading()),
                 errorWidget: (context, url, error) => Image(image: AssetImage('assets/images/started_logo@2x.png'), fit: BoxFit.cover,),
-                fit: BoxFit.fill,
+                fit: BoxFit.cover,
               ),
               ),
             ),
@@ -66,7 +66,7 @@ class AdviceDetails extends StatelessWidget {
               alignment: Alignment.centerLeft,
               padding:
                   EdgeInsets.symmetric(horizontal: ConstMeasures.borderWidth),
-              child: Html(data: advice!.body),
+              child: advice!.body == null?  Container() : Html(data: advice!.body),
               // AutoSizeText(
               //   advice.body,
               //   style: TextStyle(color: Colors.black),

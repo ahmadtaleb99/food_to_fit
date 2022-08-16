@@ -18,7 +18,7 @@ class GetNotificationsBloc {
 
   fetchResponse() async {
     getNotificationsResponseSink.add(ApiResponse.loading('Fetching response'));
-    try {
+    // try {
       CommonResponse response;
       response = await getNotificationsRepository.getNotificationsResponse();
       if (response.status!)
@@ -26,11 +26,11 @@ class GetNotificationsBloc {
       else
         getNotificationsResponseSink.add(ApiResponse.completed_with_false(response));
       print("completed");
-    } catch (e) {
-      getNotificationsResponseSink.add(ApiResponse.error(e.toString()));
-      print("error");
-      print(e);
-    }
+    // } catch (e) {
+    //   getNotificationsResponseSink.add(ApiResponse.error(e.toString()));
+    //   print("error");
+    //   print(e);
+    // }
   }
   dispose() {
     getNotificationsController?.close();

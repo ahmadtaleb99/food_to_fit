@@ -48,6 +48,19 @@ class CommonResponse {
         });
       }
     }
+
+
+    if (responseType == "SystemConfigurations") {
+      if (json['data'] != null) {
+        data = [];
+        json['data'].forEach((v) {
+          data.add(new SystemConfigurations.fromJson(v));
+        });
+        print('finish');
+      }
+    }
+
+
     if (responseType == "PatientVisitDetails") {
       data = json['data'] != null ?  Visit.fromJson(json['data']) : null;
       print('finish');
@@ -102,11 +115,11 @@ class CommonResponse {
       print('finish');
     }
 
-    if (responseType == "SystemConfigurations") {
+    if (responseType == "Patients") {
       if (json['data'] != null) {
         data = [];
         json['data'].forEach((v) {
-          data.add( SystemConfigurations.fromJson(v));
+          data.add( Profile.fromJson(v));
         });
         print('finish');
       }
@@ -122,6 +135,16 @@ class CommonResponse {
       }
     }
 
+
+    if (responseType == "Notifications") {
+      if (json['data'] != null) {
+        data =  [];
+        json['data'].forEach((v) {
+          data.add( NotificationModel.fromJson(v));
+        });
+        print('finish');
+      }
+    }
     if (responseType == "PatientWeights") {
       if (json['data'] != null) {
           data =  [];

@@ -91,7 +91,7 @@ class DietProgramsPageState extends State<DietProgramsPage> {
                           case Status.COMPLETED_WITH_FALSE:
                             print('COMPLETED_WITH_FALSE');
                             if(snapshot.data!.data!.message == "You don't have any diet program yet"){
-                              return DataNotFound(errorMessage: snapshot.data!.data!.message);
+                              return DataNotFound(errorMessage: snapshot.data!.data!.message?.tr());
                             } else {
                               if(snapshot.data!.data!.message == "Your account is unauthorized"){
                                 logOut(context);
