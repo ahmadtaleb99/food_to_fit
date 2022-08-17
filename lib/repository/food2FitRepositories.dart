@@ -3,7 +3,7 @@ import 'dart:developer';
 
 import 'package:food_to_fit/AppPreferences.dart';
 import 'package:food_to_fit/models/responseModel.dart';
-import 'package:food_to_fit/app_constants.dart';
+import 'package:food_to_fit/resources/app_constants.dart';
 import 'package:food_to_fit/networking/api_base_helper.dart';
 import 'package:food_to_fit/sharedPreferences.dart';
 import 'package:food_to_fit/widgets/di.dart';

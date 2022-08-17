@@ -1,12 +1,12 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:food_to_fit/AppPreferences.dart';
-import 'package:food_to_fit/app_constants.dart';
-import 'package:food_to_fit/language_manager.dart';
+import 'package:food_to_fit/resources/app_constants.dart';
 import 'package:food_to_fit/pages/drawables/rounded_button.dart';
 import 'package:food_to_fit/pages/main_page.dart';
 import 'package:food_to_fit/pages/profile_info_page.dart';
 import 'package:food_to_fit/pages/profile_page.dart';
+import 'package:food_to_fit/resources/language_manager.dart';
 import 'package:food_to_fit/widgets/appBarWidget.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:auto_size_text/auto_size_text.dart';

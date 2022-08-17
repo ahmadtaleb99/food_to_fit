@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
-import 'package:food_to_fit/app_constants.dart';
+import 'package:food_to_fit/resources/app_constants.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:food_to_fit/models/adviceModel.dart';
 import 'package:cached_network_image/cached_network_image.dart';

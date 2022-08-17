@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:food_to_fit/app_constants.dart';
+import 'package:food_to_fit/resources/app_constants.dart';
 
 class Loading extends StatelessWidget {
   const Loading({Key? key}) : super(key: key);

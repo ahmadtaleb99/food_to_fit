@@ -4,7 +4,7 @@ import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'package:food_to_fit/networking/api_exceptions.dart';
 import 'dart:async';
-import 'package:food_to_fit/app_constants.dart';
+import 'package:food_to_fit/resources/app_constants.dart';
 import 'package:food_to_fit/sharedPreferences.dart';
 
 class ApiBaseHelper {
@@ -25,9 +25,9 @@ class ApiBaseHelper {
           .timeout(const Duration(seconds: 60));
       responseJson = returnResponse(response);
     } on TimeoutException catch (_) {
-      throw FetchDataException('No Internet connection'.tr());
-    } on SocketException catch (_) {
       throw FetchDataException('timeout-error'.tr());
+    } on SocketException catch (_) {
+      throw FetchDataException('No Internet connection'.tr());
     } catch (e) {
       print(e);
       throw FetchDataException('Something went wrong!'.tr());

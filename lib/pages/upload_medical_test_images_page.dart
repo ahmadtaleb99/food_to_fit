@@ -3,7 +3,7 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'drawables/rounded_button.dart';
-import 'package:food_to_fit/app_constants.dart';
+import 'package:food_to_fit/resources/app_constants.dart';
 import 'package:food_to_fit/blocs/uploadMedicalTestBloc.dart';
 import 'package:food_to_fit/models/responseModel.dart';
 import 'package:food_to_fit/networking/api_response.dart';

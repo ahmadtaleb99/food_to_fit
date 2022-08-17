@@ -1,7 +1,7 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:food_to_fit/models/medTestModel.dart';
-import 'package:food_to_fit/app_constants.dart';
+import 'package:food_to_fit/resources/app_constants.dart';
 import 'package:food_to_fit/widgets/timeLineWidget.dart';
 import 'package:food_to_fit/pages/med_test_details_page.dart';
 import 'package:food_to_fit/blocs/getMedicalTestsBloc.dart';

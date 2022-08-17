@@ -1,22 +1,30 @@
 import 'package:food_to_fit/AppPreferences.dart';
-import 'package:food_to_fit/language_manager.dart';
 import 'package:food_to_fit/models/dayModel.dart';
 import 'package:food_to_fit/models/dietProgramModel.dart';
+import 'package:food_to_fit/resources/language_manager.dart';
 
 import '../widgets/di.dart';
 class NonStaticBodyMeasure{
   final String nameAr;
   final String nameEn;
   final String namePt;
+
   final int value;
 
 
   String getLocalizedName (){
     var lang =  getIT<AppPreferences>().getAppLanguage();
-      switch(lang) {
-        case LanguageType.ENGLISH.getValue():
-          return nameEn;
-      }
+      if(lang == LanguageType.ENGLISH.getValue())
+        return this.nameEn;
+
+    if(lang == LanguageType.ARABIC.getValue())
+      return this.nameAr;
+
+    if(lang == LanguageType.PORTUGUESE.getValue())
+      return this.namePt;
+
+
+    return this.nameEn;
   }
   const NonStaticBodyMeasure({
     required this.nameAr,
@@ -25,7 +33,8 @@ class NonStaticBodyMeasure{
     required this.value,
   });
   factory NonStaticBodyMeasure.fromJson(Map<String, dynamic> json) {
-    return NonStaticBodyMeasure(nameAr: json['name_ar'],
+    return NonStaticBodyMeasure(
+        nameAr: json['name_ar'],
         nameEn: json['name_en'],
         namePt: json['name_pt'],
         value: json['value']);
@@ -71,9 +80,9 @@ class ProfileInfo {
     lastPatientWeightMeasureDate = json['last_patient_weight_measure_date'];
 
     nonStaticBodyMeasures = json['non_static_body_measures'] != null
-        ? List<NonStaticBodyMeasure>.from(json['non_static_body_measures'])
-        .map((dynamic e) => NonStaticBodyMeasure.fromJson(e)).toList()
-        : null;
+        ? List<NonStaticBodyMeasure>.from((json['non_static_body_measures'] as List)
+        .map((dynamic e) => NonStaticBodyMeasure.fromJson(e)).toList().cast()
+    ): null;
     if (json['patient_diseases'] != null) {
       patientDiseases =  [];
       json['patient_diseases'].forEach((v) {
@@ -374,21 +383,40 @@ class PatientDiseases {
 
 class Disease {
   String? id;
-  String? diseaseName;
+  String? diseaseNameAr;
+  String? diseaseNameEn;
+  String? diseaseNamePt;
   String? type;
+  String? getLocalizedName (){
+    var lang =  getIT<AppPreferences>().getAppLanguage();
+    if(lang == LanguageType.ENGLISH.getValue())
+      return this.diseaseNameAr;
 
-  Disease({this.id, this.diseaseName, this.type});
+    if(lang == LanguageType.ARABIC.getValue())
+      return this.diseaseNameEn;
+
+    if(lang == LanguageType.PORTUGUESE.getValue())
+      return this.diseaseNamePt;
+
+
+    return this.diseaseNamePt;
+  }
+  Disease({this.id, this.diseaseNameAr,this.diseaseNamePt,this.diseaseNameEn, this.type});
 
   Disease.fromJson(Map<String, dynamic> json) {
     id = json['id'];
-    diseaseName = json['disease_name'];
+    diseaseNameAr = json['disease_name_ar'];
+    diseaseNamePt = json['disease_name_pt'];
+    diseaseNameEn = json['disease_name_en'];
     type = json['type'];
   }
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data =  Map<String, dynamic>();
     data['id'] = this.id;
-    data['disease_name'] = this.diseaseName;
+    data['disease_name_ar'] = this.diseaseNameAr;
+    data['disease_name_pt'] = this.diseaseNamePt;
+    data['disease_name_en']= this.diseaseNameEn;
     data['type'] = this.type;
     return data;
   }

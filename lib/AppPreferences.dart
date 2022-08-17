@@ -3,8 +3,8 @@ import 'dart:ui';
 
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import 'package:food_to_fit/app_constants.dart';
-import 'package:food_to_fit/language_manager.dart';
+import 'package:food_to_fit/resources/app_constants.dart';
+import 'package:food_to_fit/resources/language_manager.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 const String keyLanguageKey = 'keyLanguage';
 const String accessTokenKey = 'accessToken';
@@ -17,7 +17,7 @@ class AppPreferences {
   final SharedPreferences _prefs;
   AppPreferences(this._prefs);
 
-  bool isRtl() => getLocale() == AppLanguages.arabicLocale;
+  bool isRtl() => getAppLanguage() == LanguageType.ARABIC.getValue();
     Future<void> saveAccessToken(String accessToken) async{
     await _prefs.setString(accessTokenKey, accessToken);
     log('new access token :  : $accessToken');
@@ -67,6 +67,10 @@ class AppPreferences {
 
     if(language == LanguageType.ARABIC.getValue()){
       return AppLanguages.arabicLocale;
+    }
+
+    if(language == LanguageType.PORTUGUESE.getValue()){
+      return AppLanguages.portugueseLocale;
     }
 
     return AppLanguages.englishLocale;

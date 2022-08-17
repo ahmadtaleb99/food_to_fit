@@ -1,10 +1,12 @@
-import 'package:easy_localization/easy_localization.dart';
+import 'package:easy_localization/easy_localization.dart' as intl;
 import 'package:flutter/material.dart';
+import 'package:food_to_fit/resources/date_manager.dart';
 import 'package:food_to_fit/widgets/appBarWidget.dart';
 import 'package:food_to_fit/models/medTestModel.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 
-import 'package:food_to_fit/app_constants.dart';
+import 'package:food_to_fit/resources/app_constants.dart';
+import 'package:food_to_fit/widgets/di.dart';
 import 'package:food_to_fit/widgets/medTestDetailsTableWidget.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:food_to_fit/blocs/getMedicalTestDetailsBloc.dart';
@@ -15,6 +17,9 @@ import 'package:food_to_fit/widgets/errorWidget.dart';
 import 'package:food_to_fit/main.dart';
 import 'package:food_to_fit/pages/drawables/rounded_button.dart';
 import 'package:food_to_fit/pages/upload_medical_test_images_page.dart';
+import 'package:intl/intl.dart';
+
+import '../AppPreferences.dart';
 
 class MedTestDetailsPage extends StatefulWidget {
   final MedicalTestDetails previousMedicalTest;
@@ -28,7 +33,7 @@ class MedTestDetailsPage extends StatefulWidget {
 class MedTestDetailsPageState extends State<MedTestDetailsPage> {
   MedicalTest? medTest;
   late GetMedicalTestDetailsBloc bloc;
-
+    final format = getIT<AppPreferences>().isRtl()   ? 'HH:MM MM/dd/yyyy  ' : ' MM/dd/yyyy  HH:MM';
   @override
   Widget build(BuildContext context) {
     bloc = GetMedicalTestDetailsBloc(widget.previousMedicalTest.id!);
@@ -77,7 +82,8 @@ class MedTestDetailsPageState extends State<MedTestDetailsPage> {
                                   padding:
                                       EdgeInsets.symmetric(horizontal: 10.0),
                                   child: AutoSizeText(
-                                    'Time: '.tr() + medTest!.medicalTestDetails!.date!,
+
+                                    'Time: '.tr() + DateFormat(format).format(DateTime.parse(medTest!.medicalTestDetails!.date!)),
                                     style: TextStyle(color: Colors.black),
                                     maxFontSize: 14,
                                   )),

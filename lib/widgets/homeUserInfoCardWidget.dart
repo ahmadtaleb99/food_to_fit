@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:food_to_fit/app_icons.dart';
+import 'package:food_to_fit/resources/app_icons.dart';
 import 'package:food_to_fit/models/homeActionCardModel.dart';
-import 'package:food_to_fit/app_constants.dart';
+import 'package:food_to_fit/resources/app_constants.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:food_to_fit/pages/weights_page.dart';
 

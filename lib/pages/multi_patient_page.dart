@@ -5,7 +5,7 @@ import 'package:food_to_fit/pages/main_page.dart';
 import 'package:food_to_fit/widgets/appBarWidget.dart';
 import 'package:food_to_fit/widgets/di.dart';
 import 'package:food_to_fit/widgets/userInfoWidget.dart';
-import 'package:food_to_fit/app_constants.dart';
+import 'package:food_to_fit/resources/app_constants.dart';
 import 'package:food_to_fit/pages/drawables/rounded_patient_button.dart';
 import 'package:food_to_fit/pages/log_in.dart';
 import 'package:auto_size_text/auto_size_text.dart';

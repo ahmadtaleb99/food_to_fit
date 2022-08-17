@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:food_to_fit/models/notificationModel.dart';
-import 'package:food_to_fit/app_constants.dart';
+import 'package:food_to_fit/resources/app_constants.dart';
 
 class NotificationWidget {
   Widget getNotificationWidget(NotificationModel notification) {

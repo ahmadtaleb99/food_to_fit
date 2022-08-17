@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:food_to_fit/app_constants.dart';
+import 'package:food_to_fit/resources/app_constants.dart';
 
 class LoaderWidget extends StatelessWidget {
   const LoaderWidget({Key? key}) : super(key: key);

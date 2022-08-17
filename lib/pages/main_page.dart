@@ -3,12 +3,12 @@ import 'package:flutter/material.dart';
 import 'dart:collection';
 import 'package:food_to_fit/pages/guest_home_page.dart';
 import 'package:food_to_fit/pages/authenticated_home_page.dart';
-import 'package:food_to_fit/app_icons.dart';
+import 'package:food_to_fit/resources/app_icons.dart';
 import 'package:food_to_fit/pages/profile_page.dart';
 import 'package:food_to_fit/pages/visits_page.dart';
 import 'package:food_to_fit/pages/diet_programs_page.dart';
 import 'package:food_to_fit/pages/med_test_page.dart';
-import '../app_constants.dart';
+import '../resources/app_constants.dart';
 import 'package:food_to_fit/widgets/appBarWidget.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 

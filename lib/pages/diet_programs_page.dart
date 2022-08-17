@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:food_to_fit/models/dietProgramModel.dart';
 import 'package:food_to_fit/widgets/CustomDialogWidget.dart';
 import 'package:food_to_fit/widgets/timeLineWidget.dart';
-import '../app_constants.dart';
+import '../resources/app_constants.dart';
 import 'diet_program_details_page.dart';
 import 'package:food_to_fit/blocs/getDietProgramsBloc.dart';
 import 'package:food_to_fit/models/responseModel.dart';

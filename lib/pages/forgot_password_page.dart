@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import './drawables/rounded_text_field.dart';
 import './drawables/rounded_button.dart';
-import '../app_constants.dart';
+import '../resources/app_constants.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:food_to_fit/models/responseModel.dart';
 import 'package:food_to_fit/networking/api_response.dart';

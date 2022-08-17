@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:food_to_fit/app_constants.dart';
+import 'package:food_to_fit/resources/app_constants.dart';
 import 'package:food_to_fit/pages/drawables/rounded_button.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:food_to_fit/widgets/appBarWidget.dart';

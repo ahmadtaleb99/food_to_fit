@@ -61,7 +61,6 @@ class ConstAPIUrls {
   static const String getNotifications = 'get-notifications?patient_id=';
   static const String getPatients = 'get-patients';
 
-
 }
 extension xDouble on double{
   bool canBeInt () {

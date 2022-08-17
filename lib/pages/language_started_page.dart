@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:food_to_fit/app_constants.dart';
+import 'package:food_to_fit/resources/app_constants.dart';
 import 'package:food_to_fit/pages/started_page.dart';
 import 'package:food_to_fit/pages/drawables/rounded_button.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:food_to_fit/pages/log_in.dart';
-import '../app_constants.dart';
+import '../resources/app_constants.dart';
 
 class LanguageStartedPage extends StatefulWidget {
   @override

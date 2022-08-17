@@ -8,7 +8,7 @@ import 'package:food_to_fit/pages/multi_patient_page.dart';
 import 'package:food_to_fit/widgets/di.dart';
 import './drawables/rounded_text_field.dart';
 import './drawables/rounded_button.dart';
-import '../app_constants.dart';
+import '../resources/app_constants.dart';
 import './main_page.dart';
 import 'package:food_to_fit/sharedPreferences.dart';
 import 'package:food_to_fit/pages/forgot_password_page.dart';
@@ -37,7 +37,8 @@ class LogInPageState extends State<LogInPage> {
    var  _appPrefs =  getIT<AppPreferences>();
   @override
   void initState() {
-    // TODO: implement initState
+    usernameController.text = 'hani1@gmail.com';
+    passwordController.text = '1';
     super.initState();
   }
 
@@ -115,6 +116,7 @@ class LogInPageState extends State<LogInPage> {
                             ),
                             SizedBox(height: 20),
                             RoundedTextField(
+
                               hint: "password_hint".tr(),
                               obscure: true,
                               controller: passwordController,

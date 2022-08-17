@@ -4,10 +4,10 @@ import 'package:food_to_fit/widgets/homeUserInfoCardWidget.dart';
 import 'package:food_to_fit/models/homeActionCardModel.dart';
 import 'package:food_to_fit/widgets/profileInfoFieldWidget.dart';
 import 'package:food_to_fit/widgets/bodyMeasureWidget.dart';
-import 'package:food_to_fit/app_constants.dart';
+import 'package:food_to_fit/resources/app_constants.dart';
 import 'package:food_to_fit/widgets/appBarWidget.dart';
 import 'package:food_to_fit/widgets/userInfoWidget.dart';
-import '../app_icons.dart';
+import '../resources/app_icons.dart';
 import 'package:food_to_fit/pages/drawables/rounded_button.dart';
 import 'package:food_to_fit/pages/multi_patient_page.dart';
 import 'package:auto_size_text/auto_size_text.dart';
@@ -278,11 +278,12 @@ class ProfileInfoPageState extends State<ProfileInfoPage> {
           children: List.generate(profile!.nonStaticBodyMeasures!.length, (index) {
             return profile!.nonStaticBodyMeasures![index] != null
                 ? BodyMeasureWidget().bodyMeasureWidget(
-                profile!.nonStaticBodyMeasures![index].nameAr+ ' : ',
+                profile!.nonStaticBodyMeasures![index].getLocalizedName()+ ' : ',
                 profile!.nonStaticBodyMeasures![index].value.toString())
                 : Container();
           }),
         ),
+        SizedBox(height: 10,),
         AutoSizeText(
           'Diseases'.tr(),
           style: TextStyle(
@@ -315,7 +316,7 @@ class ProfileInfoPageState extends State<ProfileInfoPage> {
                   BorderRadius.circular(ConstMeasures.borderCircular),
                 ),
                 child: AutoSizeText(
-                  diseasesList![index].disease!.diseaseName!,
+                  diseasesList![index].disease!.getLocalizedName()!,
                   textAlign: TextAlign.center,
                   style: TextStyle(fontSize: 14.0),
                   maxFontSize: 14,

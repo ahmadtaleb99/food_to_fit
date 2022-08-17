@@ -1,7 +1,7 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import 'package:food_to_fit/app_constants.dart';
-import 'package:food_to_fit/app_icons.dart';
+import 'package:food_to_fit/resources/app_constants.dart';
+import 'package:food_to_fit/resources/app_icons.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 
 class UserInfoWidget {

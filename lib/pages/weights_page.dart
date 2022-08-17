@@ -2,7 +2,7 @@ import 'package:auto_size_text/auto_size_text.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:food_to_fit/models/weightBodyMeasureModel.dart';
-import 'package:food_to_fit/app_constants.dart';
+import 'package:food_to_fit/resources/app_constants.dart';
 import 'package:food_to_fit/widgets/timeLineWidget.dart';
 import 'package:food_to_fit/blocs/getPatientWeightsBloc.dart';
 import 'package:food_to_fit/networking/api_response.dart';

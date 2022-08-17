@@ -1,9 +1,9 @@
 import 'dart:developer';
 
-import 'package:easy_localization/easy_localization.dart';
+import 'package:easy_localization/easy_localization.dart' as local;
 import 'package:flutter/material.dart';
-import 'package:food_to_fit/app_icons.dart';
-import 'package:food_to_fit/app_constants.dart';
+import 'package:food_to_fit/resources/app_icons.dart';
+import 'package:food_to_fit/resources/app_constants.dart';
 import 'package:food_to_fit/widgets/appBarWidget.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:food_to_fit/blocs/getSystemConfigurationsBloc.dart';
@@ -122,12 +122,15 @@ class AboutFoodToFitState extends State<AboutFoodToFit> {
                                         });
                                       },
                                       child: AutoSizeText(
+
                                         // "Mobile Number: " +
                                         systemConfigurationList!
                                             .elementAt(7)
                                             .value!,
+                                        textDirection: TextDirection.ltr ,
                                         maxFontSize: 13.0,
                                         style: TextStyle(
+
                                             color: CustomColors.YellowColor),
                                       ),
                                     ),
@@ -164,7 +167,9 @@ class AboutFoodToFitState extends State<AboutFoodToFit> {
                                             .elementAt(6)
                                             .value!,
                                         maxFontSize: 13.0,
+                                        textDirection: TextDirection.ltr ,
                                         style: TextStyle(
+
                                             color: CustomColors.YellowColor),
                                       ),
                                     ),

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:food_to_fit/app_constants.dart';
+import 'package:food_to_fit/resources/app_constants.dart';
 import 'package:food_to_fit/pages/drawables/rounded_wrap_content_button.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 import 'package:food_to_fit/models/startedPageModel.dart';

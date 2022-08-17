@@ -1,8 +1,11 @@
 import 'package:easy_localization/easy_localization.dart';
+import 'package:food_to_fit/AppPreferences.dart';
+import 'package:food_to_fit/resources/date_manager.dart';
 import 'package:timeline_tile/timeline_tile.dart';
 import 'package:flutter/material.dart';
 import 'package:food_to_fit/pages/drawables/rounded_wrap_content_button.dart';
-import '../app_constants.dart';
+import '../resources/app_constants.dart';
+import 'di.dart';
 
 class TimeLineWidget {
   Widget getTimeLineWidget(BuildContext context, String title, String date,
@@ -31,7 +34,7 @@ class TimeLineWidget {
           child: Container(
             alignment: Alignment.centerRight,
             child: Text(
-              date,
+              DateManager.getFormatedDate(date),
               textAlign: TextAlign.center,
               style: TextStyle(fontSize: 12),
             ),

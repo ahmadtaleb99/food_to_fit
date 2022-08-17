@@ -1,8 +1,9 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import 'package:food_to_fit/app_constants.dart';
+import 'package:food_to_fit/resources/app_constants.dart';
 import 'package:food_to_fit/models/visitModel.dart';
 import 'package:auto_size_text/auto_size_text.dart';
+import 'package:food_to_fit/resources/date_manager.dart';
 
 class VisitDetailsTableWidget {
   Widget getVisitDetailsTable(
@@ -38,7 +39,7 @@ class VisitDetailsTableWidget {
                 Padding(
                   padding: EdgeInsets.symmetric(horizontal: 10.0),
                   child: AutoSizeText(
-                    visit!.dateTime!,
+                   DateManager.getFormatedDateRtl(visit!.dateTime!),
                     style: TextStyle(color: Colors.black, fontSize: 12),
                     maxFontSize: 12,
                   ),
