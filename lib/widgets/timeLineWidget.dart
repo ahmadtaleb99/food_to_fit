@@ -34,7 +34,7 @@ class TimeLineWidget {
           child: Container(
             alignment: Alignment.centerRight,
             child: Text(
-              DateManager.getFormatedDate(date),
+              DateManager.getFormattedDate(date),
               textAlign: TextAlign.center,
               style: TextStyle(fontSize: 12),
             ),

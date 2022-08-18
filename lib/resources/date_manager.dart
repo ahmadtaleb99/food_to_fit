@@ -6,12 +6,12 @@ import '../widgets/di.dart';
 class DateManager{
   static const String dateFormat = ' MM/dd/yyyy  HH:MM';
 
-  static  String getFormatedDate(String date){
+  static getFormattedDate(String date){
     return DateFormat('MM/dd/yyyy    HH:MM').format(DateTime.parse(date));
 
   }
 
-  static  String getFormatedDateRtl(String date){
+  static  String getFormattedDateRtl(String date){
 
     final format = getIT<AppPreferences>().isRtl()   ? 'HH:MM MM/dd/yyyy  ' : ' MM/dd/yyyy  HH:MM';
 

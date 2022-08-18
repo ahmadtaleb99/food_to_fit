@@ -26,6 +26,7 @@ class GetDietProgramsBloc {
       else
         getDietProgramsResponseSink.add(ApiResponse.completed_with_false(response));
       print("completed");
+
     } catch (e) {
       getDietProgramsResponseSink.add(ApiResponse.error(e.toString()));
       print("error");

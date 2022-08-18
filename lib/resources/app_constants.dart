@@ -41,12 +41,13 @@ class ConstAPIUrls {
   // static const String baseURLFiles = 'http://flexsolutions.technology/food2fit/web/';
   static const String baseURLFiles = 'http://192.168.0.145/food2fit/web/';
   static const String logIn = 'login';
-  static const String getGeneralAdvices = 'get-general-advices?lang=';
-  static const String getCarouselGeneralAdvices = 'get-carousel-general-advices';
+  static const String getGeneralAdvices = 'get-general-advice?lang=';
+  static const String getCarouselGeneralAdvice = 'get-carousel-general-advice?lang=';
   static const String requestAnAppointment = 'request-an-appointment';
   static const String getMedicalTests = 'get-medical-tests?patient_id=';
   static const String getMedicalTestDetails = 'get-medical-test-details?medical_test_id=';
   static const String getPatientVisits = 'get-patient-visits?patient_id=';
+  static const String updateAccountSettings = 'update-account-settings?patient_id=';
   static const String getPatientVisitDetails = 'get-patient-visit-details?visit_id=';
   static const String getDietPrograms = 'get-diet-programs?patient_id=';
   static const String getDietProgramDetails = 'get-diet-program-details?diet_program_id=';

@@ -18,7 +18,7 @@ class GetDietProgramDetailsBloc {
 
   fetchResponse(dietProgramID) async {
     getDietProgramDetailsResponseSink.add(ApiResponse.loading('Fetching response'));
-    try {
+    // try {
       CommonResponse response;
       response = await getDietProgramDetailsRepository.getDietProgramDetailsResponse(dietProgramID);
       if (response.status!)
@@ -26,11 +26,11 @@ class GetDietProgramDetailsBloc {
       else
         getDietProgramDetailsResponseSink.add(ApiResponse.completed_with_false(response));
       print("completed");
-    } catch (e) {
-      getDietProgramDetailsResponseSink.add(ApiResponse.error(e.toString()));
-      print("error");
-      print(e);
-    }
+    // } catch (e) {
+    //   getDietProgramDetailsResponseSink.add(ApiResponse.error(e.toString()));
+    //   print("error");
+    //   print(e);
+    // }
   }
   dispose() {
     getDietProgramDetailsController?.close();

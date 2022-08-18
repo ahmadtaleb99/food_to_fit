@@ -39,7 +39,7 @@ class VisitDetailsTableWidget {
                 Padding(
                   padding: EdgeInsets.symmetric(horizontal: 10.0),
                   child: AutoSizeText(
-                   DateManager.getFormatedDateRtl(visit!.dateTime!),
+                   DateManager.getFormattedDateRtl(visit!.dateTime!),
                     style: TextStyle(color: Colors.black, fontSize: 12),
                     maxFontSize: 12,
                   ),

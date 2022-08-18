@@ -256,75 +256,82 @@ class ProfileInfoPageState extends State<ProfileInfoPage> {
             ],
           ),
         ),
-        AutoSizeText(
-          'More Information:'.tr(),
-          style: TextStyle(
-              color: CustomColors.PrimaryColor,
-              fontWeight: FontWeight.bold,
-              fontSize: 24.0),
-          maxFontSize: 24,
-        ),
-        SizedBox(height: 10.0),
-        AutoSizeText(
-          'Body Measure'.tr(),
-          style: TextStyle(
-              color: CustomColors.PrimaryColor,
-              fontWeight: FontWeight.bold,
-              fontSize: 16.0),
-          maxFontSize: 16,
-        ),
-        SizedBox(height: 10.0),
-        Column(
-          children: List.generate(profile!.nonStaticBodyMeasures!.length, (index) {
-            return profile!.nonStaticBodyMeasures![index] != null
-                ? BodyMeasureWidget().bodyMeasureWidget(
-                profile!.nonStaticBodyMeasures![index].getLocalizedName()+ ' : ',
-                profile!.nonStaticBodyMeasures![index].value.toString())
-                : Container();
-          }),
-        ),
-        SizedBox(height: 10,),
-        AutoSizeText(
-          'Diseases'.tr(),
-          style: TextStyle(
-              color: CustomColors.PrimaryColor,
-              fontWeight: FontWeight.bold,
-              fontSize: 16.0),
-          maxFontSize: 16,
-        ),
-        SizedBox(height: 15.0),
-        diseasesList!.length == 0
-            ? Align(
-          alignment: Alignment.center,
-          child: AutoSizeText(
-            'There are no diseases'.tr(),
-            style: TextStyle(fontWeight: FontWeight.bold, fontSize: 14.0),
-            maxFontSize: 14,
-          ),
-        )
-            : Wrap(
-          children: List.generate(diseasesList!.length, (index) {
-            return Container(
-              margin: EdgeInsets.symmetric(horizontal: 10.0, vertical: 5.0),
-              width: (MediaQuery.of(context).size.width / 2) -
-                  (ConstMeasures.borderWidth * 2),
-              child: Container(
-                padding: EdgeInsets.all(20.0),
-                decoration: BoxDecoration(
-                  color: CustomColors.LightGreyColor,
-                  borderRadius:
-                  BorderRadius.circular(ConstMeasures.borderCircular),
-                ),
-                child: AutoSizeText(
-                  diseasesList![index].disease!.getLocalizedName()!,
-                  textAlign: TextAlign.center,
-                  style: TextStyle(fontSize: 14.0),
-                  maxFontSize: 14,
-                ),
-              ),
-            );
-          }),
-        )
+
+       if (profile!.nonStaticBodyMeasures != null && profile!.nonStaticBodyMeasures!.isNotEmpty )
+         Column(
+           crossAxisAlignment: CrossAxisAlignment.start,
+           children: [
+
+           AutoSizeText(
+             'More Information:'.tr(),
+             style: TextStyle(
+                 color: CustomColors.PrimaryColor,
+                 fontWeight: FontWeight.bold,
+                 fontSize: 24.0),
+             maxFontSize: 24,
+           ),
+           SizedBox(height: 10.0),
+           AutoSizeText(
+             'Body Measures'.tr(),
+             style: TextStyle(
+                 color: CustomColors.PrimaryColor,
+                 fontWeight: FontWeight.bold,
+                 fontSize: 16.0),
+             maxFontSize: 16,
+           ),
+           SizedBox(height: 10.0),
+           Column(
+             children: List.generate(profile!.nonStaticBodyMeasures!.length, (index) {
+               return profile!.nonStaticBodyMeasures![index] != null
+                   ? BodyMeasureWidget().bodyMeasureWidget(
+                   profile!.nonStaticBodyMeasures![index].getLocalizedName()+ ' : ',
+                   profile!.nonStaticBodyMeasures![index].value.toString())
+                   : Container();
+             }),
+           ) ,
+           SizedBox(height: 10,),
+         ],)
+        // AutoSizeText(
+        //   'Diseases'.tr(),
+        //   style: TextStyle(
+        //       color: CustomColors.PrimaryColor,
+        //       fontWeight: FontWeight.bold,
+        //       fontSize: 16.0),
+        //   maxFontSize: 16,
+        // ),
+        // SizedBox(height: 15.0),
+        // // diseasesList!.length == 0
+        // //     ? Align(
+        // //   alignment: Alignment.center,
+        // //   child: AutoSizeText(
+        // //     'There are no diseases'.tr(),
+        // //     style: TextStyle(fontWeight: FontWeight.bold, fontSize: 14.0),
+        // //     maxFontSize: 14,
+        // //   ),
+        // // )
+        // //     : Wrap(
+        // //   children: List.generate(diseasesList!.length, (index) {
+        // //     return Container(
+        // //       margin: EdgeInsets.symmetric(horizontal: 10.0, vertical: 5.0),
+        // //       width: (MediaQuery.of(context).size.width / 2) -
+        // //           (ConstMeasures.borderWidth * 2),
+        // //       child: Container(
+        // //         padding: EdgeInsets.all(20.0),
+        // //         decoration: BoxDecoration(
+        // //           color: CustomColors.LightGreyColor,
+        // //           borderRadius:
+        // //           BorderRadius.circular(ConstMeasures.borderCircular),
+        // //         ),
+        // //         child: AutoSizeText(
+        // //           diseasesList![index].disease!.getLocalizedName()!,
+        // //           textAlign: TextAlign.center,
+        // //           style: TextStyle(fontSize: 14.0),
+        // //           maxFontSize: 14,
+        // //         ),
+        // //       ),
+        // //     );
+        // //   }),
+        // // )
       ],
     );
   }

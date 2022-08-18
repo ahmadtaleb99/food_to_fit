@@ -220,6 +220,7 @@ class Account {
   dynamic resetPasswordToken;
   dynamic deviceToken;
   String? accessToken;
+  int? areNotificationsAllowed;
 
   Account(
       {this.id,
@@ -228,7 +229,8 @@ class Account {
         this.phone,
         this.resetPasswordToken,
         this.deviceToken,
-        this.accessToken});
+        this.areNotificationsAllowed
+      });
 
   Account.fromJson(Map<String, dynamic> json) {
     id = json['id'];
@@ -238,17 +240,13 @@ class Account {
     resetPasswordToken = json['reset_password_token'];
     deviceToken = json['device_token'];
     accessToken = json['access_token'];
+    areNotificationsAllowed =   json['allow_notifications'] == null ?  true : json['allow_notifications'] ;
+
   }
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data =  Map<String, dynamic>();
-    data['id'] = this.id;
-    data['email'] = this.email;
-    data['password'] = this.password;
-    data['phone'] = this.phone;
-    data['reset_password_token'] = this.resetPasswordToken;
-    data['device_token'] = this.deviceToken;
-    data['access_token'] = this.accessToken;
+    data['allow_notifications'] = this.areNotificationsAllowed;
     return data;
   }
 }

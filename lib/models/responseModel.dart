@@ -65,6 +65,8 @@ class CommonResponse {
       data = json['data'] != null ?  Visit.fromJson(json['data']) : null;
       print('finish');
     }
+
+
     if (responseType == "GeneralAdvices" ||
         responseType == "CarouselGeneralAdvices") {
       if (json['data'] != null) {

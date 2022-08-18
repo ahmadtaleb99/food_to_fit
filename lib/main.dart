@@ -47,7 +47,7 @@ Future<void> main() async {
 
 
   runApp(EasyLocalization(
-    supportedLocales: const [AppLanguages.englishLocale,AppLanguages.arabicLocale],
+    supportedLocales: const [AppLanguages.englishLocale,AppLanguages.arabicLocale,AppLanguages.portugueseLocale],
     path:'assets/languages',
 
     child: Builder(

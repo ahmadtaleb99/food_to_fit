@@ -2,12 +2,10 @@
   "Diet" : "Diet",
   "Med Test" : "Med Test",
   "Home" : "Home",
-  " KG" : " KG",
   "Portuguese" : "Portuguese",
-
+  " KG" : " KG",
   "cm" : " cm",
   "English" : "English",
-  "Account updated successfully" : "Account updated successfully",
   "Choose Languages" : "Choose Language",
   "select-lang" : "Please select your preferred language to facilitate communication",
   "Arabic": "Arabic",
@@ -64,6 +62,7 @@
   "You don't have any weight body measure value yet": "You don't have any weight body measure value yet",
   "You don't have any submitted medical test yet.":  "You don't have any submitted medical test yet.",
   "to": "to",
+  "Account updated successfully" : "Account updated successfully",
 
   " day": " day",
   " days": " days",
@@ -124,7 +123,7 @@
   "Note: If you click on any image to edit it, you have to reselect other images.": "Note: If you click on any image to edit it, you have to reselect other images.",
   "Skip": "Skip ",
   "Wrong:": "Wrong:",
-    "not-authed-msg": "You have to login to get the features of this page. If you do not have an account, please contact your nutrition specialist in order to have an account ",
+  "not-authed-msg": "You have to login to get the features of this page. If you do not have an account, please contact your nutrition specialist in order to have an account ",
   "Meeting Type": "Meeting Type",
   "invalid_user_name": "Invalid User Name",
   "timeout-error": "Connection is taking too long",
@@ -193,6 +192,4 @@
   "Unfilled": "Unfilled",
   "Uploaded": "Uploaded",
   "Filled": "Filled"
-
-
 }

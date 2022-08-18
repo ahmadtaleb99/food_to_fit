@@ -249,10 +249,7 @@ class DietProgramDetailsPageState extends State<DietProgramDetailsPage> {
               ? CustomColors.PrimaryAssentColor
               : CustomColors.DarkLeavesGreen),
           title: day.meals![i].name!.tr(),
-          ingredientList: getIT<AppPreferences>().getAppLanguage() == LanguageType.ENGLISH.getValue() ?
-
-          day.meals![i].englishTextualExplanation!.split("\r\n"):
-          day.meals![i].arabicTextualExplanation!.split("\r\n")
+          ingredientList: day.meals![i].getLocalizedName()!.split("\r\n")
       ));
     }
     print("currCardList: " + cardList.toString());

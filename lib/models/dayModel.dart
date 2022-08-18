@@ -1,3 +1,9 @@
+import 'dart:developer';
+
+import 'package:food_to_fit/AppPreferences.dart';
+import 'package:food_to_fit/resources/language_manager.dart';
+import 'package:food_to_fit/widgets/di.dart';
+
 class Day {
   String? id;
   String? dietProgramId;
@@ -31,11 +37,31 @@ class Day {
 }
 
 class Meals {
+
+
+
+  String? getLocalizedName (){
+    var lang =  getIT<AppPreferences>().getAppLanguage();
+    if(lang == LanguageType.ENGLISH.getValue())
+      return this.englishTextualExplanation;
+
+    if(lang == LanguageType.ARABIC.getValue())
+      return this.arabicTextualExplanation;
+
+    if(lang == LanguageType.PORTUGUESE.getValue())
+      return this.portugueseTextualExplanation;
+
+
+    return this.englishTextualExplanation;
+  }
+
   String? id;
   String? name;
   String? dayId;
   String? englishTextualExplanation;
   String? arabicTextualExplanation;
+  String? portugueseTextualExplanation;
+
   String? time;
 
   Meals(
@@ -43,15 +69,21 @@ class Meals {
         this.name,
         this.dayId,
         this.englishTextualExplanation,
+        this.portugueseTextualExplanation,
         this.arabicTextualExplanation,
         this.time});
 
   Meals.fromJson(Map<String, dynamic> json) {
+    log('123123123123213123123'+json['portuguese_textual_explanation'].toString() );
+    log((json['portuguese_textual_explanation'] == null).toString());
     id = json['id'];
     name = json['name'];
     dayId = json['day_id'];
     englishTextualExplanation = json['english_textual_explanation'];
     arabicTextualExplanation = json['arabic_textual_explanation'];
+    portugueseTextualExplanation = json['portuguese_textual_explanation'] != null ?
+    json['portuguese_textual_explanation']
+        : json['english_textual_explanation'];
     time = json['time'];
   }
 
@@ -62,6 +94,7 @@ class Meals {
     data['day_id'] = this.dayId;
     data['english_textual_explanation'] = this.englishTextualExplanation;
     data['arabic_textual_explanation'] = this.arabicTextualExplanation;
+    data['portuguese_textual_explanation'] = this.portugueseTextualExplanation;
     data['time'] = this.time;
     return data;
   }

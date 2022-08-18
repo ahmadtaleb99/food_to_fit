@@ -199,7 +199,7 @@ class ProfilePageState extends State<ProfilePage> {
                                                 Navigator.of(context).push(MaterialPageRoute(builder: (context) => NotificationsPage()));
                                               },),
                                               ProfileActionWidget(title: 'Account Settings', icon: AppIcons.settings, onTap: () {
-                                                Navigator.of(context).push(MaterialPageRoute(builder: (context) => SettingsPage())).then((value) => setState((){}));
+                                                Navigator.of(context).push(MaterialPageRoute(builder: (context) => SettingsPage(profile!.account!))).then((value) => setState((){}));
                                               },),
                                               ProfileActionWidget(title: 'Change Password', icon: Icons.lock_outline, onTap: () {
                                                 Navigator.of(context).push(MaterialPageRoute(builder: (context) => ChangePasswordPage()));
@@ -279,86 +279,109 @@ class ProfilePageState extends State<ProfilePage> {
                 ]),
               );
             } else {
-              return Column(
-                mainAxisAlignment: MainAxisAlignment.start,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  SizedBox(height: 15,),
-                  Container(
-                          padding: EdgeInsets.symmetric(horizontal: 30),
-                    child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          AutoSizeText(
-                            'Choose Languages'.tr(),
-                            style: TextStyle(
-                                color: Colors.black,
-                                fontWeight: FontWeight.bold,
-                                fontSize: 14),
-                            maxFontSize: 14,
-                          ),
-                          SizedBox(height: 10.0),
-                          AutoSizeText(
-                            'select-lang'.tr(),
-                            style:
-                            TextStyle(color: Colors.black, fontSize: 14),
-                            maxFontSize: 14,
-                          ),
-                          RadioListTile(
-                            contentPadding: EdgeInsets.zero,
-                            activeColor: CustomColors.LightLeavesGreen,
-
-                            title:  AutoSizeText(
-                              'English'.tr(),
-
-                              style: TextStyle(fontSize: 14.0),
+              return SingleChildScrollView(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    SizedBox(height: 15,),
+                    Container(
+                            padding: EdgeInsets.symmetric(horizontal: 30),
+                      child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            AutoSizeText(
+                              'Choose Languages'.tr(),
+                              style: TextStyle(
+                                  color: Colors.black,
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 14),
                               maxFontSize: 14,
                             ),
-                            groupValue: _selectedLanguage,
-                            onChanged: (String? value) {
-                              setState(() async {
-
-                                _selectedLanguage = value!;
-                                await      getIT<AppPreferences>().changeAppLanguage(context, _selectedLanguage);
-                              });
-                            }, value: LanguageType.ENGLISH.getValue(),
-
-                          ),
-                          RadioListTile(
-                            contentPadding: EdgeInsets.zero,
-
-                            activeColor: CustomColors.LightLeavesGreen,
-
-                            title:  AutoSizeText(
-                              'Arabic'.tr(),
-
-                              style: TextStyle(fontSize: 14.0),
+                            SizedBox(height: 10.0),
+                            AutoSizeText(
+                              'select-lang'.tr(),
+                              style:
+                              TextStyle(color: Colors.black, fontSize: 14),
                               maxFontSize: 14,
                             ),
-                            groupValue: _selectedLanguage,
-                            onChanged: (String? value) {
-                              setState(() async {
-                                _selectedLanguage = value!;
-                           await      getIT<AppPreferences>().changeAppLanguage(context, _selectedLanguage);
+                            RadioListTile(
+                              contentPadding: EdgeInsets.zero,
+                              activeColor: CustomColors.LightLeavesGreen,
 
-                              });
-                            }, value: LanguageType.ARABIC.getValue(),
+                              title:  AutoSizeText(
+                                'English'.tr(),
 
-                          ),
-                        ]),
-                  ),
-                  CustomDialog(
-                    title: ' ',
-                    backgroundColor: CustomColors.ErrorMessageColor,
-                    message:
-                    ConstMeasures.unAuthenticatedMessage.tr(),
-                    actionTitle: 'Go to login'.tr(),
-                    onPressed: () {
-                      Navigator.of(context).pushNamedAndRemoveUntil(
-                          '/LogIn', (Route<dynamic> route) => false);
-                    },
-                  ),
-                ],
+                                style: TextStyle(fontSize: 14.0),
+                                maxFontSize: 14,
+                              ),
+                              groupValue: _selectedLanguage,
+                              onChanged: (String? value) {
+                                setState(() async {
+
+                                  _selectedLanguage = value!;
+                                  await      getIT<AppPreferences>().changeAppLanguage(context, _selectedLanguage);
+                                });
+                              }, value: LanguageType.ENGLISH.getValue(),
+
+                            ),
+                            RadioListTile(
+                              contentPadding: EdgeInsets.zero,
+
+                              activeColor: CustomColors.LightLeavesGreen,
+
+                              title:  AutoSizeText(
+                                'Arabic'.tr(),
+
+                                style: TextStyle(fontSize: 14.0),
+                                maxFontSize: 14,
+                              ),
+                              groupValue: _selectedLanguage,
+                              onChanged: (String? value) {
+                                setState(() async {
+                                  _selectedLanguage = value!;
+                             await      getIT<AppPreferences>().changeAppLanguage(context, _selectedLanguage);
+
+                                });
+                              }, value: LanguageType.ARABIC.getValue(),
+
+                            ),
+                            RadioListTile(
+                              contentPadding: EdgeInsets.zero,
+
+                              activeColor: CustomColors.LightLeavesGreen,
+
+                              title:  AutoSizeText(
+                                'Portuguese'.tr(),
+
+                                style: TextStyle(fontSize: 14.0),
+                                maxFontSize: 14,
+                              ),
+                              groupValue: _selectedLanguage,
+                              onChanged: (String? value) {
+                                setState(() async {
+                                  _selectedLanguage = value!;
+                             await      getIT<AppPreferences>().changeAppLanguage(context, _selectedLanguage);
+
+                                });
+                              }, value: LanguageType.PORTUGUESE.getValue(),
+
+                            ),
+                          ]),
+                    ),
+                    CustomDialog(
+                      title: ' ',
+                      backgroundColor: CustomColors.ErrorMessageColor,
+                      message:
+                      ConstMeasures.unAuthenticatedMessage.tr(),
+                      actionTitle: 'Go to login'.tr(),
+                      onPressed: () {
+                        Navigator.of(context).pushNamedAndRemoveUntil(
+                            '/LogIn', (Route<dynamic> route) => false);
+                      },
+                    ),
+                  ],
+                ),
               );
             }
           } else {

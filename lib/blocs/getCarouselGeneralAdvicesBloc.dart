@@ -13,19 +13,19 @@ class GetCarouselGeneralAdvicesBloc {
   Stream<ApiResponse<CommonResponse>> get getGeneralAdvicesResponseStream =>
       getGeneralAdvicesController!.stream as Stream<ApiResponse<CommonResponse>>;
 
-  GetCarouselGeneralAdvicesBloc() {
+  GetCarouselGeneralAdvicesBloc(String language) {
     getGeneralAdvicesController =
         StreamController<ApiResponse<CommonResponse>>();
     getGeneralAdvicesRepository = Food2FitRepositories();
-    fetchResponse();
+    fetchResponse(language);
   }
 
-  fetchResponse() async {
+  fetchResponse(String language) async {
     getGeneralAdvicesResponseSink.add(ApiResponse.loading('Fetching response'));
     try {
       CommonResponse response;
       response =
-          await getGeneralAdvicesRepository.getCarouselGeneralAdvicesResponse();
+          await getGeneralAdvicesRepository.getCarouselGeneralAdvicesResponse(language);
       if (response.status!)
         getGeneralAdvicesResponseSink
             .add(ApiResponse.completed_with_true(response));

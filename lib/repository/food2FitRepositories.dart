@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:developer';
 
 import 'package:food_to_fit/AppPreferences.dart';
+import 'package:food_to_fit/models/profileInfoModel.dart';
 import 'package:food_to_fit/models/responseModel.dart';
 import 'package:food_to_fit/resources/app_constants.dart';
 import 'package:food_to_fit/networking/api_base_helper.dart';
@@ -40,8 +41,8 @@ class Food2FitRepositories {
 
 
 
-  Future<CommonResponse>  getCarouselGeneralAdvicesResponse() async {
-    final response = await helper.get(ConstAPIUrls.getCarouselGeneralAdvices);
+  Future<CommonResponse>  getCarouselGeneralAdvicesResponse(String language) async {
+    final response = await helper.get(ConstAPIUrls.getCarouselGeneralAdvice+language);
     commonResponse.setResponseType("CarouselGeneralAdvices");
     return commonResponse.fromJson(response);
   }
@@ -173,6 +174,16 @@ class Food2FitRepositories {
         body: {'new_password': newPassword});
     print(response);
     commonResponse.setResponseType("ChangePassword");
+    return commonResponse.fromJson(response);
+  }
+
+  Future<CommonResponse> updateAccountSettings(Account account) async {
+    log(account.areNotificationsAllowed.toString());
+    final response = await helper.post(ConstAPIUrls.updateAccountSettings + await (getPatientID()),
+        headers: {'Authorization': await (getAccessToken() ), 'Referer': 'https://www.flexsolution.biz'},
+        body: {'allow_notifications': account.areNotificationsAllowed.toString()});
+    print(response);
+    commonResponse.setResponseType("UpdateAccountSettings");
     return commonResponse.fromJson(response);
   }
 
