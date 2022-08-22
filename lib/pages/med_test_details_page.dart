@@ -1,10 +1,11 @@
 import 'package:easy_localization/easy_localization.dart' as intl;
 import 'package:flutter/material.dart';
+import 'package:food_to_fit/pages/images_view_page.dart';
 import 'package:food_to_fit/resources/date_manager.dart';
 import 'package:food_to_fit/widgets/appBarWidget.dart';
 import 'package:food_to_fit/models/medTestModel.dart';
 import 'package:cached_network_image/cached_network_image.dart';
-
+import 'package:photo_view/photo_view.dart';
 import 'package:food_to_fit/resources/app_constants.dart';
 import 'package:food_to_fit/widgets/di.dart';
 import 'package:food_to_fit/widgets/medTestDetailsTableWidget.dart';
@@ -33,14 +34,18 @@ class MedTestDetailsPage extends StatefulWidget {
 class MedTestDetailsPageState extends State<MedTestDetailsPage> {
   MedicalTest? medTest;
   late GetMedicalTestDetailsBloc bloc;
-    final format = getIT<AppPreferences>().isRtl()   ? 'HH:MM MM/dd/yyyy  ' : ' MM/dd/yyyy  HH:MM';
+  final format = getIT<AppPreferences>().isRtl()
+      ? 'HH:MM MM/dd/yyyy  '
+      : ' MM/dd/yyyy  HH:MM';
   @override
   Widget build(BuildContext context) {
     bloc = GetMedicalTestDetailsBloc(widget.previousMedicalTest.id!);
     return Scaffold(
       appBar: AppBarWidget().appBarWidget(Text('Medical Test Details'.tr(),
           style: TextStyle(
-              color: Colors.black, fontWeight: FontWeight.bold, fontSize: 16))) as PreferredSizeWidget?,
+              color: Colors.black,
+              fontWeight: FontWeight.bold,
+              fontSize: 16))) as PreferredSizeWidget?,
       body: Container(
         color: Colors.white,
         height: MediaQuery.of(context).size.height,
@@ -73,7 +78,8 @@ class MedTestDetailsPageState extends State<MedTestDetailsPage> {
                                       EdgeInsets.symmetric(horizontal: 10.0),
                                   child: AutoSizeText(
                                     'Status: '.tr() +
-                                        medTest!.medicalTestDetails!.fillStatus!.tr(),
+                                        medTest!.medicalTestDetails!.fillStatus!
+                                            .tr(),
                                     style: TextStyle(color: Colors.black),
                                     maxFontSize: 14,
                                   )),
@@ -82,17 +88,20 @@ class MedTestDetailsPageState extends State<MedTestDetailsPage> {
                                   padding:
                                       EdgeInsets.symmetric(horizontal: 10.0),
                                   child: AutoSizeText(
-
-                                    'Time: '.tr() + DateFormat(format).format(DateTime.parse(medTest!.medicalTestDetails!.date!)),
+                                    'Time: '.tr() +
+                                        DateFormat(format).format(
+                                            DateTime.parse(medTest!
+                                                .medicalTestDetails!.date!)),
                                     style: TextStyle(color: Colors.black),
                                     maxFontSize: 14,
                                   )),
                               SizedBox(height: 30.0),
-                              medTest!.medicalTestDetails!.fillStatus == 'Filled'
+                              medTest!.medicalTestDetails!.fillStatus ==
+                                      'Filled'
                                   ? Column(
                                       children: List.generate(
-                                          medTest!.medicalTestProperties!.length,
-                                          (index) {
+                                          medTest!.medicalTestProperties!
+                                              .length, (index) {
                                       return MedTestDetailsTableWidget()
                                           .getMedTestDetailsTableWidget(
                                               context,
@@ -117,7 +126,8 @@ class MedTestDetailsPageState extends State<MedTestDetailsPage> {
                                                       color: Colors.blueAccent),
                                                 )
                                               : Text(
-                                                  'Your medical tests and its properties:'.tr(),
+                                                  'Your medical tests and its properties:'
+                                                      .tr(),
                                                   style: TextStyle(
                                                       fontSize: 16.0,
                                                       fontWeight:
@@ -128,7 +138,8 @@ class MedTestDetailsPageState extends State<MedTestDetailsPage> {
                                           ),
                                           Column(
                                               children: List.generate(
-                                                  medTest!.medicalTestProperties!
+                                                  medTest!
+                                                      .medicalTestProperties!
                                                       .length, (index) {
                                             int currentType = index;
                                             return Container(
@@ -186,7 +197,8 @@ class MedTestDetailsPageState extends State<MedTestDetailsPage> {
                                                             .PrimaryColor,
                                                         textColor: Colors.white,
                                                         title:
-                                                            'Upload New Medical Test'.tr(),
+                                                            'Upload New Medical Test'
+                                                                .tr(),
                                                         onClick: () {
                                                           Navigator.push(
                                                               context,
@@ -246,18 +258,38 @@ class MedTestDetailsPageState extends State<MedTestDetailsPage> {
                                           child: ClipRRect(
                                             borderRadius: BorderRadius.circular(
                                                 ConstMeasures.borderRadius),
-                                            child: CachedNetworkImage(
-
-                                                imageUrl:        ConstAPIUrls.baseURLFiles +
-                                                      medTest!
-                                                          .medicalTestImages![index]
-                                                          .imagePath!,
-                                              progressIndicatorBuilder:
-                                                  (context, url, downloadProgress) {
-                                                return Center(
-                                                    child: Loading());
+                                            child: GestureDetector(
+                                              onTap: () {
+                                                Navigator.push(
+                                                    context,
+                                                    MaterialPageRoute(
+                                                        builder: (context) =>
+                                                            ImagesViewPage(
+                                                                images: medTest!
+                                                                    .medicalTestImages,initialIndex: index,)));
                                               },
-                                                  fit: BoxFit.cover,
+                                              child: Hero(
+                                                tag: medTest!
+                                                    .medicalTestImages![
+                                                index]
+                                                    .id!,
+                                                child: PhotoView(
+                                                  imageProvider: NetworkImage(
+                                                    ConstAPIUrls.baseURLFiles +
+                                                        medTest!
+                                                            .medicalTestImages![
+                                                                index]
+                                                            .imagePath!,
+
+                                                  ),
+                                                  loadingBuilder: (BuildContext
+                                                          context,
+                                                      ImageChunkEvent? event) {
+                                                    return Center(
+                                                        child: Loading());
+                                                  },
+                                                ),
+                                              ),
                                             ),
                                           ),
                                         ));

@@ -45,7 +45,7 @@ class TimeLineWidget {
           child:
               Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
             Text(title, style: TextStyle(fontSize: 14)),
-            RoundedButton(
+            RoundedButtonWrapContent(
                 color: CustomColors.PrimaryColor,
                 title: 'View'.tr(),
                 onClick: onClick,

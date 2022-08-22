@@ -61,6 +61,17 @@ class CommonResponse {
     }
 
 
+  if (responseType == "SupportedLanguages") {
+      if (json['data'] != null) {
+        data = [];
+        json['data'].forEach((v) {
+          data.add(new SystemConfigurations.fromJson(v));
+        });
+        print('finish');
+      }
+    }
+
+
     if (responseType == "PatientVisitDetails") {
       data = json['data'] != null ?  Visit.fromJson(json['data']) : null;
       print('finish');

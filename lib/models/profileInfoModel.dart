@@ -221,6 +221,7 @@ class Account {
   dynamic deviceToken;
   String? accessToken;
   int? areNotificationsAllowed;
+  // String language;
 
   Account(
       {this.id,
@@ -229,6 +230,7 @@ class Account {
         this.phone,
         this.resetPasswordToken,
         this.deviceToken,
+        // this.language,
         this.areNotificationsAllowed
       });
 

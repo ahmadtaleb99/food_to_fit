@@ -1,6 +1,6 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import './drawables/rounded_button.dart';
+import 'package:food_to_fit/pages/drawables/rounded_button.dart';
 import '../resources/app_constants.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:food_to_fit/models/responseModel.dart';
@@ -93,8 +93,8 @@ class ChangePasswordPageState extends State<ChangePasswordPage> {
                               validator: (val) {
                                 if (val!.isEmpty)
                                   return 'Field is required'.tr();
-                                // if (newPasswordController.text.length < 8)
-                                //   return 'Password must be more than or equal to 8';
+                                if (newPasswordController.text.length < 4)
+                                  return 'Password must be more than or equal to 4 characters'.tr();
                                 return null;
                               },
                               decoration: InputDecoration(
@@ -203,7 +203,7 @@ class ChangePasswordPageState extends State<ChangePasswordPage> {
                                   builder: (context) {
                                     return CustomDialog(
                                       title: '',
-                                      message: snapshot.data!.data!.message,
+                                      message: 'Password changed successfully.'.tr(),
                                       backgroundColor:
                                           CustomColors.SuccessMessageColor,
                                       actionTitle: 'Ok'.tr(),

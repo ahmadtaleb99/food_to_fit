@@ -79,9 +79,9 @@ Future<String> checkStartedPage() async {
   print(startedPageWasSeen.toString());
   if (startedPageWasSeen != null) {
     if (await checkAuthentication()) {
-      return 'AUTHENTICATED';
+      return 'FIRST_TIME';
     }
-    return 'GUEST';
+    return 'FIRST_TIME';
   }
   return 'FIRST_TIME';
 }

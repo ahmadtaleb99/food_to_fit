@@ -62,7 +62,10 @@
   "You don't have any weight body measure value yet": "You don't have any weight body measure value yet",
   "You don't have any submitted medical test yet.":  "You don't have any submitted medical test yet.",
   "to": "to",
+  "Password changed successfully." : "Password changed successfully.",
   "Account updated successfully" : "Account updated successfully",
+  "Password must be more than or equal to 4 characters" : "Password must be more than or equal to 4 character",
+  "Photo Preview" : "Photo Preview",
 
   " day": " day",
   " days": " days",

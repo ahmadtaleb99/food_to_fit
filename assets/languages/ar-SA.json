@@ -69,6 +69,9 @@
   "First Name": "الاسم الأول",
   "Last Name": "الاسم الأخير",
   "Phone Number": "رقم الموبايل",
+  "Password must be more than or equal to 4 characters" : "يجب ان تحتوي كلمة المرور على 4 حروف أو أكثر",
+  "Password changed successfully." : "تم تغيير كلمة المرور بنجاح.",
+  "Photo Preview" : "استعراض الصورة",
 
   "no_route_found": "لا توجد شاشه",
   "on_boarding_title1": "شاهد افضل كورس #١",

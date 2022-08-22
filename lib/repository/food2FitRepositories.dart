@@ -202,6 +202,12 @@ class Food2FitRepositories {
     return commonResponse.fromJson(response);
   }
 
+ Future<CommonResponse> getSupportedLanguagesResponse() async {
+    final response = await helper.get(ConstAPIUrls.getSupportedLanguages);
+    commonResponse.setResponseType("SupportedLanguages");
+    return commonResponse.fromJson(response);
+  }
+
 
 
 

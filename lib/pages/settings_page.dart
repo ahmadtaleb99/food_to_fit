@@ -157,6 +157,12 @@ class SettingsPageState extends State<SettingsPage> {
                         ),
                       ),
                       ListTile(
+                        onTap: (){
+                          setState(() {
+                            switchNotificationValue = !switchNotificationValue;
+                          });
+
+                        },
                         contentPadding: EdgeInsets.only(
                             left: ConstMeasures.borderWidth,
                             right: ConstMeasures.borderWidth),
@@ -165,15 +171,12 @@ class SettingsPageState extends State<SettingsPage> {
                           style: TextStyle(fontSize: 14.0),
                           maxFontSize: 14,
                         ),
-                        trailing: CupertinoSwitch(
-                          activeColor: CustomColors.LightGreenColor,
-                          value:   switchNotificationValue ,
-                          onChanged: (value) {
-                            setState(() {
-
-                              switchNotificationValue = value;
-                            });
-                          },
+                        trailing: IgnorePointer(
+                          child: CupertinoSwitch(
+                            activeColor: CustomColors.LightGreenColor,
+                            value:   switchNotificationValue ,
+                            onChanged: (value) {},
+                          ),
                         ),
                       ),
                       // Container(

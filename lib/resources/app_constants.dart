@@ -60,6 +60,7 @@ class ConstAPIUrls {
   static const String getSystemConfigurations = 'get-system-configurations';
   static const String forgetPassword = 'forget-password';
   static const String getNotifications = 'get-notifications?patient_id=';
+  static const String getSupportedLanguages = 'get-supported-languages';
   static const String getPatients = 'get-patients';
 
 }
