@@ -104,8 +104,12 @@ class NotificationResponse {
 
       if (this.parameters != null) {
         String key = parameters!.split('??').first;
+        log(key.toString());
         String value = parameters!.split('??')[1];
-        parsedContent.replaceAll(key, value);
+        log(value.toString());
+        parsedContent =  parsedContent.replaceAll(key, value);
+        log(parsedContent.toString());
+
       }
 
       return NotificationModel(
