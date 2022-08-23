@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:food_to_fit/models/adviceModel.dart';
 import 'package:food_to_fit/models/medTestModel.dart';
 import 'package:food_to_fit/models/visitModel.dart';
@@ -141,23 +143,17 @@ class CommonResponse {
     if (responseType == "Notifications") {
       if (json['data'] != null) {
         data =  [];
+
+
         json['data'].forEach((v) {
-          data.add( NotificationModel.fromJson(v));
+          NotificationModel notificationModel = NotificationResponse.fromJson(v).toModel();
+          data.add(notificationModel );
         });
         print('finish');
       }
     }
 
 
-    if (responseType == "Notifications") {
-      if (json['data'] != null) {
-        data =  [];
-        json['data'].forEach((v) {
-          data.add( NotificationModel.fromJson(v));
-        });
-        print('finish');
-      }
-    }
     if (responseType == "PatientWeights") {
       if (json['data'] != null) {
           data =  [];

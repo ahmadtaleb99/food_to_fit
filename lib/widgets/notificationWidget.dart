@@ -2,17 +2,18 @@ import 'package:flutter/material.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:food_to_fit/models/notificationModel.dart';
 import 'package:food_to_fit/resources/app_constants.dart';
+import 'package:food_to_fit/resources/date_manager.dart';
 
 class NotificationWidget {
   Widget getNotificationWidget(NotificationModel notification) {
     return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Container(
             margin: EdgeInsets.only(top: 10),
             padding: EdgeInsets.symmetric(horizontal: 10.0),
-            alignment: Alignment.centerLeft,
-            child: AutoSizeText(
-              notification.title!,
+            child: AutoSizeText(  
+              notification.title.toString(),
               maxFontSize: 18,
               minFontSize: 16,
               style:
@@ -21,9 +22,8 @@ class NotificationWidget {
         Container(
             margin: EdgeInsets.only(top: 10),
             padding: EdgeInsets.symmetric(horizontal: 15.0),
-            alignment: Alignment.centerLeft,
             child: AutoSizeText(
-              notification.content!,
+              notification.content.toString(),
               maxFontSize: 16,
               minFontSize: 14,
               style: TextStyle(color: Colors.black),
@@ -39,9 +39,8 @@ class NotificationWidget {
             ),
             Container(
                 padding: EdgeInsets.all(5.0),
-                alignment: Alignment.centerLeft,
                 child: AutoSizeText(
-                  notification.date !,
+                DateManager.getFormattedDateRtl(  notification.date !),
                   maxFontSize: 12,
                   minFontSize: 10,
                   style: TextStyle(color: CustomColors.GreyColor),

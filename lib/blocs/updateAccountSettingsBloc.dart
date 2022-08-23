@@ -19,18 +19,18 @@ class UpdateAccountSettingsBloc {
 
   fetchResponse(Account account) async {
     updateAccountResponseSink.add(ApiResponse.loading('Fetching response'));
-    try {
+    // try {
       CommonResponse response = await updateAccountRepo.updateAccountSettings(account);
       if (response.status!)
         updateAccountResponseSink.add(ApiResponse.completed_with_true(response));
       else
         updateAccountResponseSink.add(ApiResponse.completed_with_false(response));
       print("completed");
-    } catch (e) {
-      updateAccountResponseSink.add(ApiResponse.error(e.toString()));
-      print("error");
-      print(e);
-    }
+    // } catch (e) {
+    //   updateAccountResponseSink.add(ApiResponse.error(e.toString()));
+    //   print("error");
+    //   print(e);
+    // }
   }
   dispose() {
     updateAccountResponseSink?.close();

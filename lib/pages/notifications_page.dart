@@ -48,13 +48,9 @@ class NotificationsPage extends StatelessWidget {
                     notificationList = List.from(snapshot.data!.data!.data);
                     print('COMPLETED_WITH_TRUE');
                     print(snapshot.data!.data!.data);
-                    return SingleChildScrollView(
-                      child: Column(
-                        children: notificationList!
-                            .map((notification) => NotificationWidget().getNotificationWidget(notification))
-                            .toList(),
-                      ),
-                    );
+                    return ListView.builder(itemCount: notificationList!.length ,itemBuilder: (context,index) {
+                      return NotificationWidget().getNotificationWidget(notificationList![index]);
+                    });
                     break;
                   case Status.ERROR:
                     print('error');

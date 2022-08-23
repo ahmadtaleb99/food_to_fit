@@ -221,7 +221,7 @@ class Account {
   dynamic deviceToken;
   String? accessToken;
   int? areNotificationsAllowed;
-  // String language;
+  String? language;
 
   Account(
       {this.id,
@@ -230,7 +230,7 @@ class Account {
         this.phone,
         this.resetPasswordToken,
         this.deviceToken,
-        // this.language,
+        this.language,
         this.areNotificationsAllowed
       });
 
@@ -240,6 +240,7 @@ class Account {
     password = json['password'];
     phone = json['phone'];
     resetPasswordToken = json['reset_password_token'];
+    language = json['language'];
     deviceToken = json['device_token'];
     accessToken = json['access_token'];
     areNotificationsAllowed =   json['allow_notifications'] == null ?  true : json['allow_notifications'] ;
@@ -248,9 +249,12 @@ class Account {
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data =  Map<String, dynamic>();
-    data['allow_notifications'] = this.areNotificationsAllowed;
+    data['allow_notifications'] = this.areNotificationsAllowed.toString();
+    data['language'] = this.language  ;
     return data;
   }
+
+
 }
 
 class StaticBodyMeasures {

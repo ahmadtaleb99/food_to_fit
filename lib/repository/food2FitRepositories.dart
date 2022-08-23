@@ -181,7 +181,7 @@ class Food2FitRepositories {
     log(account.areNotificationsAllowed.toString());
     final response = await helper.post(ConstAPIUrls.updateAccountSettings + await (getPatientID()),
         headers: {'Authorization': await (getAccessToken() ), 'Referer': 'https://www.flexsolution.biz'},
-        body: {'allow_notifications': account.areNotificationsAllowed.toString()});
+        body: account.toJson());
     print(response);
     commonResponse.setResponseType("UpdateAccountSettings");
     return commonResponse.fromJson(response);

@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:food_to_fit/AppPreferences.dart';
@@ -41,9 +43,11 @@ class SettingsPageState extends State<SettingsPage> {
 
   @override
   initState(){
-        _selectedLanguage = getIT<AppPreferences>().getAppLanguage();
+        // _selectedLanguage = getIT<AppPreferences>().getAppLanguage();
 
         switchNotificationValue = widget.account.areNotificationsAllowed!.isOdd;
+        _selectedLanguage = widget.account.language ?? LanguageType.ENGLISH.getValue();
+        log('selected language '+_selectedLanguage.toString());
     super.initState();
   }
   SingingCharacter? character = SingingCharacter.English;
@@ -227,7 +231,7 @@ class SettingsPageState extends State<SettingsPage> {
     setState(() {
       _loading= true;
       bloc.fetchResponse
-        (Account(areNotificationsAllowed: switchNotificationValue.toInt()));
+        (Account(areNotificationsAllowed: switchNotificationValue.toInt(),language: _selectedLanguage));
 
       getIT<AppPreferences>().changeAppLanguage(context, _selectedLanguage);
 
