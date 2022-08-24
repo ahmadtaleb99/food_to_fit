@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:developer';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:food_to_fit/main.dart';
 import 'package:food_to_fit/networking/api_response.dart';
@@ -19,26 +20,39 @@ class LogInBloc {
   }
   fetchResponse(String username, String password) async {
     logInResponseSink.add(ApiResponse.loading('Fetching response'));
+    String? token;
+    try {
 
-      var firebaseToken =  await FirebaseMessaging.instance.getToken().then((token) async  {
+      token =    await FirebaseMessaging.instance.getToken();
+
+    }
+    catch (e){
+      log(e.toString());
+    }
+
+
 
         try {
 
+
         CommonResponse response = await logInRepository.getLogInResponse(username, password, token);
-          if (response.status!)
+          if (response.status == true && token != null )
     logInResponseSink.add(ApiResponse.completed_with_true(response));
-    else
-    logInResponseSink.add(ApiResponse.completed_with_false(response));
-    print("completed");
+
+     else     if (response.status == false){
+            logInResponseSink.add(ApiResponse.completed_with_false(response));
+          }
+
+    else if  (token == null)
+    logInResponseSink.add(ApiResponse.completed_with_internal_error(response,'firebase-error'));
+
+
+        print("completed");
         } catch (e) {
           logInResponseSink.add(ApiResponse.error(e.toString()));
           print("error");
           print(e);
         }
-      }).catchError((e){
-        logInResponseSink.add(ApiResponse.error('Firebase-Error'));
-
-      });
 
 
   }

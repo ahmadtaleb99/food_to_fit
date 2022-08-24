@@ -8,6 +8,8 @@
 
   "cm" : " cm",
   "English" : "English",
+  "Warning!" : "Warning!",
+  "notifications-disabled" : "You cannot receive notifications at the moment, to activate this service please go to the settings page.",
   "Photo Preview" : "Photo Preview",
   "Password changed successfully." : "Password changed successfully.",
   "Account updated successfully" : "Account updated successfully",

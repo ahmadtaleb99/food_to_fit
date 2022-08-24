@@ -387,10 +387,9 @@ class RequestAnAppointmentFormState extends State<RequestAnAppointmentForm> {
   Future<bool> checkLastAppointmentRequestDate() async {
 
     // return true;
-    String lastAppointmentDateRequest = await SharedPreferencesSingleton().getStringValuesSF(
+    String? lastAppointmentDateRequest = await SharedPreferencesSingleton().getStringValuesSF(
         SharedPreferencesSingleton.lastAppointmentRequestDate);
-    // print("lastAppointmentDateRequest " + lastAppointmentDateRequest);
-    if (lastAppointmentDateRequest != "last_appointment_request_date"){
+    if (lastAppointmentDateRequest == null){
       return lastAppointmentDateRequest != DateTime.now().toString().split(' ')[0];
     } else {
       return false;

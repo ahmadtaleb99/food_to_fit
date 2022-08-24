@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'dart:developer';
 
 import 'package:food_to_fit/AppPreferences.dart';
@@ -53,7 +54,7 @@ class NotificationResponse {
   String? title;
   String? content;
   String? date;
-  String? parameters;
+  Map<String,dynamic>? parameters;
   Map<String, dynamic>? notificationTemplate;
 
   NotificationResponse({
@@ -75,7 +76,7 @@ class NotificationResponse {
       title: map['title'],
       content: map['content'],
       date: map['date'],
-      parameters: map['parameters'],
+      parameters: map['parameters'] != null ?  jsonDecode(map['parameters']) : {},
       notificationTemplate:
           map['notificationTemplate'] as Map<String, dynamic>?,
     );
@@ -103,12 +104,14 @@ class NotificationResponse {
           notificationTemplate!['content_$_currentAppLanguage'];
 
       if (this.parameters != null) {
-        String key = parameters!.split('??').first;
-        log(key.toString());
-        String value = parameters!.split('??')[1];
-        log(value.toString());
-        parsedContent =  parsedContent.replaceAll(key, value);
-        log(parsedContent.toString());
+            if(this.parameters!.isNotEmpty){
+              parameters!.forEach((key, value) {
+
+                parsedContent =  parsedContent.replaceAll(key, value);
+              });
+
+            }
+
 
       }
 

@@ -3,6 +3,7 @@ import 'dart:developer';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:food_to_fit/AppPreferences.dart';
+import 'package:food_to_fit/models/WelcomeMessage.dart';
 import 'package:food_to_fit/models/responseModel.dart';
 import 'package:food_to_fit/pages/multi_patient_page.dart';
 import 'package:food_to_fit/widgets/di.dart';
@@ -253,6 +254,25 @@ class LogInPageState extends State<LogInPage> {
                           });
                           bloc.logInResponseSink.add(ApiResponse<CommonResponse>());
                           break;
+
+
+                        case Status.COMPLETED_WITH_INTERNAL_ERROR:
+                          loading = false;
+                          print(snapshot.data!.data!.message);
+                          print('COMPLETED_WITH_INTERNAL_ERROR');
+                         if(snapshot.data!.message == 'firebase-error') {
+                           CommonResponse response = snapshot.data!.data!;
+                           _saveLoginInformation(response).then((value) =>Navigator.pushAndRemoveUntil(
+                               context,
+                               MaterialPageRoute(
+                                   builder: (context) => MainPage(isAuthenticated: true,welcomeMessage: WelcomeMessage(message: 'notifications-disabled'.tr(), isError: true),)),
+                                   (route) => false) );
+
+
+                         }
+
+                          bloc.logInResponseSink.add(ApiResponse<CommonResponse>());
+                          break;
                         case Status.ERROR:
                           loading = false;
                           Future.delayed(Duration.zero, () {
@@ -290,17 +310,21 @@ class LogInPageState extends State<LogInPage> {
     );
   }
 
-  logIn(CommonResponse response, BuildContext context) async {
 
-      await _appPrefs.saveAccessToken(response.accessToken!);
+  Future _saveLoginInformation(CommonResponse response,) async {
+    await _appPrefs.saveAccessToken(response.accessToken!);
     await SharedPreferencesSingleton().addStringToSF(
         SharedPreferencesSingleton.accessToken, response.accessToken!);
 
     await _appPrefs.savePatientId(response.patientsAccounts![0].id.toString());
+  }
+  logIn(CommonResponse response, BuildContext context) async {
+
+      _saveLoginInformation(response);
     Navigator.pushAndRemoveUntil(
         context,
         MaterialPageRoute(
-            builder: (context) => MainPage(isAuthenticated: true)),
+            builder: (context) => MainPage(isAuthenticated: true,)),
         (route) => false);
 
 
@@ -311,10 +335,7 @@ class LogInPageState extends State<LogInPage> {
 
   _goToMultiPatientPage(CommonResponse response, BuildContext context) async {
 
-    _appPrefs.saveAccessToken(response.accessToken!);
-
-    await SharedPreferencesSingleton().addStringToSF(
-        SharedPreferencesSingleton.accessToken, response.accessToken!);
+    _saveLoginInformation(response);
 
    await _appPrefs.savePatientId(response.patientsAccounts![0].id.toString());
 

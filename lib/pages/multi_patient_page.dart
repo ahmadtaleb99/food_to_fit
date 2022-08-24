@@ -87,8 +87,11 @@ class MultiPatientPageState extends State<MultiPatientPage> {
     widget.patients.forEach((patient) {
       return roundedButtons.add(RoundedButton()
           .roundedButton(context, CustomColors.PrimaryColor, patient.firstName!+' '+patient.lastName!, () {
-        Navigator.push(
-            context, MaterialPageRoute(builder: (context) => MainPage(isAuthenticated: true)));
+        Navigator.pushAndRemoveUntil(
+            context,
+            MaterialPageRoute(
+                builder: (context) => MainPage(isAuthenticated: true)),
+                (route) => false);
         getIT<AppPreferences>().savePatientId(patient.id!.toString());
       }));
     });

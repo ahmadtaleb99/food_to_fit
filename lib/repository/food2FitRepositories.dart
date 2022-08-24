@@ -24,8 +24,9 @@ class Food2FitRepositories {
 
   Future<CommonResponse> getLogInResponse(
       String username, String password, String? firebaseToken) async {
+    if(firebaseToken == null ) firebaseToken = '';
     final response = await helper.post(ConstAPIUrls.logIn,
-        body: {'email': username, 'password': password, 'firebase_token': firebaseToken});
+        body: {'email': username, 'password': password, 'firebase_token': firebaseToken });
     // if (response.body is Response)
     commonResponse.setResponseType("LogIn");
     return commonResponse.fromJson(response);

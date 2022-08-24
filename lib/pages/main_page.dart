@@ -1,5 +1,6 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:food_to_fit/models/WelcomeMessage.dart';
 import 'dart:collection';
 import 'package:food_to_fit/pages/guest_home_page.dart';
 import 'package:food_to_fit/pages/authenticated_home_page.dart';
@@ -8,14 +9,16 @@ import 'package:food_to_fit/pages/profile_page.dart';
 import 'package:food_to_fit/pages/visits_page.dart';
 import 'package:food_to_fit/pages/diet_programs_page.dart';
 import 'package:food_to_fit/pages/med_test_page.dart';
+import 'package:food_to_fit/widgets/CustomDialogWidget.dart';
 import '../resources/app_constants.dart';
 import 'package:food_to_fit/widgets/appBarWidget.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 
 class MainPage extends StatefulWidget {
   final isAuthenticated;
+  final WelcomeMessage? welcomeMessage;
 
-  MainPage({required this.isAuthenticated});
+  MainPage({required this.isAuthenticated,  this.welcomeMessage});
 
   @override
   MainPageState createState() => MainPageState();
@@ -47,8 +50,28 @@ class MainPageState extends State<MainPage> {
     widgetOptions.add(MedTestPage());
     widgetOptions.add(VisitsPage());
     widgetOptions.add(ProfilePage());
+
+    if(widget.welcomeMessage != null ) _showWelcomeDialog(widget.welcomeMessage!);
   }
 
+
+  void _showWelcomeDialog(WelcomeMessage welcomeMessage){
+    Future.delayed(Duration.zero, () {
+      showDialog(
+          context: context,
+          builder: (context) {
+            return CustomDialog(
+              title: 'Warning!'.tr(),
+              backgroundColor:
+              CustomColors.SuccessMessageBorderColor,
+              message: welcomeMessage.message,
+              actionTitle: 'Ok'.tr(),
+              onPressed: () => Navigator.pop(context),
+              onCanceled: null,
+            );
+          });
+    });
+  }
   static List<String> widgetOptionsTitles = <String>[
     'Home',
     'Diet',

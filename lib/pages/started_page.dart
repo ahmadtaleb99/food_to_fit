@@ -53,7 +53,6 @@ class StartedPageState extends State<StartedPage> {
           physics: NeverScrollableScrollPhysics(),
           controller: controller,
           children: [
-            ChooseLanuagePage.ChooseLanguagePage(),
             ...startedPagesDataList
                 .map((startedPageData) => getStartedView(context, startedPageData))
                 .toList()

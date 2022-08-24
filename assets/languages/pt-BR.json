@@ -6,9 +6,12 @@
   " KG" : " KG",
   "cm" : " cm",
   "English" : "English",
+  "Warning!" : "Warning!",
+
   "Choose Languages" : "Choose Language",
   "select-lang" : "Please select your preferred language to facilitate communication",
   "Arabic": "Arabic",
+  "notifications-disabled" : "You cannot receive notifications at the moment, to activate this service please go to the settings page.",
   "Allow Notifications": "Allow Notifications",
   "Images have been uploaded successfully": "Images have been uploaded successfully",
 

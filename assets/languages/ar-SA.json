@@ -6,9 +6,12 @@
   "Diet" : "البرنامج الغذائي",
   "Med Test" : "الفحص الصحي",
   "Visits": "الزيارات",
+  "Warning!" : "تنبيه!",
   "My visits and payments": "الزيارات والدفعات",
   "Profile": "الملف الشخصي",
   "Request an appointment": "طلب موعد",
+  "notifications-disabled" : "لا يمكنك تلقي الاشعارات في الوقت الحالي، لتفعيل هذه الخدمة يرجى الذهاب إلى صفحة الاعدادات",
+
   "Nutritional Advice": "النصائح الصحية",
   "Images have been uploaded successfully": "تم تحميل الصور بنجاح",
 
