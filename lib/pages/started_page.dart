@@ -1,11 +1,13 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:food_to_fit/AppPreferences.dart';
 import 'package:food_to_fit/pages/drawables/rounded_button.dart';
 import 'package:food_to_fit/pages/drawables/rounded_text_field.dart';
 import 'package:food_to_fit/pages/drawables/rounded_wrap_content_button.dart';
 import 'package:food_to_fit/resources/app_constants.dart';
 import 'package:food_to_fit/resources/language_manager.dart';
+import 'package:food_to_fit/widgets/di.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 import 'package:food_to_fit/models/startedPageModel.dart';
 import 'package:auto_size_text/auto_size_text.dart';
@@ -116,7 +118,8 @@ class StartedPageState extends State<StartedPage> {
                         curve: Curves.easeInOut,
                       );
                     } else {
-                      await SharedPreferencesSingleton().addBoolToSF(SharedPreferencesSingleton.startedPageWasSeen, true);
+
+                      getIT<AppPreferences>().setOnboardingScreenViewed();
                       Navigator.of(context)
                           .pushNamedAndRemoveUntil(
                           '/LogIn', (Route<dynamic> route) => false);

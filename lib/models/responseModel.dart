@@ -1,6 +1,7 @@
 import 'dart:developer';
 
 import 'package:food_to_fit/models/adviceModel.dart';
+import 'package:food_to_fit/models/language.dart';
 import 'package:food_to_fit/models/medTestModel.dart';
 import 'package:food_to_fit/models/visitModel.dart';
 import 'package:food_to_fit/models/dayModel.dart';
@@ -32,6 +33,7 @@ class CommonResponse {
 
   fromJson(Map<String, dynamic> json) {
     print('json decoding');
+    print(json['status'].toString());
     status = json['status'];
     message = json['message'];
     accessToken = json['access_token'];
@@ -63,15 +65,17 @@ class CommonResponse {
     }
 
 
-  if (responseType == "SupportedLanguages") {
+  if (responseType == "GetLanguages") {
       if (json['data'] != null) {
         data = [];
-        json['data'].forEach((v) {
-          data.add(new SystemConfigurations.fromJson(v));
+        json['data']['languages'].forEach((v) {
+          data.add(new Language.fromJson(v));
         });
         print('finish');
       }
-    }
+      throw Error();
+
+  }
 
 
     if (responseType == "PatientVisitDetails") {

@@ -83,7 +83,7 @@ class NotificationResponse {
   }
 
   NotificationModel toModel() {
-    String _currentAppLanguage = getIT<AppPreferences>().getAppLanguage();
+    String _currentAppLanguage = getIT<AppPreferences>().getAppLanguageOrDefault();
 
     //general notification written by hand
     if (this.notificationTemplate == null) {

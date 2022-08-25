@@ -1,6 +1,7 @@
 import 'dart:developer';
 
 import 'package:easy_localization/easy_localization.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:food_to_fit/AppPreferences.dart';
 import 'package:food_to_fit/blocs/updateAccountSettingsBloc.dart';
@@ -40,21 +41,31 @@ class SettingsPage extends StatefulWidget {
 
 class SettingsPageState extends State<SettingsPage> {
   UpdateAccountSettingsBloc bloc = UpdateAccountSettingsBloc();
+  @override
+  void dispose() {
+    bloc.dispose();
+    super.dispose();
+  }
 
   @override
-  initState(){
-        // _selectedLanguage = getIT<AppPreferences>().getAppLanguage();
+  initState() {
+    // _selectedLanguage = getIT<AppPreferences>().getAppLanguage();
 
-        switchNotificationValue = widget.account.areNotificationsAllowed!.isOdd;
-        _selectedLanguage = widget.account.language ?? LanguageType.ENGLISH.getValue();
-        log('selected language '+_selectedLanguage.toString());
+    switchNotificationValue = widget.account.areNotificationsAllowed!.isOdd;
+    _selectedLanguage =
+        widget.account.language ?? LanguageType.ENGLISH.getValue();
+    firebaseToken = widget.account.deviceToken ?? '';
+    log('selected language ' + _selectedLanguage.toString());
     super.initState();
   }
+
   SingingCharacter? character = SingingCharacter.English;
-  String _selectedLanguage =' ';
+  String _selectedLanguage = ' ';
   bool _loading = false;
   bool switchNotificationValue = false;
   bool switchReminderValue = true;
+
+  late String firebaseToken;
 
   @override
   Widget build(BuildContext context) {
@@ -69,8 +80,8 @@ class SettingsPageState extends State<SettingsPage> {
           children: [
             SingleChildScrollView(
               child: Container(
-                // color: Colors.white,
-                // height: MediaQuery.of(context).size.height,
+                  // color: Colors.white,
+                  // height: MediaQuery.of(context).size.height,
                   width: MediaQuery.of(context).size.width,
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -91,8 +102,8 @@ class SettingsPageState extends State<SettingsPage> {
                               SizedBox(height: 10.0),
                               AutoSizeText(
                                 'select-lang'.tr(),
-                                style:
-                                TextStyle(color: Colors.black, fontSize: 14),
+                                style: TextStyle(
+                                    color: Colors.black, fontSize: 14),
                                 maxFontSize: 14,
                               ),
                             ]),
@@ -100,10 +111,8 @@ class SettingsPageState extends State<SettingsPage> {
                       RadioListTile(
                         contentPadding: EdgeInsets.only(left: 5.0, right: 5.0),
                         activeColor: CustomColors.LightLeavesGreen,
-
-                        title:  AutoSizeText(
+                        title: AutoSizeText(
                           'English'.tr(),
-
                           style: TextStyle(fontSize: 14.0),
                           maxFontSize: 14,
                         ),
@@ -112,16 +121,14 @@ class SettingsPageState extends State<SettingsPage> {
                           setState(() {
                             _selectedLanguage = value!;
                           });
-                        }, value: LanguageType.ENGLISH.getValue(),
-
+                        },
+                        value: LanguageType.ENGLISH.getValue(),
                       ),
                       RadioListTile(
                         contentPadding: EdgeInsets.only(left: 5.0, right: 5.0),
                         activeColor: CustomColors.LightLeavesGreen,
-
-                        title:  AutoSizeText(
+                        title: AutoSizeText(
                           'Arabic'.tr(),
-
                           style: TextStyle(fontSize: 14.0),
                           maxFontSize: 14,
                         ),
@@ -130,16 +137,14 @@ class SettingsPageState extends State<SettingsPage> {
                           setState(() {
                             _selectedLanguage = value!;
                           });
-                        }, value: LanguageType.ARABIC.getValue(),
-
+                        },
+                        value: LanguageType.ARABIC.getValue(),
                       ),
                       RadioListTile(
                         contentPadding: EdgeInsets.only(left: 5.0, right: 5.0),
                         activeColor: CustomColors.LightLeavesGreen,
-
-                        title:  AutoSizeText(
+                        title: AutoSizeText(
                           'Portuguese'.tr(),
-
                           style: TextStyle(fontSize: 14.0),
                           maxFontSize: 14,
                         ),
@@ -148,8 +153,8 @@ class SettingsPageState extends State<SettingsPage> {
                           setState(() {
                             _selectedLanguage = value!;
                           });
-                        }, value: LanguageType.PORTUGUESE.getValue(),
-
+                        },
+                        value: LanguageType.PORTUGUESE.getValue(),
                       ),
                       SizedBox(height: 30),
                       Container(
@@ -161,16 +166,54 @@ class SettingsPageState extends State<SettingsPage> {
                         ),
                       ),
                       ListTile(
-                        onTap: (){
-                          setState(() {
-                            switchNotificationValue = !switchNotificationValue;
+                        onTap: () async {
+                          if (firebaseToken.isEmpty) {
+                            print('true;');
+
+
+                            _showLoading;
+
+                            firebaseToken = await _tryGetToken();
+                            _hideLoading();
+
+                            log('new firebase token  : : : : : :  $firebaseToken');
+
+                            if (firebaseToken.isEmpty) {
+                              Future.delayed(Duration.zero, () {
+                                showDialog(
+                                    context: context,
+                                    builder: (context) {
+                                      return CustomDialog(
+                                        title: '',
+                                        message: 'service-not-available'.tr(),
+                                        backgroundColor:
+                                            CustomColors.SuccessMessageColor,
+                                        actionTitle: 'Ok'.tr(),
+                                        onPressed: () {
+                                          // _loading = false;
+                                          // setState(() {});
+
+                                          Navigator.pop(context);
+                                        },
+                                        onCanceled: null,
+                                      );
+                                    });
+                              });
+                            }
+                            else     setState(() {
+                              switchNotificationValue =
+                              !switchNotificationValue;
+                            });
+                          } else setState(() {
+                            switchNotificationValue =
+                            !switchNotificationValue;
                           });
 
                         },
                         contentPadding: EdgeInsets.only(
                             left: ConstMeasures.borderWidth,
                             right: ConstMeasures.borderWidth),
-                        title:  AutoSizeText(
+                        title: AutoSizeText(
                           'Allow Notifications'.tr(),
                           style: TextStyle(fontSize: 14.0),
                           maxFontSize: 14,
@@ -178,38 +221,11 @@ class SettingsPageState extends State<SettingsPage> {
                         trailing: IgnorePointer(
                           child: CupertinoSwitch(
                             activeColor: CustomColors.LightGreenColor,
-                            value:   switchNotificationValue ,
+                            value: switchNotificationValue,
                             onChanged: (value) {},
                           ),
                         ),
                       ),
-                      // Container(
-                      //   padding: EdgeInsets.symmetric(
-                      //       horizontal: ConstMeasures.borderWidth),
-                      //   child: Divider(
-                      //     color: CustomColors.GreyDividerColor,
-                      //     thickness: 3.0,
-                      //   ),
-                      // ),
-                      // ListTile(
-                      //   contentPadding: EdgeInsets.only(
-                      //       left: ConstMeasures.borderWidth,
-                      //       right: ConstMeasures.borderWidth),
-                      //   title:  AutoSizeText(
-                      //     'Allow Reminders'.tr(),
-                      //     style: TextStyle(fontSize: 14.0),
-                      //     maxFontSize: 14,
-                      //   ),
-                      //   trailing: CupertinoSwitch(
-                      //     activeColor: CustomColors.LightGreenColor,
-                      //     value: switchReminderValue,
-                      //     onChanged: (value) {
-                      //       setState(() {
-                      //         switchReminderValue = value;
-                      //       });
-                      //     },
-                      //   ),
-                      // ),
                       Container(
                         padding: EdgeInsets.symmetric(
                             horizontal: ConstMeasures.borderWidth),
@@ -218,24 +234,27 @@ class SettingsPageState extends State<SettingsPage> {
                           thickness: 3.0,
                         ),
                       ),
-                      SizedBox(height: 50,),
-
-
+                      SizedBox(
+                        height: 50,
+                      ),
                       Container(
                         padding: EdgeInsets.all(ConstMeasures.borderWidth),
                         child: RoundedButton(
                           color: CustomColors.PrimaryColor,
                           textColor: Colors.white,
                           title: 'Update'.tr(),
-                          onClick: (){
-    setState(() {
-      _loading= true;
-      bloc.fetchResponse
-        (Account(areNotificationsAllowed: switchNotificationValue.toInt(),language: _selectedLanguage));
+                          onClick: () {
+                            setState(() {
+                              _loading = true;
+                              bloc.fetchResponse(Account(
+                                  areNotificationsAllowed:
+                                      switchNotificationValue.toInt(),
+                                  language: _selectedLanguage,
+                                  deviceToken: firebaseToken));
 
-      getIT<AppPreferences>().changeAppLanguage(context, _selectedLanguage);
-
-    });
+                              getIT<AppPreferences>().changeAppLanguage(
+                                  context, _selectedLanguage);
+                            });
 
                             // .then((value) {
                             //   Navigator.pop(context,true);
@@ -247,28 +266,30 @@ class SettingsPageState extends State<SettingsPage> {
                     ],
                   )),
             ),
-            _loading ?   StreamBuilder<ApiResponse<CommonResponse>>(
+            if (_loading) LoaderWidget(),
+            StreamBuilder<ApiResponse<CommonResponse>>(
                 stream: bloc.updateAccountResponseStream,
                 builder: (context, snapshot) {
-                  return Builder(builder: (context){
+                  return Builder(builder: (context) {
                     if (snapshot.hasData)
                       switch (snapshot.data!.status) {
-                        case Status.LOADING:
-                          return LoaderWidget();
                         case Status.COMPLETED_WITH_TRUE:
-                          loading = false;
                           print(snapshot.data!.data);
                           print('COMPLETED_WITH_TRUE');
                           if (snapshot.data!.data!.status!) {
                             Future.delayed(Duration.zero, () {
+                              setState(() {
+                                _loading = false;
+                              });
                               showDialog(
                                   context: context,
                                   builder: (context) {
                                     return CustomDialog(
                                       title: '',
-                                      message: snapshot.data!.data?.message!.tr(),
+                                      message:
+                                          snapshot.data!.data?.message!.tr(),
                                       backgroundColor:
-                                      CustomColors.SuccessMessageColor,
+                                          CustomColors.SuccessMessageColor,
                                       actionTitle: 'Ok'.tr(),
                                       onPressed: () {
                                         // _loading = false;
@@ -281,10 +302,15 @@ class SettingsPageState extends State<SettingsPage> {
                                   });
                             });
                           }
-                          bloc.updateAccountResponseSink.add(ApiResponse<CommonResponse>());
+                          bloc.updateAccountResponseSink
+                              .add(ApiResponse<CommonResponse>());
                           break;
                         case Status.COMPLETED_WITH_FALSE:
-                          loading = false;
+                          Future.delayed(Duration.zero, () {
+                            setState(() {
+                              _loading = false;
+                            });
+                          });
                           print(snapshot.data!.data!.message);
                           print('COMPLETED_WITH_FALSE');
                           if (snapshot.data!.data!.message ==
@@ -292,6 +318,11 @@ class SettingsPageState extends State<SettingsPage> {
                             logOut(context);
                           }
                           Future.delayed(Duration.zero, () {
+                            Future.delayed(Duration.zero, () {
+                              setState(() {
+                                _loading = false;
+                              });
+                            });
                             showDialog(
                                 context: context,
                                 builder: (context) {
@@ -299,14 +330,15 @@ class SettingsPageState extends State<SettingsPage> {
                                     title: '',
                                     message: snapshot.data!.data!.message,
                                     backgroundColor:
-                                    CustomColors.ErrorMessageColor,
+                                        CustomColors.ErrorMessageColor,
                                     actionTitle: 'Ok'.tr(),
                                     onPressed: () => Navigator.pop(context),
                                     onCanceled: null,
                                   );
                                 });
                           });
-                          bloc.updateAccountResponseSink.add(ApiResponse<CommonResponse>());
+                          bloc.updateAccountResponseSink
+                              .add(ApiResponse<CommonResponse>());
                           break;
                         case Status.ERROR:
                           loading = false;
@@ -318,7 +350,7 @@ class SettingsPageState extends State<SettingsPage> {
                                     title: '',
                                     message: snapshot.data!.message,
                                     backgroundColor:
-                                    CustomColors.ErrorMessageColor,
+                                        CustomColors.ErrorMessageColor,
                                     actionTitle: 'Retry',
                                     onPressed: () {
                                       Navigator.pop(context);
@@ -340,9 +372,29 @@ class SettingsPageState extends State<SettingsPage> {
                       }
                     return Container();
                   });
-                }
-            ) : Container()
+                })
           ],
         ));
+  }
+
+  Future<String> _tryGetToken() async {
+    try {
+      String? token = await FirebaseMessaging.instance.getToken();
+      return token ?? '';
+    } catch (e) {
+      return '';
+    }
+  }
+
+  void _showLoading() {
+    setState(() {
+      _loading = true;
+    });
+  }
+
+  void _hideLoading() {
+    setState(() {
+      _loading = false;
+    });
   }
 }

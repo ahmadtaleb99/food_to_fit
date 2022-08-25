@@ -54,7 +54,7 @@ class ProfilePageState extends State<ProfilePage> {
     bool _loading= false;
   @override
   void initState() {
-    _selectedLanguage = getIT<AppPreferences>().getAppLanguage();
+    _selectedLanguage = getIT<AppPreferences>().getAppLanguageOrDefault();
     super.initState();
     image.image.resolve(ImageConfiguration()).addListener(
         ImageStreamListener((ImageInfo info, bool syncCall) => setState(() {

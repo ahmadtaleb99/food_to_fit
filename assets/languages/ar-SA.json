@@ -6,6 +6,8 @@
   "Diet" : "البرنامج الغذائي",
   "Med Test" : "الفحص الصحي",
   "Visits": "الزيارات",
+  "service-not-available" : "هذه الخدمة غير متاحة في بلدك.",
+
   "Warning!" : "تنبيه!",
   "My visits and payments": "الزيارات والدفعات",
   "Profile": "الملف الشخصي",

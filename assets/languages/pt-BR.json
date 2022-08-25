@@ -7,7 +7,7 @@
   "cm" : " cm",
   "English" : "English",
   "Warning!" : "Warning!",
-
+  "service-not-available" : "This service is not available in your country.",
   "Choose Languages" : "Choose Language",
   "select-lang" : "Please select your preferred language to facilitate communication",
   "Arabic": "Arabic",

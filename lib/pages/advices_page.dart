@@ -14,7 +14,7 @@ import 'package:food_to_fit/widgets/errorWidget.dart';
 List<Advice>? adviceList;
 
 class AdvicesPage extends StatelessWidget {
-    final GetGeneralAdvicesBloc bloc = GetGeneralAdvicesBloc(getIT<AppPreferences>().getAppLanguage());
+    final GetGeneralAdvicesBloc bloc = GetGeneralAdvicesBloc(getIT<AppPreferences>().getAppLanguageOrDefault());
 
     @override
   Widget build(BuildContext context) {
@@ -33,7 +33,7 @@ class AdvicesPage extends StatelessWidget {
           centerTitle: true,
         ),
         body: RefreshIndicator(
-          onRefresh: () => bloc.fetchResponse(getIT<AppPreferences>().getAppLanguage()),
+          onRefresh: () => bloc.fetchResponse(getIT<AppPreferences>().getAppLanguageOrDefault()),
           child: StreamBuilder<ApiResponse<CommonResponse>>(
             stream: bloc.getGeneralAdvicesResponseStream,
             builder: (context, snapshot) {
@@ -62,7 +62,7 @@ class AdvicesPage extends StatelessWidget {
                     print('error');
                     return CustomErrorWidget(
                       errorMessage: snapshot.data!.message,
-                      onRetryPressed: () => bloc.fetchResponse(getIT<AppPreferences>().getAppLanguage()),
+                      onRetryPressed: () => bloc.fetchResponse(getIT<AppPreferences>().getAppLanguageOrDefault()),
                     );
                     break;
                   case Status.COMPLETED_WITH_FALSE:

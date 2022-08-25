@@ -22,7 +22,7 @@ class GuestHomeViewWidget extends StatefulWidget {
 }
 
 class GuestHomeViewWidgetState extends State<GuestHomeViewWidget> {
-  GetCarouselGeneralAdvicesBloc bloc = GetCarouselGeneralAdvicesBloc(getIT<AppPreferences>().getAppLanguage());
+  GetCarouselGeneralAdvicesBloc bloc = GetCarouselGeneralAdvicesBloc(getIT<AppPreferences>().getAppLanguageOrDefault());
   List<Advice>? adviceList = [];
   List<HomeActionCardObject> homeActions = [
     HomeActionCardObject(

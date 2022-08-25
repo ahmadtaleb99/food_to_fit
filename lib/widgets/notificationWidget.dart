@@ -40,7 +40,7 @@ class NotificationWidget {
             Container(
                 padding: EdgeInsets.all(5.0),
                 child: AutoSizeText(
-                DateManager.getFormattedDateRtl(  notification.date !),
+                DateManager.getFormattedDateRtl( notification.date !) ,
                   maxFontSize: 12,
                   minFontSize: 10,
                   style: TextStyle(color: CustomColors.GreyColor),

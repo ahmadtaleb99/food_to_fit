@@ -4,6 +4,7 @@ import 'dart:io';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:food_to_fit/pages/splash_page.dart';
 import 'package:food_to_fit/resources/app_constants.dart';
 import 'package:food_to_fit/resources/language_manager.dart';
 import 'package:food_to_fit/widgets/di.dart';
@@ -38,12 +39,12 @@ Future<void> main() async {
 
   FirebaseMessaging.onBackgroundMessage(backgroundMessageHandler);
   await initAppModule();
-  try{
-    await FirebaseMessaging.instance.getToken();
-
-  } catch (e){
-    log('firebase error');
-  }
+  // try{
+  //   await FirebaseMessaging.instance.getToken();
+  //
+  // } catch (e){
+  //   log('firebase error');
+  // }
 
 
   runApp(EasyLocalization(
@@ -74,16 +75,7 @@ Future<void> main() async {
 
 
 Future<String> checkStartedPage() async {
-  var startedPageWasSeen = await SharedPreferencesSingleton()
-      .getBoolValuesSF(SharedPreferencesSingleton.startedPageWasSeen);
-  print(startedPageWasSeen.toString());
-  if (startedPageWasSeen != null) {
-    if (await checkAuthentication()) {
-      return 'AUTHENTICATED';
-    }
-    return 'GUEST';
-  }
-  return 'FIRST_TIME';
+  return '';
 }
 
 Future<bool> checkAuthentication() async {
@@ -130,7 +122,6 @@ class AppWidgetState extends State<AppWidget> {
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
 
     var android =  AndroidInitializationSettings('@mipmap/launcher_icon');
@@ -171,7 +162,8 @@ class AppWidgetState extends State<AppWidget> {
 
   @override
   Widget build(BuildContext context) {
-    return chooseFirstPage();
+    return SplashPage();
+
   }
 
   showNotification(String? title, String? content) async {

@@ -41,7 +41,7 @@ class Meals {
 
 
   String? getLocalizedName (){
-    var lang =  getIT<AppPreferences>().getAppLanguage();
+    var lang =  getIT<AppPreferences>().getAppLanguageOrDefault();
     if(lang == LanguageType.ENGLISH.getValue())
       return this.englishTextualExplanation;
 

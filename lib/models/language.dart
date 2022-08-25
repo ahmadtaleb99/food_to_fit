@@ -1,19 +1,27 @@
 class Language {
-  String code;
+  final String code;
+  final String name;
+  final bool isDefault;
 
-  Map<String, dynamic> toMap() {
+  const Language({
+    required this.code,
+    required this.name,
+    required this.isDefault,
+  });
+
+  Map<String, dynamic> toJson() {
     return {
       'code': this.code,
+      'name': this.name,
+      'isDefault': this.isDefault,
     };
   }
 
-  factory Language.fromMap(Map<String, dynamic> map) {
+  factory Language.fromJson(Map<String, dynamic> map) {
     return Language(
-      code: map['name'] as String,
+      code: map['code'] as String,
+      name: map['name'] as String,
+      isDefault: map['isDefault'] as bool,
     );
   }
-
-  Language({
-    required this.code,
-  });
 }

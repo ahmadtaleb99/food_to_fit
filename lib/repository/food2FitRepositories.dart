@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:convert';
 import 'dart:developer';
 
 import 'package:food_to_fit/AppPreferences.dart';
@@ -37,6 +38,19 @@ class Food2FitRepositories {
   Future<CommonResponse> getGeneralAdvicesResponse(String language) async {
     final response = await helper.get(ConstAPIUrls.getGeneralAdvices+language);
     commonResponse.setResponseType("GeneralAdvices");
+    return commonResponse.fromJson(response);
+  }
+
+
+ Future<CommonResponse> getLanguagesResponse() async {
+    String json = '{"status":true,"message":"success","data":{"languages":[{"name":"arabic","code":"ar","isDefault":true},{"name":"english","code":"en","isDefault":false},{"name":"portuguese","code":"pt","isDefault":false}]}}';
+    // final response = await helper.get(ConstAPIUrls.getLanguages);
+
+  await Future.delayed((Duration(seconds: 3)),(){});
+    final response = jsonDecode(json);
+
+
+    commonResponse.setResponseType("GetLanguages");
     return commonResponse.fromJson(response);
   }
 
@@ -204,7 +218,7 @@ class Food2FitRepositories {
   }
 
  Future<CommonResponse> getSupportedLanguagesResponse() async {
-    final response = await helper.get(ConstAPIUrls.getSupportedLanguages);
+    final response = await helper.get(ConstAPIUrls.getLanguages);
     commonResponse.setResponseType("SupportedLanguages");
     return commonResponse.fromJson(response);
   }

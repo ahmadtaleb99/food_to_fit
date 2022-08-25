@@ -8,6 +8,7 @@
 
   "cm" : " cm",
   "English" : "English",
+  "service-not-available" : "This service is not available in your country.",
   "Warning!" : "Warning!",
   "notifications-disabled" : "You cannot receive notifications at the moment, to activate this service please go to the settings page.",
   "Photo Preview" : "Photo Preview",
@@ -107,6 +108,7 @@
   "digits": "digits",
   "Invalid phone number": "Invalid phone number",
   "digit": "digits",
+  "": "digits",
   "Phone number must be more than or equal to": "Phone number must be more than or equal to",
   "Phone number must be less than or equal to": "Phone number must be less than or equal to",
   "Something went wrong!": "Something went wrong!",
@@ -168,7 +170,6 @@
   "change_language": "Change Language",
   "contact_us": "Contact Us",
   "invite_your_friends": "Invite Your Friends",
-  "Logout": "Logout",
   "Logout": "Logout",
   "reset_password": "Reset Password",
 

@@ -10,6 +10,7 @@ const String keyLanguageKey = 'keyLanguage';
 const String accessTokenKey = 'accessToken';
 const String patientIdKey = 'patientIdKey';
 const String patientsNumberKey = 'patientsNumberKey';
+const String keyOnboardingScreenViewed = 'keyOnboardingScreenViewed';
 
 class AppPreferences {
 
@@ -17,7 +18,7 @@ class AppPreferences {
   final SharedPreferences _prefs;
   AppPreferences(this._prefs);
 
-  bool isRtl() => getAppLanguage() == LanguageType.ARABIC.getValue();
+  bool isRtl() => getAppLanguageOrDefault() == LanguageType.ARABIC.getValue();
     Future<void> saveAccessToken(String accessToken) async{
     await _prefs.setString(accessTokenKey, accessToken);
     log('new access token :  : $accessToken');
@@ -38,7 +39,7 @@ class AppPreferences {
 
 
     bool isAuthenticated() => _prefs.getString(accessTokenKey) != null;
-  String getAppLanguage() {
+  String getAppLanguageOrDefault() {
     String? language = _prefs.getString(keyLanguageKey);
 
     if (language == null || language.isEmpty) {
@@ -48,6 +49,14 @@ class AppPreferences {
 
     return language;
   }
+
+  String? getAppLanguage() {
+    String? language = _prefs.getString(keyLanguageKey);
+
+
+    return language;
+  }
+
 
   Future<void> changeAppLanguage(BuildContext context,String languageType) async {
 
@@ -59,7 +68,7 @@ class AppPreferences {
 
 
   Locale getLocale(){
-    String? language = getAppLanguage();
+    String? language = getAppLanguageOrDefault();
 
     if (language == null || language.isEmpty) {
       return AppLanguages.englishLocale;
@@ -81,7 +90,9 @@ class AppPreferences {
   void setLocale(){
 
   }
+  bool isOnboardingScreenViewed() => _prefs.getBool(keyOnboardingScreenViewed) ?? false;
 
+  void setOnboardingScreenViewed() => _prefs.setBool(keyOnboardingScreenViewed, true);
 
 
 }

@@ -13,7 +13,7 @@ class NonStaticBodyMeasure{
 
 
   String getLocalizedName (){
-    var lang =  getIT<AppPreferences>().getAppLanguage();
+    var lang =  getIT<AppPreferences>().getAppLanguageOrDefault();
       if(lang == LanguageType.ENGLISH.getValue())
         return this.nameEn;
 
@@ -251,6 +251,7 @@ class Account {
     final Map<String, dynamic> data =  Map<String, dynamic>();
     data['allow_notifications'] = this.areNotificationsAllowed.toString();
     data['language'] = this.language  ;
+    data['device_token'] = this.deviceToken  ;
     return data;
   }
 
@@ -392,7 +393,7 @@ class Disease {
   String? diseaseNamePt;
   String? type;
   String? getLocalizedName (){
-    var lang =  getIT<AppPreferences>().getAppLanguage();
+    var lang =  getIT<AppPreferences>().getAppLanguageOrDefault();
     if(lang == LanguageType.ENGLISH.getValue())
       return this.diseaseNameAr;
 

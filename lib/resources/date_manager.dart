@@ -13,7 +13,8 @@ class DateManager{
 
   static  String getFormattedDateRtl(String date){
 
-    final format = getIT<AppPreferences>().isRtl()   ? 'HH:MM MM/dd/yyyy  ' : ' MM/dd/yyyy  HH:MM';
+    final format = getIT<AppPreferences>().isRtl()   ? 'HH:MM MM/dd/yyyy  ' : 'MM/dd/yyyy  H:m  '
+        '';
 
     return DateFormat(format).format(DateTime.parse(date));
 
