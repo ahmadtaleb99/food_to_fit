@@ -72,16 +72,30 @@ class _SplashPageState extends State<SplashPage> {
         decoration: BoxDecoration(
 
           image: DecorationImage(
-            image: AssetImage("assets/images/green_background.png"),
-            fit: BoxFit.fill  ,
+            image: AssetImage("assets/images/green_background1.png"),
+            fit: BoxFit.cover  ,
           ),
         ),
         child: Container(
           child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
                       mainAxisSize: MainAxisSize.max,
             children: [
+              Container(
+                  margin: EdgeInsets.fromLTRB(
+                      50, MediaQuery.of(context).size.height / 5, 50, 20),
+                  child: CircleAvatar(
+                    radius: 105,
+                    backgroundColor: Colors.white,
+                    child: CircleAvatar(
+                      radius: 100,
+                      backgroundColor: Colors.white,
+                      backgroundImage:
+                      AssetImage("assets/images/22@2x.png"),
+                    ),
+                  )),
+              SizedBox(height: 40,),
               if(_loading) Loading(
+                color: Colors.white,
                   message: 'loading'.tr()
               ),
 

@@ -2,8 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:food_to_fit/resources/app_constants.dart';
 
 class Loading extends StatelessWidget {
-  const Loading({Key? key,  this.message}) : super(key: key);
+  const Loading({Key? key,  this.message,this.color}) : super(key: key);
   final String?  message ;
+  final Color? color;
 
 
   @override
@@ -12,10 +13,10 @@ class Loading extends StatelessWidget {
       child: Column(
         children: [
           CircularProgressIndicator(
-            valueColor: AlwaysStoppedAnimation<Color>(CustomColors.PrimaryColor),
+            valueColor: AlwaysStoppedAnimation<Color>(color ?? CustomColors.PrimaryColor),
           ),
           SizedBox(height: 10,),
-          if(message!= null ) Text(message!)
+          if(message!= null ) Text(message!,style: TextStyle(color: color ,fontWeight: FontWeight.bold),)
 
         ],
       ),

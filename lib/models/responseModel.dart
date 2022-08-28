@@ -10,6 +10,7 @@ import 'package:food_to_fit/models/profileInfoModel.dart';
 import 'package:food_to_fit/models/systemConfigurationsModel.dart';
 import 'package:food_to_fit/models/notificationModel.dart';
 import 'package:food_to_fit/models/weightBodyMeasureModel.dart';
+import 'package:food_to_fit/networking/api_exceptions.dart';
 
 class CommonResponse {
   String? responseType;
@@ -73,7 +74,7 @@ class CommonResponse {
         });
         print('finish');
       }
-      throw Error();
+
 
   }
 

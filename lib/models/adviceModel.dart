@@ -1,4 +1,4 @@
-class Advice <T> {
+  class Advice <T> {
   int? id;
   String? title;
   String? imageUrl;
