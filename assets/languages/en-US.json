@@ -106,9 +106,11 @@
   "Last Name": "Last Name",
   "Advice": "Advice",
   "digits": "digits",
+  "Next": "Next",
+  "Get Started": "Get Started",
+
   "Invalid phone number": "Invalid phone number",
-  "digit": "digits",
-  "": "digits",
+  "digit": "digit",
   "Phone number must be more than or equal to": "Phone number must be more than or equal to",
   "Phone number must be less than or equal to": "Phone number must be less than or equal to",
   "Something went wrong!": "Something went wrong!",

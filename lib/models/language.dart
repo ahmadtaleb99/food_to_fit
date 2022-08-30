@@ -13,15 +13,16 @@ class Language {
     return {
       'code': this.code,
       'name': this.name,
-      'isDefault': this.isDefault,
+      'is_default': this.isDefault,
     };
   }
 
   factory Language.fromJson(Map<String, dynamic> map) {
+
     return Language(
       code: map['code'] as String,
       name: map['name'] as String,
-      isDefault: map['isDefault'] as bool,
+      isDefault: map['is_default'] ,
     );
   }
 }

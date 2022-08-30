@@ -32,17 +32,17 @@ class StartedPageState extends State<StartedPage> {
         imagePath: "assets/images/started_1@2x.png",
         title:
         "Lorem dolor sit amet consectetur adipisicing elit, sed do eiusmod tempor incididunt ut ero labore et dolore",
-        buttonTitle: "Next"),
+        buttonTitle: "Next".tr()),
     StartedPageObject(
         imagePath: "assets/images/started_2@2x.png",
         title:
         "Lorem dolor sit amet consectetur adipisicing elit, sed do eiusmod tempor incididunt ut ero labore et dolore",
-        buttonTitle: "Next"),
+        buttonTitle: "Next".tr()),
     StartedPageObject(
         imagePath: "assets/images/started_3@2x.png",
         title:
         "Lorem dolor sit amet consectetur adipisicing elit, sed do eiusmod tempor incididunt ut ero labore et dolore",
-        buttonTitle: "Get Started"),
+        buttonTitle: "Get Started".tr()),
   ];
 
   @override

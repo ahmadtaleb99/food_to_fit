@@ -4,6 +4,8 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:food_to_fit/AppPreferences.dart';
 import 'package:food_to_fit/models/WelcomeMessage.dart';
+import 'package:food_to_fit/models/language.dart';
+import 'package:food_to_fit/models/profileInfoModel.dart';
 import 'package:food_to_fit/models/responseModel.dart';
 import 'package:food_to_fit/pages/multi_patient_page.dart';
 import 'package:food_to_fit/widgets/di.dart';
@@ -207,7 +209,13 @@ class LogInPageState extends State<LogInPage> {
                           print(snapshot.data!.data);
                           print('COMPLETED_WITH_TRUE');
                           if (snapshot.data!.data!.status!) {
+
                             CommonResponse response = snapshot.data!.data!;
+                            if(response.account != null){
+                          _getAccountLanguage(response.account!);
+                              }
+
+
                             if (response.patientsAccounts!.length == 1 )
                               logIn(response, context);
                             else
@@ -331,6 +339,13 @@ class LogInPageState extends State<LogInPage> {
   }
 
 
+_getAccountLanguage(Account account) async {
+
+  String? userLanguage = account.language;
+  if( userLanguage != _appPrefs.getAppLanguage()) {
+    await _appPrefs.changeAppLanguage(context, userLanguage!);
+  }
+}
 
 
   _goToMultiPatientPage(CommonResponse response, BuildContext context) async {
@@ -340,10 +355,14 @@ class LogInPageState extends State<LogInPage> {
    await _appPrefs.savePatientId(response.patientsAccounts![0].id.toString());
 
 
-    Navigator.pushAndRemoveUntil(
-        context,
-        MaterialPageRoute(
-            builder: (context) => MultiPatientPage(patients: response.patientsAccounts ?? [ ],email : usernameController.text)),
-            (route) => false);
+
+
+    Future.delayed(Duration.zero,(){
+    Navigator.pushReplacement(
+    context,
+    MaterialPageRoute(
+    builder: (context) => MultiPatientPage(patients: response.patientsAccounts ?? [ ],email : usernameController.text)),
+    );
+    });
   }
 }

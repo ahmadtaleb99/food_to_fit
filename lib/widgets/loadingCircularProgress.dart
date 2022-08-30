@@ -11,6 +11,7 @@ class Loading extends StatelessWidget {
   Widget build(BuildContext context) {
     return Center(
       child: Column(
+    mainAxisAlignment: MainAxisAlignment.center,
         children: [
           CircularProgressIndicator(
             valueColor: AlwaysStoppedAnimation<Color>(color ?? CustomColors.PrimaryColor),

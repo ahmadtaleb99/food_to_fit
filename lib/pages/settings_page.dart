@@ -5,6 +5,7 @@ import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:food_to_fit/AppPreferences.dart';
 import 'package:food_to_fit/blocs/updateAccountSettingsBloc.dart';
+import 'package:food_to_fit/models/language.dart';
 import 'package:food_to_fit/models/profileInfoModel.dart';
 import 'package:food_to_fit/models/responseModel.dart';
 import 'package:food_to_fit/networking/api_response.dart';
@@ -32,8 +33,9 @@ enum SingingCharacter { English, Arabic }
 
 class SettingsPage extends StatefulWidget {
   final Account account;
+  final List<Language> supportedLanguages;
 
-  SettingsPage(this.account);
+  SettingsPage(this.account, this.supportedLanguages);
 
   @override
   SettingsPageState createState() => SettingsPageState();
@@ -51,14 +53,16 @@ class SettingsPageState extends State<SettingsPage> {
   initState() {
     // _selectedLanguage = getIT<AppPreferences>().getAppLanguage();
 
-    switchNotificationValue = widget.account.areNotificationsAllowed!.isOdd;
-    _selectedLanguage =
-        widget.account.language ?? LanguageType.ENGLISH.getValue();
-    firebaseToken = widget.account.deviceToken ?? '';
+      _init();
     log('selected language ' + _selectedLanguage.toString());
     super.initState();
   }
-
+void _init(){
+  switchNotificationValue = widget.account.areNotificationsAllowed!.isOdd;
+  _selectedLanguage =
+      widget.account.language ?? LanguageType.ENGLISH.getValue();
+  firebaseToken = widget.account.deviceToken ?? '';
+}
   SingingCharacter? character = SingingCharacter.English;
   String _selectedLanguage = ' ';
   bool _loading = false;
@@ -124,38 +128,26 @@ class SettingsPageState extends State<SettingsPage> {
                         },
                         value: LanguageType.ENGLISH.getValue(),
                       ),
-                      RadioListTile(
-                        contentPadding: EdgeInsets.only(left: 5.0, right: 5.0),
-                        activeColor: CustomColors.LightLeavesGreen,
-                        title: AutoSizeText(
-                          'Arabic'.tr(),
-                          style: TextStyle(fontSize: 14.0),
-                          maxFontSize: 14,
-                        ),
-                        groupValue: _selectedLanguage,
-                        onChanged: (String? value) {
-                          setState(() {
-                            _selectedLanguage = value!;
-                          });
-                        },
-                        value: LanguageType.ARABIC.getValue(),
-                      ),
-                      RadioListTile(
-                        contentPadding: EdgeInsets.only(left: 5.0, right: 5.0),
-                        activeColor: CustomColors.LightLeavesGreen,
-                        title: AutoSizeText(
-                          'Portuguese'.tr(),
-                          style: TextStyle(fontSize: 14.0),
-                          maxFontSize: 14,
-                        ),
-                        groupValue: _selectedLanguage,
-                        onChanged: (String? value) {
-                          setState(() {
-                            _selectedLanguage = value!;
-                          });
-                        },
-                        value: LanguageType.PORTUGUESE.getValue(),
-                      ),
+
+
+                        ...widget.supportedLanguages.map((language) =>  RadioListTile(
+                          contentPadding: EdgeInsets.only(left: 5.0, right: 5.0),
+                          activeColor: CustomColors.LightLeavesGreen,
+                          title: AutoSizeText(
+                            language.name.tr(),
+                            style: TextStyle(fontSize: 14.0),
+                            maxFontSize: 14,
+                          ),
+                          groupValue: _selectedLanguage,
+                          onChanged: (String? value) {
+                            setState(() {
+                              _selectedLanguage = value!;
+                            });
+                          },
+                          value: language.code,
+                        )).toList(),
+
+
                       SizedBox(height: 30),
                       Container(
                         padding: EdgeInsets.all(ConstMeasures.borderWidth),
@@ -245,6 +237,9 @@ class SettingsPageState extends State<SettingsPage> {
                           title: 'Update'.tr(),
                           onClick: () {
                             setState(() {
+
+
+                              log( switchNotificationValue.toInt().toString()+' switchNotificationValue.toInt().toString(');
                               _loading = true;
                               bloc.fetchResponse(Account(
                                   areNotificationsAllowed:
@@ -252,8 +247,8 @@ class SettingsPageState extends State<SettingsPage> {
                                   language: _selectedLanguage,
                                   deviceToken: firebaseToken));
 
-                              getIT<AppPreferences>().changeAppLanguage(
-                                  context, _selectedLanguage);
+                              // getIT<AppPreferences>().changeAppLanguage(
+                              //     context, _selectedLanguage);
                             });
 
                             // .then((value) {
@@ -274,12 +269,15 @@ class SettingsPageState extends State<SettingsPage> {
                     if (snapshot.hasData)
                       switch (snapshot.data!.status) {
                         case Status.COMPLETED_WITH_TRUE:
-                          print(snapshot.data!.data);
                           print('COMPLETED_WITH_TRUE');
                           if (snapshot.data!.data!.status!) {
                             Future.delayed(Duration.zero, () {
+
+
                               setState(() {
                                 _loading = false;
+                                getIT<AppPreferences>().changeAppLanguage(
+                                    context, _selectedLanguage);
                               });
                               showDialog(
                                   context: context,
@@ -318,11 +316,7 @@ class SettingsPageState extends State<SettingsPage> {
                             logOut(context);
                           }
                           Future.delayed(Duration.zero, () {
-                            Future.delayed(Duration.zero, () {
-                              setState(() {
-                                _loading = false;
-                              });
-                            });
+
                             showDialog(
                                 context: context,
                                 builder: (context) {
@@ -341,7 +335,12 @@ class SettingsPageState extends State<SettingsPage> {
                               .add(ApiResponse<CommonResponse>());
                           break;
                         case Status.ERROR:
-                          loading = false;
+                          Future.delayed(Duration.zero, () {
+                            setState(() {
+                              _loading = false;
+                              // _init();
+                            });
+                          });
                           Future.delayed(Duration.zero, () {
                             showDialog(
                                 context: context,
@@ -368,6 +367,8 @@ class SettingsPageState extends State<SettingsPage> {
                                   );
                                 });
                           });
+                          bloc.updateAccountResponseSink
+                              .add(ApiResponse<CommonResponse>());
                           break;
                       }
                     return Container();

@@ -30,6 +30,7 @@ class Food2FitRepositories {
         body: {'email': username, 'password': password, 'firebase_token': firebaseToken });
     // if (response.body is Response)
     commonResponse.setResponseType("LogIn");
+    log('setting response login');
     return commonResponse.fromJson(response);
     // else
     //   return Response.fromJson(jsonDecode(response.body));
@@ -44,10 +45,10 @@ class Food2FitRepositories {
 
  Future<CommonResponse> getLanguagesResponse() async {
     String json = '{"status":true,"message":"success","data":{"languages":[{"name":"arabic","code":"ar","isDefault":true},{"name":"english","code":"en","isDefault":false},{"name":"portuguese","code":"pt","isDefault":false}]}}';
-    // final response = await helper.get(ConstAPIUrls.getLanguages);
+    final response = await helper.get(ConstAPIUrls.getLanguages);
 
-  await Future.delayed((Duration(seconds: 3)),(){});
-    final response = jsonDecode(json);
+  // await Future.delayed((Duration(seconds: 3)),(){});
+  //   final response = jsonDecode(json);
 
 
     commonResponse.setResponseType("GetLanguages");

@@ -61,7 +61,9 @@ class AppPreferences {
   Future<void> changeAppLanguage(BuildContext context,String languageType) async {
 
   await     _prefs.setString(keyLanguageKey, languageType);
-
+        
+  
+  log('setting language: ${_prefs.getString(keyLanguageKey)}');
     var locale = getLocale();
     context.locale = locale;
   }

@@ -199,7 +199,7 @@ class ProfilePageState extends State<ProfilePage> {
                                                 Navigator.of(context).push(MaterialPageRoute(builder: (context) => NotificationsPage()));
                                               },),
                                               ProfileActionWidget(title: 'Account Settings', icon: AppIcons.settings, onTap: () {
-                                                Navigator.of(context).push(MaterialPageRoute(builder: (context) => SettingsPage(profile!.account!))).then((value) => setState((){}));
+                                                Navigator.of(context).push(MaterialPageRoute(builder: (context) => SettingsPage(profile!.account!,profile!.languages!))).then((value) => setState((){}));
                                               },),
                                               ProfileActionWidget(title: 'Change Password', icon: Icons.lock_outline, onTap: () {
                                                 Navigator.of(context).push(MaterialPageRoute(builder: (context) => ChangePasswordPage()));

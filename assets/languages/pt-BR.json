@@ -119,6 +119,9 @@
   "retry_again": "Retry again",
   "error_occurred": "An Error Occurred",
   "Ok": "Ok",
+  "Next": "Next",
+  "Get Started": "Get Started",
+
   "NO patient": "NO patient",
   "There is no patient to login": "There is no patient to login",
   "wrong username or password": "wrong username or password",

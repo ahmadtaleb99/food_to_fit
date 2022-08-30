@@ -30,7 +30,7 @@ class _SplashPageState extends State<SplashPage> {
   late Timer _timer;
   late Stopwatch _stopwatch;
   bool _loading = true;
-  Duration splashDelay = Duration(seconds: 4);
+  Duration splashDelay = Duration(seconds: 2);
   final _appPrefs = getIT<AppPreferences>();
   bool _isTimerFinished = false;
   void _startTimer(){
@@ -39,13 +39,13 @@ class _SplashPageState extends State<SplashPage> {
 
   void _goNext() {
     if (!_appPrefs.isOnboardingScreenViewed()) {
-      Navigator.push(context, MaterialPageRoute(builder: (context) => StartedPage()));
+      Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => StartedPage()));
     }
     else if (_appPrefs.isAuthenticated()) {
-      Navigator.push(context, MaterialPageRoute(builder: (context) => MainPage(isAuthenticated: true)));
+      Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => MainPage(isAuthenticated: true)));
 
     }
-    else        Navigator.push(context, MaterialPageRoute(builder: (context) => LogInPage()));
+    else        Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => LogInPage()));
 
   }
   @override
@@ -96,7 +96,6 @@ class _SplashPageState extends State<SplashPage> {
               SizedBox(height: 40,),
               if(_loading) Loading(
                 color: Colors.white,
-                  message: 'loading'.tr()
               ),
 
               StreamBuilder<ApiResponse<CommonResponse>>(
@@ -124,8 +123,8 @@ class _SplashPageState extends State<SplashPage> {
                           _timer = Timer(Duration(seconds: remainingSeconds), () { _goNext();});
                         }
                         else {
-                          log('is not active');
-                      _goNext();
+                          _timer = Timer(Duration(seconds: 0), () { _goNext();});
+
                         }
 
 
@@ -172,11 +171,13 @@ class _SplashPageState extends State<SplashPage> {
   _setAppLanguage (String language) async{
    await  _appPrefs.changeAppLanguage(context, language);
 
-   log(_appPrefs.getAppLanguage().toString());
+   log(_appPrefs.getAppLanguage().toString()+' seat language in splash screen from storagre');
   }
 
   _chooseLanguage(List<Language> languages){
     String? currentAppLanguage = _appPrefs.getAppLanguage();
+    log(currentAppLanguage.toString()+' language in splash screen from storagre');
+
 
     if(currentAppLanguage != null) {
       if(_isLanguageSupported(currentAppLanguage, languages))

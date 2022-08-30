@@ -18,6 +18,7 @@ class CommonResponse {
   String? accessToken;
   List<Profile>? patientsAccounts;
   dynamic data;
+  Account? account;
   String? message;
 
   CommonResponse(
@@ -26,6 +27,7 @@ class CommonResponse {
       this.accessToken,
       this.patientsAccounts,
       this.data,
+      this.account,
       this.message});
 
   setResponseType(String responseType) {
@@ -33,18 +35,22 @@ class CommonResponse {
   }
 
   fromJson(Map<String, dynamic> json) {
-    print('json decoding');
+    print(' json decoding');
     print(json['status'].toString());
     status = json['status'];
     message = json['message'];
     accessToken = json['access_token'];
+    if (json['account'] != null) {
+      account = Account.fromJson(json['account']);
+    }
+
     if (json['patients_accounts'] != null) {
       patientsAccounts = [];
       json['patients_accounts'].forEach((v) {
         patientsAccounts!.add( Profile.fromJson(v));
       });
     }
-    print('responseType: ' + responseType!);
+    log('responseType: ' + responseType!);
     if (responseType == "PatientVisits") {
       if (json['data'] != null) {
         data =  [];
@@ -69,7 +75,7 @@ class CommonResponse {
   if (responseType == "GetLanguages") {
       if (json['data'] != null) {
         data = [];
-        json['data']['languages'].forEach((v) {
+        json['data'].forEach((v) {
           data.add(new Language.fromJson(v));
         });
         print('finish');
@@ -169,6 +175,6 @@ class CommonResponse {
       }
     }
 
-    return CommonResponse(status: status, message: message, data: data, accessToken: accessToken, patientsAccounts: patientsAccounts);
+    return CommonResponse(status: status, message: message, data: data,account: account, accessToken: accessToken, patientsAccounts: patientsAccounts);
   }
 }

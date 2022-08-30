@@ -22,40 +22,30 @@ class LogInBloc {
     logInResponseSink.add(ApiResponse.loading('Fetching response'));
     String? token;
     try {
-
-      token =    await FirebaseMessaging.instance.getToken();
-
-    }
-    catch (e){
+      token = await FirebaseMessaging.instance.getToken();
+    } catch (e) {
       log(e.toString());
     }
 
+    try {
+      CommonResponse response =
+          await logInRepository.getLogInResponse(username, password, token);
+      if (response.status == true && token != null)
+        logInResponseSink.add(ApiResponse.completed_with_true(response));
+      else if (response.status == false) {
+        logInResponseSink.add(ApiResponse.completed_with_false(response));
+      } else if (token == null)
+        logInResponseSink.add(ApiResponse.completed_with_internal_error(
+            response, 'firebase-error'));
 
-
-        try {
-
-
-        CommonResponse response = await logInRepository.getLogInResponse(username, password, token);
-          if (response.status == true && token != null )
-    logInResponseSink.add(ApiResponse.completed_with_true(response));
-
-     else     if (response.status == false){
-            logInResponseSink.add(ApiResponse.completed_with_false(response));
-          }
-
-    else if  (token == null)
-    logInResponseSink.add(ApiResponse.completed_with_internal_error(response,'firebase-error'));
-
-
-        print("completed");
-        } catch (e) {
-          logInResponseSink.add(ApiResponse.error(e.toString()));
-          print("error");
-          print(e);
-        }
-
-
+      print("completed");
+    } catch (e) {
+      logInResponseSink.add(ApiResponse.error(e.toString()));
+      print("error");
+      print(e);
+    }
   }
+
   dispose() {
     logInController?.close();
   }

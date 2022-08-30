@@ -1,6 +1,7 @@
 import 'package:food_to_fit/AppPreferences.dart';
 import 'package:food_to_fit/models/dayModel.dart';
 import 'package:food_to_fit/models/dietProgramModel.dart';
+import 'package:food_to_fit/models/language.dart';
 import 'package:food_to_fit/resources/language_manager.dart';
 
 import '../widgets/di.dart';
@@ -49,6 +50,7 @@ class ProfileInfo {
   int? patientsProfilesCount;
   StaticBodyMeasures? staticBodyMeasures;
   String? lastPatientWeightMeasureDate;
+  List<Language>? languages;
   List<NonStaticBodyMeasure>? nonStaticBodyMeasures;
   List<PatientDiseases>? patientDiseases;
   DietProgram? latestDietProgram;
@@ -61,6 +63,7 @@ class ProfileInfo {
         this.account,
         this.patientsProfilesCount,
         this.staticBodyMeasures,
+        this.languages,
         this.lastPatientWeightMeasureDate,
         this.nonStaticBodyMeasures,
         this.patientDiseases,
@@ -69,6 +72,9 @@ class ProfileInfo {
         this.dietProgramDays});
 
   ProfileInfo.fromJson(Map<String, dynamic> json) {
+    languages = json['languages'] != null ?
+      languages =  List<Language>.from((json['languages'] as List)
+          .map((dynamic e) => Language.fromJson(e)).toList().cast()) : [];
     profile =
     json['profile'] != null ?  Profile.fromJson(json['profile']) : null;
     account =
@@ -243,7 +249,7 @@ class Account {
     language = json['language'];
     deviceToken = json['device_token'];
     accessToken = json['access_token'];
-    areNotificationsAllowed =   json['allow_notifications'] == null ?  true : json['allow_notifications'] ;
+    areNotificationsAllowed =    int.parse(json['allow_notifications'].toString() );
 
   }
 
