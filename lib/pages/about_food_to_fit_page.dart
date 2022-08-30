@@ -2,6 +2,7 @@ import 'dart:developer';
 
 import 'package:easy_localization/easy_localization.dart' as local;
 import 'package:flutter/material.dart';
+import 'package:food_to_fit/AppPreferences.dart';
 import 'package:food_to_fit/resources/app_icons.dart';
 import 'package:food_to_fit/resources/app_constants.dart';
 import 'package:food_to_fit/widgets/appBarWidget.dart';
@@ -9,6 +10,7 @@ import 'package:auto_size_text/auto_size_text.dart';
 import 'package:food_to_fit/blocs/getSystemConfigurationsBloc.dart';
 import 'package:food_to_fit/networking/api_response.dart';
 import 'package:food_to_fit/models/responseModel.dart';
+import 'package:food_to_fit/widgets/di.dart';
 import 'package:food_to_fit/widgets/loadingCircularProgress.dart';
 import 'package:food_to_fit/widgets/errorWidget.dart';
 import 'package:food_to_fit/models/systemConfigurationsModel.dart';
@@ -25,7 +27,7 @@ class AboutFoodToFitState extends State<AboutFoodToFit> {
   Future<void>? _launched;
   GetSystemConfigurationsBloc bloc = GetSystemConfigurationsBloc();
   List<SystemConfigurations>? systemConfigurationList;
-
+    final _appPrefs =  getIT<AppPreferences>();
 
   @override
   Widget build(BuildContext context) {
@@ -56,9 +58,7 @@ class AboutFoodToFitState extends State<AboutFoodToFit> {
                     systemConfigurationList = List.from(snapshot.data!.data!.data);
                     List<String> weekendDaysList =
                         systemConfigurationList!.elementAt(0).value!.split(" ");
-                    for(var kza in systemConfigurationList!){
-                      log(kza.value.toString());
-                    }
+
                     for (int i = 0; i < weekendDaysList.length; i++) {
                       if (i == weekendDaysList.length - 1) {
                         weekendDays =
@@ -68,10 +68,14 @@ class AboutFoodToFitState extends State<AboutFoodToFit> {
                             weekendDays + weekendDaysList[i].toString() + ", ";
                       }
                     }
+
+                    final String appLanguage = _appPrefs.getAppLanguageOrDefault();
                     String? mobilePhone = systemConfigurationList!.elementAt(7).value;
                     String? phone = systemConfigurationList!.elementAt(6).value;
                     String? facebookPage = systemConfigurationList!.elementAt(11).value;
                     String? igAccount = systemConfigurationList!.elementAt(12).value;
+                    String about = systemConfigurationList!.
+                    firstWhere((element) => element.configOptions == 'about_$appLanguage}').value ?? ' ';
                     return SingleChildScrollView(
                       child: Container(
                         margin: EdgeInsets.symmetric(

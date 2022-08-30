@@ -212,7 +212,8 @@ class LogInPageState extends State<LogInPage> {
 
                             CommonResponse response = snapshot.data!.data!;
                             if(response.account != null){
-                          _getAccountLanguage(response.account!);
+                          // _getAccountLanguage(response.account!);
+
                               }
 
 
@@ -220,7 +221,7 @@ class LogInPageState extends State<LogInPage> {
                               logIn(response, context);
                             else
                             if (response.patientsAccounts!.length > 1 )
-                                  _goToMultiPatientPage(response, context);
+                                  _goToMultiPatientPage(response, context).then((value) => _appPrefs.changeAppLanguage(context, response.account!.language!));
 
                                 else
                               Future.delayed(Duration.zero, () {
@@ -328,18 +329,18 @@ class LogInPageState extends State<LogInPage> {
   }
   logIn(CommonResponse response, BuildContext context) async {
 
-      _saveLoginInformation(response);
-    Navigator.pushAndRemoveUntil(
-        context,
-        MaterialPageRoute(
-            builder: (context) => MainPage(isAuthenticated: true,)),
-        (route) => false);
+     await _saveLoginInformation(response);
+    Future.delayed(Duration.zero,() =>  Navigator.pushAndRemoveUntil(
+    context,
+    MaterialPageRoute(
+    builder: (context) => MainPage(isAuthenticated: true,)),
+    (route) => false));
 
 
   }
 
 
-_getAccountLanguage(Account account) async {
+Future _getAccountLanguage(Account account) async {
 
   String? userLanguage = account.language;
   if( userLanguage != _appPrefs.getAppLanguage()) {
@@ -348,9 +349,9 @@ _getAccountLanguage(Account account) async {
 }
 
 
-  _goToMultiPatientPage(CommonResponse response, BuildContext context) async {
+  Future _goToMultiPatientPage(CommonResponse response, BuildContext context) async {
 
-    _saveLoginInformation(response);
+      await    _saveLoginInformation(response);
 
    await _appPrefs.savePatientId(response.patientsAccounts![0].id.toString());
 

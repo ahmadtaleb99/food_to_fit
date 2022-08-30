@@ -121,6 +121,7 @@
   "digits": "خانات",
   "Phone number must be less than or equal to": "يجب ان يكون الرقم أصغر أو مساوياً ل",
   "Ok": "حسناً",
+  "app-settings-has-changed": "تم تحديث بعض الاعدادات، يرجى إعادة تشغيل التطبيق.",
 
   "Status: ": "الحالة: ",
   " day": " يوم",

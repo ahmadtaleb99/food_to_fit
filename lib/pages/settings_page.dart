@@ -5,6 +5,7 @@ import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:food_to_fit/AppPreferences.dart';
 import 'package:food_to_fit/blocs/updateAccountSettingsBloc.dart';
+import 'package:food_to_fit/main.dart';
 import 'package:food_to_fit/models/language.dart';
 import 'package:food_to_fit/models/profileInfoModel.dart';
 import 'package:food_to_fit/models/responseModel.dart';
@@ -53,16 +54,18 @@ class SettingsPageState extends State<SettingsPage> {
   initState() {
     // _selectedLanguage = getIT<AppPreferences>().getAppLanguage();
 
-      _init();
+    _init();
     log('selected language ' + _selectedLanguage.toString());
     super.initState();
   }
-void _init(){
-  switchNotificationValue = widget.account.areNotificationsAllowed!.isOdd;
-  _selectedLanguage =
-      widget.account.language ?? LanguageType.ENGLISH.getValue();
-  firebaseToken = widget.account.deviceToken ?? '';
-}
+
+  void _init() {
+    switchNotificationValue = widget.account.areNotificationsAllowed!.isOdd;
+    _selectedLanguage =
+        widget.account.language ?? LanguageType.ENGLISH.getValue();
+    firebaseToken = widget.account.deviceToken ?? '';
+  }
+
   SingingCharacter? character = SingingCharacter.English;
   String _selectedLanguage = ' ';
   bool _loading = false;
@@ -112,42 +115,25 @@ void _init(){
                               ),
                             ]),
                       ),
-                      RadioListTile(
-                        contentPadding: EdgeInsets.only(left: 5.0, right: 5.0),
-                        activeColor: CustomColors.LightLeavesGreen,
-                        title: AutoSizeText(
-                          'English'.tr(),
-                          style: TextStyle(fontSize: 14.0),
-                          maxFontSize: 14,
-                        ),
-                        groupValue: _selectedLanguage,
-                        onChanged: (String? value) {
-                          setState(() {
-                            _selectedLanguage = value!;
-                          });
-                        },
-                        value: LanguageType.ENGLISH.getValue(),
-                      ),
-
-
-                        ...widget.supportedLanguages.map((language) =>  RadioListTile(
-                          contentPadding: EdgeInsets.only(left: 5.0, right: 5.0),
-                          activeColor: CustomColors.LightLeavesGreen,
-                          title: AutoSizeText(
-                            language.name.tr(),
-                            style: TextStyle(fontSize: 14.0),
-                            maxFontSize: 14,
-                          ),
-                          groupValue: _selectedLanguage,
-                          onChanged: (String? value) {
-                            setState(() {
-                              _selectedLanguage = value!;
-                            });
-                          },
-                          value: language.code,
-                        )).toList(),
-
-
+                      ...widget.supportedLanguages
+                          .map((language) => RadioListTile(
+                                contentPadding:
+                                    EdgeInsets.only(left: 5.0, right: 5.0),
+                                activeColor: CustomColors.LightLeavesGreen,
+                                title: AutoSizeText(
+                                  language.name.tr(),
+                                  style: TextStyle(fontSize: 14.0),
+                                  maxFontSize: 14,
+                                ),
+                                groupValue: _selectedLanguage,
+                                onChanged: (String? value) {
+                                  setState(() {
+                                    _selectedLanguage = value!;
+                                  });
+                                },
+                                value: language.code,
+                              ))
+                          .toList(),
                       SizedBox(height: 30),
                       Container(
                         padding: EdgeInsets.all(ConstMeasures.borderWidth),
@@ -161,7 +147,6 @@ void _init(){
                         onTap: () async {
                           if (firebaseToken.isEmpty) {
                             print('true;');
-
 
                             _showLoading;
 
@@ -191,16 +176,16 @@ void _init(){
                                       );
                                     });
                               });
-                            }
-                            else     setState(() {
+                            } else
+                              setState(() {
+                                switchNotificationValue =
+                                    !switchNotificationValue;
+                              });
+                          } else
+                            setState(() {
                               switchNotificationValue =
-                              !switchNotificationValue;
+                                  !switchNotificationValue;
                             });
-                          } else setState(() {
-                            switchNotificationValue =
-                            !switchNotificationValue;
-                          });
-
                         },
                         contentPadding: EdgeInsets.only(
                             left: ConstMeasures.borderWidth,
@@ -237,9 +222,8 @@ void _init(){
                           title: 'Update'.tr(),
                           onClick: () {
                             setState(() {
-
-
-                              log( switchNotificationValue.toInt().toString()+' switchNotificationValue.toInt().toString(');
+                              log(switchNotificationValue.toInt().toString() +
+                                  ' switchNotificationValue.toInt().toString(');
                               _loading = true;
                               bloc.fetchResponse(Account(
                                   areNotificationsAllowed:
@@ -272,8 +256,13 @@ void _init(){
                           print('COMPLETED_WITH_TRUE');
                           if (snapshot.data!.data!.status!) {
                             Future.delayed(Duration.zero, () {
-
-
+                              setState(() {
+                                _loading = false;
+                                getIT<AppPreferences>().changeAppLanguage(
+                                    context, _selectedLanguage);
+                              });
+                            });
+                            Future.delayed(Duration.zero, () {
                               setState(() {
                                 _loading = false;
                                 getIT<AppPreferences>().changeAppLanguage(
@@ -316,7 +305,6 @@ void _init(){
                             logOut(context);
                           }
                           Future.delayed(Duration.zero, () {
-
                             showDialog(
                                 context: context,
                                 builder: (context) {

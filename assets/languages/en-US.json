@@ -89,6 +89,7 @@
   "Confirm does not match with password!": "Confirm does not match with password!",
 
   "New Password": "New Password",
+  "app-settings-has-changed": "Application settings has changed, please restart your app.",
   "Confirm Password": "Confirm Password",
 
   "Field is required": "This field cannot be empty",

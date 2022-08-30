@@ -107,6 +107,8 @@
   "digits": "digits",
   "Invalid phone number": "Invalid phone number",
   "digit": "digits",
+  "app-settings-has-changed": "Application settings has changed, please restart your app.",
+
   "Phone number must be more than or equal to": "Phone number must be more than or equal to",
   "Phone number must be less than or equal to": "Phone number must be less than or equal to",
   "Something went wrong!": "Something went wrong!",

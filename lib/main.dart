@@ -4,6 +4,7 @@ import 'dart:io';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_phoenix/flutter_phoenix.dart';
 import 'package:food_to_fit/pages/splash_page.dart';
 import 'package:food_to_fit/resources/app_constants.dart';
 import 'package:food_to_fit/resources/language_manager.dart';
@@ -47,28 +48,30 @@ Future<void> main() async {
   // }
 
 
-  runApp(EasyLocalization(
-    supportedLocales: const [AppLanguages.englishLocale,AppLanguages.arabicLocale,AppLanguages.portugueseLocale],
-    path:'assets/languages',
+  runApp(Phoenix(
+    child: EasyLocalization(
+      supportedLocales: const [AppLanguages.englishLocale,AppLanguages.arabicLocale,AppLanguages.portugueseLocale],
+      path:'assets/languages',
 
-    child: Builder(
-      builder: (context) {
-        return MaterialApp(
+      child: Builder(
+        builder: (context) {
+          return MaterialApp(
 
-          localizationsDelegates: context.localizationDelegates,
-          supportedLocales: context.supportedLocales,
-          locale: context.locale,
-          title: 'Food to Fit',
-          theme: ThemeData(
-              primarySwatch: Colors.blue,
-              visualDensity: VisualDensity.adaptivePlatformDensity,
-              fontFamily: 'Montserrat'),
-          home:  AppWidget(),
-          routes: <String, WidgetBuilder>{
-            '/LogIn': (BuildContext context) => LogInPage()
-          },
-        );
-      }
+            localizationsDelegates: context.localizationDelegates,
+            supportedLocales: context.supportedLocales,
+            locale: context.locale,
+            title: 'Food to Fit',
+            theme: ThemeData(
+                primarySwatch: Colors.blue,
+                visualDensity: VisualDensity.adaptivePlatformDensity,
+                fontFamily: 'Montserrat'),
+            home:  AppWidget(),
+            routes: <String, WidgetBuilder>{
+              '/LogIn': (BuildContext context) => LogInPage()
+            },
+          );
+        }
+      ),
     ),
   ));
 }
